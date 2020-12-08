@@ -193,7 +193,7 @@ $bu = base_url();
 		var bu = '<?= base_url(); ?>';
 
 		var url_form_tambah = bu + 'Calon/tambah_calon_proses';
-		var url_form_ubah = bu + 'admin/ubah_siswa_proses';
+		var url_form_ubah = bu + 'Calon/ubah_siswa_proses';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
 				[5, 10, 25, 50, -1],
@@ -364,9 +364,7 @@ $bu = base_url();
 				nama && kelas
 			) {
 				$("#form").submit();
-				// console.log(_foto);
-				// return;
-				// console.log("draft");
+
 			}
 			// return false;
 		});
@@ -398,7 +396,6 @@ $bu = base_url();
 				// scrollTop: $(sel).offset().top - 75
 			}, 500);
 		}
-
 		$('.btnTambah').on('click', function() {
 			url_form = url_form_tambah;
 			// url_form = url_form_tambah;
@@ -416,7 +413,6 @@ $bu = base_url();
 			$('#listFoto').html('');
 			$('#foto_wrappers').html('');
 		});
-
 		$("#form").submit(function(e) {
 			console.log('form submitted');
 			// return false;
@@ -506,60 +502,34 @@ $bu = base_url();
 			// console.log(url_form);
 			$('#tambah_act').hide();
 
-			var no_telpon = $(this).data('no_telpon');
-			var id_siswa = $(this).data('id_siswa');
-			var nisn = $(this).data('nis');
-			var nama = $(this).data('nama');
-			var kelas = $(this).data('id_kelas');
-			var jenkel = $(this).data('jenis_kelamin');
-			var tempat_lahir = $(this).data('tempat_lahir');
-			var tanggal_lahir = $(this).data('tgl_lahir');
-			var alamat = $(this).data('alamat');
-			var username = $(this).data('username');
-			var password = $(this).data('password');
-			// console.log(username)
+			var id_calon = $(this).data('id_calon');
+			var nama = $(this).data('nama_calon');
+			var kelas = $(this).data('kelas_calon');
+			var visi = $(this).data('visi');
+			var misi = $(this).data('misi');
+			var nis = $(this).data('nis');
 			$('#modal-detail').modal('show');
-			// var foto = $(this).data('foto');
-			// console.log(kelas)
-
-			$('#id_siswa').val(id_siswa);
+			$('#id_calon').val(id_calon);
+			$("#nisn").val(parseInt(nis));
+			$('#visi').val(visi);
+			$('#misi').val(misi);
 			$('#nama').val(nama);
-			$('#nama').val(nama);
-			$('#alamat').val(alamat);
-			$('#jk').val(jenkel);
-			$('#tempat_lahir').val(tempat_lahir);
-			$('#tanggal_lahir').val(tanggal_lahir);
-			$('#username').val(username);
-			$('#password').val(password);
-			$('#noHP').val(no_telpon);
-			$('#Edit').show();
 			$("#kelas").val(parseInt(kelas));
-			$("#nisn").val(parseInt(nisn));
-
-
+			$('#Edit').show();
 		});
 
 		$('#Edit').on('click', function() {
-
-			var id_siswa = $('#id_siswa').val();
-			var nisn = $('#nis').val();
+			var id_calon = $('#id_calon').val();
+			var nis = $('#nis').val();
 			var nama = $('#nama').val();
 			var kelas = $('#kelas').val();
-			var jenis_kelamin = $('#jk').val();
-			var tanggal_lahir = $('#tanggal_lahir').val();
-			var tempat_lahir = $('#tempat_lahir').val();
-			var username = $('#username').val();
-			var password = $('#password').val();
-			var noHP = $('#noHP').val();
-
+			var misi = $('#misi').val();
+			var visi = $('#visi').val();
 			if (
-				nama && kelas && kelas && jenis_kelamin && noHP && username && password && tempat_lahir
+				nama && kelas && visi && misi 
 			) {
 				$("#form").submit();
-
 			}
-
-
 		});
 
 		$('#btnExport').on('click', function() {

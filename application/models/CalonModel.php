@@ -8,12 +8,12 @@ class CalonModel extends CI_Model {
 	{
 		$columns = array(
 			'NIS',
-			'nama',
+			'nama_calon',
 			'id_kelas'
 		);
 		// untuk search
 		$columnsSearch = array(
-			'nama',
+			'nama_calon',
 			'moto',
 			'visi',
 		);

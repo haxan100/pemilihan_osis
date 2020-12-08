@@ -45,10 +45,19 @@ public function index()
           data-id_calon="' . $row->id_calon . '"
           data-nama_calon="' . $row->nama_calon. '"
           data-kelas_calon="' . $row->kelas_calon . '"
+          data-visi="' . $row->visi . '"
+          data-misi="' . $row->moto . '"
+          data-nis="' . $row->nis . '"
         ><i class="far fa-edit"></i> Ubah</button>
         
         <button class="btn btn-danger my-1  btn-block btnHapus text-white" 
-          data-id_calon="' . $row->id_calon . '"          data-nama_calon="' . $row->nama_calon . '"
+		  data-id_calon="' . $row->id_calon . '"    
+		  data-id_kelas="' . $row->kelas_calon . '" 
+		  data-nama_calon="' . $row->nama_calon . '"
+
+
+
+
 				><i class="fas fa-trash"></i> Hapus</button>        ';
 			$datatable['data'][] = $fields;
 		}
@@ -114,10 +123,6 @@ public function index()
 		$this->CalonModel->tambah_Calon($in);
 
 		$message = "Berhasil Menambah Calon #1";
-		// }
-		// } else {
-		// $message = "Gagal menambah Siswa #1";
-		// }
 			echo json_encode(array(
 				'status' => $status,
 				'message' => $message,
@@ -125,7 +130,66 @@ public function index()
 			));
 			}
 		}
-	}       
+	}
+	public function ubah_siswa_proses()
+	{
+		var_dump($_POST,$_FILES);die;
+		$id_siswa = $this->input->post('id_siswa', TRUE);
+		$nisn = $this->input->post('nisn', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$kelas = $this->input->post('kelas', TRUE);
+		$alamat = $this->input->post('alamat', TRUE);
+		$jk = $this->input->post('jk', TRUE);
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+		$tanggal_lahir = $this->input->post('tanggal_lahir', TRUE);
+		$tempat_lahir = $this->input->post('tempat_lahir', TRUE);
+		$no_hp = $this->input->post('noHP', TRUE);
+
+		$message = 'Gagal mengedit data siswa!<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		$in = array(
+			'nama' => $nama,
+			'alamat' => $alamat,
+			'id_kelas' => $kelas,
+			'jenis_kelamin' => $jk,
+			'tgl_lahir' => $tanggal_lahir,
+			'tempat_lahir' => $tempat_lahir,
+			'username' => $username,
+			'password' =>
+			$password,
+			'no_telpon' => $no_hp,
+			'NIS' => $nisn,
+		);
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if (empty($kelas)) {
+			$status = false;
+			$errorInputs[] = array('#kelas', 'Silahkan pilih Kelas');
+		}
+		if (empty($alamat)) {
+			$status = false;
+			$errorInputs[] = array('#alamat', 'Silahkan isi Alamat');
+		}
+		if ($status) {
+			$this->SiswaModel->edit_siswa($in, $id_siswa);
+			$message = "Berhasil Mengedit Data ";
+			$status = true;
+		} else {
+			$message = "Gagal Mengubah Siswa #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
+		));
+	}
+	
+
 }
         
     /* End of file  Calon.php */
