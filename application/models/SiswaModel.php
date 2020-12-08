@@ -9,14 +9,13 @@ public function login(){
                                 
 }
 public function getAllSiswa()
-{
-	
-	$this->db->select('*');
-	$this->db->from('siswa');
-	$data =  $this->db->get();
-	return $data;
-	# code...
-}
+	{	
+		$this->db->select('*');
+		$this->db->from('siswa');
+		$data =  $this->db->get();
+		return $data;
+		# code...
+	}
 	public function dt_Siswa($post)
 	{
 		// untuk sort
@@ -129,6 +128,19 @@ public function getAllSiswa()
 
 
 		# code...
+	}
+	public function edit_siswa($in, $id_siswa)
+	{
+
+		$this->db->where('id_siswa', $id_siswa);
+		return $this->db->update('siswa', $in);
+	}
+
+	public function ListUserSiswa()
+	{
+		$this->db->from('siswa');
+		$query = $this->db->get();
+		return $query;
 	}
                         
                             

@@ -56,7 +56,16 @@ public function siswa()
 			$fields[] = '
         <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
           data-id_siswa="' . $row->id_siswa . '"
+          data-nama="' . $row->nama . '"
           data-id_kelas="' . $row->id_kelas . '"
+          data-no_telpon="' . $row->no_telpon . '"
+          data-tgl_lahir="' . $row->tgl_lahir . '"
+          data-jenis_kelamin="' . $row->jenis_kelamin . '"
+          data-alamat="' . $row->alamat . '"
+          data-username="' . $row->username . '"
+          data-password="' . $row->password . '"
+          data-jenis_kelamin="' . $row->jenis_kelamin . '"
+          data-tempat_lahir="' . $row->tempat_lahir . '"
           data-nis="' . $row->NIS . '"
         ><i class="far fa-edit"></i> Ubah</button>
         
@@ -70,6 +79,8 @@ public function siswa()
 	}
 	public function tambah_siswa_proses()
 	{
+		// var_dump($_POST);die;
+		$noHP = $this->input->post('noHP', TRUE);
 		$nisn = $this->input->post('nisn', TRUE);
 		$nama = $this->input->post('nama', TRUE);
 		$kelas = $this->input->post('kelas', TRUE);
@@ -97,40 +108,42 @@ public function siswa()
 			$status = false;
 			$errorInputs[] = array('#alamat', 'Silahkan isi Alamat');
 		}
-		$cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
-		if (!$cekFoto) {
+
+		// $cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
+		// if (!$cekFoto) {
 
 
-			$_FILES['f']['name']     = $_FILES['foto']['name'];
-			$_FILES['f']['type']     = $_FILES['foto']['type'];
-			$_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
-			$_FILES['f']['error']     = $_FILES['foto']['error'];
-			$_FILES['f']['size']     = $_FILES['foto']['size'];
+			// $_FILES['f']['name']     = $_FILES['foto']['name'];
+			// $_FILES['f']['type']     = $_FILES['foto']['type'];
+			// $_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
+			// $_FILES['f']['error']     = $_FILES['foto']['error'];
+			// $_FILES['f']['size']     = $_FILES['foto']['size'];
 
-			$config['upload_path']          = './upload/images/siswa';
-			$config['allowed_types']        = 'jpg|jpeg|png|gif';
-			$config['max_size']             = 3 * 1024; // kByte
-			$config['max_width']            = 10 * 1024;
-			$config['max_height']           = 10 * 1024;
-			$config['file_name'] = $nisn . "-" . date("Y-m-d-H-i-s") . ".jpg";
-			$this->load->library('image_lib');
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
+			// $config['upload_path']          = './upload/images/siswa';
+			// $config['allowed_types']        = 'jpg|jpeg|png|gif';
+			// $config['max_size']             = 3 * 1024; // kByte
+			// $config['max_width']            = 10 * 1024;
+			// $config['max_height']           = 10 * 1024;
+			// $config['file_name'] = $nisn . "-" . date("Y-m-d-H-i-s") . ".jpg";
+			// $this->load->library('image_lib');
+			// $this->load->library('upload', $config);
+			// $this->upload->initialize($config);
 
 
-			$this->image_lib->resize();
+			// $this->image_lib->resize();
 
-			if (!$this->upload->do_upload('f')) {
-				$errorUpload = $this->upload->display_errors() . '<br>';
-			} else {
-				// Uploaded file data
-				$fileName = $this->upload->data()["file_name"];
-				$foto = array(
-					'foto' => $fileName,
-				);
+			// if (!$this->upload->do_upload('f')) {
+			// 	$errorUpload = $this->upload->display_errors() . '<br>';
+			// } else {
+			// 	// Uploaded file data
+			// 	$fileName = $this->upload->data()["file_name"];
+			// 	$foto = array(
+			// 		'foto' => $fileName,
+			// 	);
 				$in = array(
-					'foto' => $fileName,
+					// 'foto' => $fileName,
 					'NIS' => $nisn,
+					'no_telpon' => $noHP,
 					'nama' => $nama,
 					'tgl_lahir' => $tanggal_lahir,
 					'tempat_lahir' => $tempat_lahir,
@@ -143,16 +156,17 @@ public function siswa()
 				$this->SiswaModel->tambah_siswa($in);
 
 				$message = "Berhasil Menambah Siswa #1";
-			}
-		} else {
-			$message = "Gagal menambah Siswa #1";
-		}
+			// }
+		// } else {
+			// $message = "Gagal menambah Siswa #1";
+		// }
 		echo json_encode(array(
 			'status' => $status,
 			'message' => $message,
 			'errorInputs' => $errorInputs
 		));
 	}
+
 	public function hapusSiswa()
 	{
 		$id_siswa = $this->input->post('id_siswa', TRUE);
@@ -169,6 +183,66 @@ public function siswa()
 		echo json_encode(array(
 			'status' => $status,
 			'message' => $message,
+		));
+	}
+
+	public function ubah_siswa_proses()
+	{
+		$id_siswa = $this->input->post('id_siswa', TRUE);
+		$nisn = $this->input->post('nisn', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$kelas = $this->input->post('kelas', TRUE);
+		$alamat = $this->input->post('alamat', TRUE);
+		$jk = $this->input->post('jk', TRUE);
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+		$tanggal_lahir = $this->input->post('tanggal_lahir', TRUE);
+		$tempat_lahir = $this->input->post('tempat_lahir', TRUE);
+		$no_hp = $this->input->post('noHP', TRUE);
+
+		$message = 'Gagal mengedit data siswa!<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		$in = array(
+			'nama' => $nama,
+			'alamat' => $alamat,
+			'id_kelas' => $kelas,
+			'jenis_kelamin' => $jk,
+			'tgl_lahir' => $tanggal_lahir,
+			'tempat_lahir' => $tempat_lahir,
+			'username' => $username,
+			'password' =>
+			$password,
+			'no_telpon' => $no_hp,
+			'NIS' => $nisn,
+		);
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if (empty($kelas)) {
+			$status = false;
+			$errorInputs[] = array('#kelas', 'Silahkan pilih Kelas');
+		}
+		if (empty($alamat)) {
+			$status = false;
+			$errorInputs[] = array('#alamat', 'Silahkan isi Alamat');
+		}
+		if ($status) {
+			$this->SiswaModel->edit_siswa($in, $id_siswa);
+			$message = "Berhasil Mengedit Data ";
+			 $status = true;
+
+
+
+		} else {
+			$message = "Gagal Mengubah Siswa #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
 		));
 	}
         
