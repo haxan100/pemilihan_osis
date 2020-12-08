@@ -36,7 +36,9 @@ public function index()
 			$fields[] = $row->nama_calon . '<br>';
 			$fields[] = $row->nis . '<br>';
 			$fields[] = $row->kelas_calon . '<br>';
-			$fields[] = $row->foto . '<br>';
+			$fields[] = $row->visi . '<br>';
+			$fields[] = $row->moto . '<br>';
+			$fields[] =  '<img class="img-fluid" id="foto_wrapper" id="foto_wrapper"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/upload/images/Calon/' . $row->foto . ' "/> ';
 
 			$fields[] = '
         <button class="btn btn-warning my-1  btn-block btnUbah text-white" 

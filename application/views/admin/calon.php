@@ -54,6 +54,7 @@ $bu = base_url();
 							<th>Kelas</th>
 							<th>Visi</th>
 							<th>Misi</th>
+							<th>Foto</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
