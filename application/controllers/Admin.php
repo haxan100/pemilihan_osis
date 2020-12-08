@@ -245,6 +245,15 @@ public function siswa()
 			'errorInputs' => $errorInputs
 		));
 	}
+
+	public function calon()
+	{
+		$obj['judul'] = "Data Calon";
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar');
+		$this->load->view('admin/calon', $obj);
+		$this->load->view('templating/footer');
+	}
         
 }
         
