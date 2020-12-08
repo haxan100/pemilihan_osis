@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<?php 
+<?php
 $bu = base_url();
 ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -35,8 +35,17 @@ $bu = base_url();
 				<i class="fa fa-file-excel"></i> Import Spek HP
 			</a>
 		</span>
+		<br>
+		<?php if ($this->session->flashdata()) : ?>
+			<div class="container-fluid">
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<?= $this->session->flashdata('flash_data') ?>
+				</div>
+			</div>
+		<?php endif ?>
 
-
+		
 		<div class="card">
 			<div class="card-header">
 			</div>
@@ -74,7 +83,7 @@ $bu = base_url();
 					<div class="modal-body">
 						<div class="container-fluid">
 
-							<form method="post" enctype="multipart/form-data" action="<?= $bu; ?>Import/import_spek_hp">
+							<form method="post" enctype="multipart/form-data" action="<?= $bu; ?>Import/import_siswa">
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<p> Pilih File : </p>
