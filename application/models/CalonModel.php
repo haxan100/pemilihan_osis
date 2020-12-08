@@ -59,7 +59,11 @@ class CalonModel extends CI_Model {
 			'data' => $data,
 		);
 	}
-                        
+
+	public function tambah_Calon($in)
+	{
+		return $this->db->insert('calon', $in);
+	}
                             
                         
 }

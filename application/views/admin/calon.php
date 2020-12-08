@@ -103,15 +103,7 @@ $bu = base_url();
 
 												</div>
 												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Alamat <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="alamat" name="alamat" class="form-control " placeholder="Isikan Alamat" type="text" class="form-control">
-
-														</div>
-													</div>
-													<div class="item form-group col-md-6 col-sm-6 ">
+													<div class="item form-group col-md-12 col-sm-12 ">
 														<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kelas <span class="required">*</span>
 														</label>
 														<div class="">
@@ -125,59 +117,41 @@ $bu = base_url();
 													</div>
 												</div>
 												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label " for="last-name">Jenis Kelamin <span class="required">*</span>
+													<div class="item form-group col-md-12 col-sm-12 ">
+														<label class="col-form-label label-align" for="last-name">Visi<span class="required">*</span>
 														</label>
-														<div class="">
-															<select class="form-control select " id="jk" name="jk">
-																<option value="l">Laki-laki</option>
-																<option value="p">Perempuan</option>
-															</select>
+														<div class="form-group">
+															<textarea id="visi" class="form-control" name="visi" rows="3"></textarea>
 														</div>
-													</div>
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Tanggal Lahir <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="tanggal_lahir" name="tanggal_lahir" class="form-control " placeholder="Isikan kelas" type="date" class="form-control">
 
-														</div>
 													</div>
 												</div>
 												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Tempat Lahir <span class="required">*</span>
+													<div class="item form-group col-md-12 col-sm-12 ">
+														<label class="col-form-label label-align" for="last-name">Misi<span class="required">*</span>
 														</label>
-														<div class="">
-															<input id="tempat_lahir" name="tempat_lahir" class="form-control " placeholder="Isikan tempat lahir" type="text" class="form-control">
-
+														<div class="form-group">
+															<textarea id="misi" class="form-control" name="misi" rows="3"></textarea>
 														</div>
-													</div>
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Username <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="username" name="username" class="form-control " placeholder="Isikan Username" type="text" class="form-control">
 
-														</div>
 													</div>
 												</div>
 												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Password <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="password" name="password" class="form-control " placeholder="Isikan Password" type="text" class="form-control">
-
-														</div>
-													</div>
 
 													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">No Hp <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="noHP" name="noHP" class="form-control " placeholder="Isikan No HP" type="text" class="form-control">
+														<div class="form-group">
+															<label for="foto_wrapper">Foto KTP</label>
+															<div id="foto_wrapper" class="mb-2"></div>
+															<div class="custom-file">
+																<br>
+																<input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg;" name="foto" id="foto" class="dropzone biz-dropzone">
 
+																<br /><br />
+																<span class="biz-text-10">
+																	<ul id="listFoto"></ul>
+																</span>
+															</div>
+															<small></small>
 														</div>
 													</div>
 													<!-- <div class="item form-group col-md-6 col-sm-6 ">
@@ -218,7 +192,7 @@ $bu = base_url();
 
 		var bu = '<?= base_url(); ?>';
 
-		var url_form_tambah = bu + 'admin/tambah_siswa_proses';
+		var url_form_tambah = bu + 'Calon/tambah_calon_proses';
 		var url_form_ubah = bu + 'admin/ubah_siswa_proses';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
@@ -403,8 +377,6 @@ $bu = base_url();
 			var _cektanggal_lahir = cektanggal_lahir();
 			var _JenKel = cekJenKel();
 			var _Alamat = cekAlamat();
-			// console.log(_cekKelas , _cekNama, _cekNIS,_cektanggal_lahir,_JenKel,_Alamat);return false;
-
 			if (
 				_cekKelas && _cekNIS && _cekNama && _cektanggal_lahir && _Alamat && _JenKel
 			) {

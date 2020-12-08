@@ -55,7 +55,77 @@ public function index()
 		echo json_encode($datatable);
 		exit();
 	}
-        
+	public function tambah_calon_proses()
+	{
+		$nisn = $this->input->post('nisn', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$kelas = $this->input->post('kelas', TRUE);
+		$visi = $this->input->post('visi', TRUE);
+		$misi = $this->input->post('misi', TRUE);
+
+		$message = 'Gagal menambah data Calon!<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if (empty($kelas)) {
+			$status = false;
+			$errorInputs[] = array('#kelas', 'Silahkan pilih Kelas');
+		}
+
+		$cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
+
+		if (!$cekFoto) {
+
+		$_FILES['f']['name']     = $_FILES['foto']['name'];
+		$_FILES['f']['type']     = $_FILES['foto']['type'];
+		$_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
+		$_FILES['f']['error']     = $_FILES['foto']['error'];
+		$_FILES['f']['size']     = $_FILES['foto']['size'];
+		$config['upload_path']          = './upload/images/calon';
+		$config['allowed_types']        = 'jpg|jpeg|png|gif';
+		$config['max_size']             = 3 * 1024; // kByte
+		$config['max_width']            = 10 * 1024;
+		$config['max_height']           = 10 * 1024;
+		$config['file_name'] = $nisn . "-" . date("Y-m-d-H-i-s") . ".jpg";
+		$this->load->library('image_lib');
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+
+		if (!$this->upload->do_upload('f')) {
+			$errorUpload = $this->upload->display_errors() . '<br>';
+		} else {
+			// Uploaded file data
+			$fileName = $this->upload->data()["file_name"];
+			$foto = array(
+				'foto' => $fileName,
+			);
+		$in = array(
+			'foto' => $fileName,
+			'NIS' => $nisn,
+			'nama_calon' => $nama,
+			'kelas_calon' => $kelas,
+			'visi' => $visi,
+			'moto' => $misi,
+		);
+		$this->CalonModel->tambah_Calon($in);
+
+		$message = "Berhasil Menambah Calon #1";
+		// }
+		// } else {
+		// $message = "Gagal menambah Siswa #1";
+		// }
+			echo json_encode(array(
+				'status' => $status,
+				'message' => $message,
+				'errorInputs' => $errorInputs
+			));
+			}
+		}
+	}       
 }
         
     /* End of file  Calon.php */
