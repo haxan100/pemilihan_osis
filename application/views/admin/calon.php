@@ -80,7 +80,6 @@ $bu = base_url();
 							<div class="row">
 								<div class="col-md-12 col-sm-12 ">
 									<div class="x_panel">
-
 										<div class="x_content">
 											<br />
 											<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -509,24 +508,25 @@ $bu = base_url();
 			var misi = $(this).data('misi');
 			var nis = $(this).data('nis');
 			$('#modal-detail').modal('show');
-			$('#id_calon').val(id_calon);
+			$('#id_siswa').val(id_calon);
 			$("#nisn").val(parseInt(nis));
 			$('#visi').val(visi);
 			$('#misi').val(misi);
 			$('#nama').val(nama);
 			$("#kelas").val(parseInt(kelas));
 			$('#Edit').show();
+
 		});
 
 		$('#Edit').on('click', function() {
-			var id_calon = $('#id_calon').val();
+			var id_siswa = $('#id_siswa').val();
 			var nis = $('#nis').val();
 			var nama = $('#nama').val();
 			var kelas = $('#kelas').val();
 			var misi = $('#misi').val();
 			var visi = $('#visi').val();
 			if (
-				nama && kelas && visi && misi 
+				nama && kelas && visi && misi
 			) {
 				$("#form").submit();
 			}

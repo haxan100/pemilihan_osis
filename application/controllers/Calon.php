@@ -133,36 +133,71 @@ public function index()
 	}
 	public function ubah_siswa_proses()
 	{
-		var_dump($_POST,$_FILES);die;
-		$id_siswa = $this->input->post('id_siswa', TRUE);
+		// var_dump($_POST,$_FILES);die;
+		$id_calon = $this->input->post('id_siswa', TRUE);
 		$nisn = $this->input->post('nisn', TRUE);
 		$nama = $this->input->post('nama', TRUE);
 		$kelas = $this->input->post('kelas', TRUE);
-		$alamat = $this->input->post('alamat', TRUE);
-		$jk = $this->input->post('jk', TRUE);
-		$username = $this->input->post('username', TRUE);
-		$password = $this->input->post('password', TRUE);
-		$tanggal_lahir = $this->input->post('tanggal_lahir', TRUE);
-		$tempat_lahir = $this->input->post('tempat_lahir', TRUE);
-		$no_hp = $this->input->post('noHP', TRUE);
+		$visi = $this->input->post('visi', TRUE);
+		$misi = $this->input->post('misi', TRUE);
 
 		$message = 'Gagal mengedit data siswa!<br>Silahkan lengkapi data yang diperlukan.';
 		$errorInputs = array();
 		$status = true;
 
 		$in = array(
-			'nama' => $nama,
-			'alamat' => $alamat,
-			'id_kelas' => $kelas,
-			'jenis_kelamin' => $jk,
-			'tgl_lahir' => $tanggal_lahir,
-			'tempat_lahir' => $tempat_lahir,
-			'username' => $username,
-			'password' =>
-			$password,
-			'no_telpon' => $no_hp,
-			'NIS' => $nisn,
+			'nama_calon' => $nama,
+			'kelas_calon' => $kelas,
+			'moto' => $misi,
+			'visi' => $visi,
+			'nis' => $nisn,
 		);
+		$cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
+		if (!$cekFoto) {
+			// var_dump($cekFoto);die;
+			$filesCount = 0;
+			$successUpload = 0;
+			$errorUpload = '';
+			$config['image_library'] = 'gd2';
+			$_FILES['f']['name']     = $_FILES['foto']['name'];
+			$_FILES['f']['type']     = $_FILES['foto']['type'];
+			$_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
+			$_FILES['f']['error']     = $_FILES['foto']['error'];
+			$_FILES['f']['size']     = $_FILES['foto']['size'];
+			$config['upload_path']          = './upload/images/Calon/';
+			$config['allowed_types']        = 'jpg|jpeg|png|gif';
+			$config['max_size']             = 3 * 1024; // kByte
+			$config['max_width']            = 10 * 1024;
+			$config['max_height']           = 10 * 1024;
+			$config['file_name'] = $id_calon . "-" . date("Y-m-d-H-i-s") . ".jpg";
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			$data_kode = array('id_calon' => $id_calon);
+			$foto = $this->db->get_where('calon', $data_kode);
+			if ($foto->num_rows() > 0) {
+				$pros = $foto->row();
+				// var_dump($pros);die;
+				$name = $pros->foto;
+				if (file_exists($lok = FCPATH . '/upload/images/Calon' . $name)) {
+					unlink($lok);
+				}
+				if (file_exists($lok = FCPATH . './upload/images/Calon/' . $name)) {
+					unlink($lok);
+				}
+			}
+			if (!$this->upload->do_upload('f')) {
+				$errorUpload = $this->upload->display_errors() . '<br>';
+				var_dump($errorUpload);
+			} 
+			
+			$inFoto = array(
+				'foto' => $nameFoto = str_replace(' ', '_', $config['file_name']),
+			);
+			$this->CalonModel->edit_calon($inFoto, $id_calon);
+		}
+
+
 		if (empty($nama)) {
 			$status = false;
 			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
@@ -171,12 +206,12 @@ public function index()
 			$status = false;
 			$errorInputs[] = array('#kelas', 'Silahkan pilih Kelas');
 		}
-		if (empty($alamat)) {
+		if (empty($misi)) {
 			$status = false;
-			$errorInputs[] = array('#alamat', 'Silahkan isi Alamat');
+			$errorInputs[] = array('#misi', 'Silahkan isi Misi');
 		}
 		if ($status) {
-			$this->SiswaModel->edit_siswa($in, $id_siswa);
+			$this->CalonModel->edit_calon($in, $id_calon);
 			$message = "Berhasil Mengedit Data ";
 			$status = true;
 		} else {
