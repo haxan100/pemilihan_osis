@@ -533,7 +533,7 @@ $bu = base_url();
 		});
 
 		$('#btnExport').on('click', function() {
-			var url = bu + 'Export/master_list_siswa/?';
+			var url = bu + 'Export/master_list_Calon/?';
 			window.location = url;
 			return (false);
 

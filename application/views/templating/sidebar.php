@@ -45,6 +45,12 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a href="<?= base_url() ?>User" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Pilih</p>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a href="./index3.html" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Setting</p>

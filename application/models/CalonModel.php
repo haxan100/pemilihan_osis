@@ -70,6 +70,12 @@ class CalonModel extends CI_Model {
 		$this->db->where('id_calon', $id_siswa);
 		return $this->db->update('calon', $in);
 	}
+	public function ListUserCalon()
+	{
+		$this->db->from('calon');
+		$query = $this->db->get();
+		return $query;
+	}
                             
                         
 }
