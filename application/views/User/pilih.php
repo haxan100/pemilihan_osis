@@ -47,7 +47,7 @@ $bu = base_url();
 							<span class="progress-description">
 								<?= $key->visi ?>
 							</span>
-							<input class="cekbox" type="checkbox" name="pilihan" id="<?= $key->id_calon ?>">
+							<input class="cekbox" type="checkbox" value="<?= $key->id_calon ?>" name="pilihan" id="<?= $key->id_calon ?>">
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -59,6 +59,10 @@ $bu = base_url();
 			}
 			?>
 		</div>
+		<center>
+
+			<button class="btn btn-primary" id="pilih" type="button">Pilih</button>
+		</center>
 		<!-- /.row -->
 
 	</section>
@@ -68,5 +72,67 @@ $bu = base_url();
 
 
 <script>
+	$(document).ready(function() {
 
+		$('input.cekbox').on('change', function() {
+			$('input.cekbox').not(this).prop('checked', false);
+		});
+		// klass cekbox
+		$('#pilih').on('click', function() {
+			var bu = '<?= base_url(); ?>';
+
+			var checkbox = document.getElementsByName("pilihan");
+			var pilihan = $('.cekbox:checked').val();
+			// var pilihan = [];
+			// console.log(checkedValue);
+			// return false
+			$checked = 0;
+			for (var i = 0; i < checkbox.length; i++) {
+				if (checkbox[i].checked)
+					$checked = 1;
+			}
+			if ($checked == 0) {
+				alert("Mohon Pilih Setidaknya 1 Produk");
+				return false
+			}
+
+			var r = confirm("Apakah Anda Yakin Untuk Memilih Calon ?");
+			if (r == true) {
+
+				$.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: "<?= $bu; ?>User/pilih",
+					data: {
+						pilih: pilihan,
+					},
+				}).done(function(e) {
+					// console.log(e);
+					if (e.status) {
+						alert(e.message);
+						// notifikasi('#alertNotif', e.message, false);
+						// $('#modalMetodSekaligus').modal('hide');
+						// datatable.ajax.reload();
+						// resetForm();
+
+					} else {
+						alert(e.message);
+
+						// $('#modalMetodSekaligus').modal('hide');
+						// var alert = 'biz-alert-success';
+						// $('#alertNotifFloat').html('<div class="alert ' + alert + ' alert alert-primary" role="alert"><span>' + e.message + '</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+					}
+				}).fail(function(e) {
+					// $('.modalMetodSekaligus').modal('hide');
+					// datatable.ajax.reload();
+					// resetForm();
+				});
+			}
+
+		});
+
+
+
+
+	});
 </script>

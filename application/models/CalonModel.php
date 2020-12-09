@@ -76,6 +76,14 @@ class CalonModel extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
+	public function getCalonByID($id_calon)
+	{
+		$this->db->from('calon');
+		$this->db->where('id_calon', $id_calon);
+		
+		$query = $this->db->get();
+		return $query;
+	}
                             
                         
 }

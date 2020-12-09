@@ -19,6 +19,44 @@ public function index()
 		$this->load->view('user/pilih', $obj);
 		$this->load->view('templating/footer');
 }
+public function pilih()
+{
+		$pesan = " gagal memilih";
+		$status = false;
+
+	$id_calon = $this->input->post('pilih');
+		// $this->session->userdata('');
+
+		$getJumlama = $this->CalonModel->getCalonByID($id_calon)->result()[0]->total;
+		$total = $getJumlama + 1;
+
+		$inSiswa = array(
+			'id_calon' => $id_calon,
+			// 'siswa' => $id_siswa,
+		);
+		$inCalon = array(
+			'id_calon' => $id_calon,
+			'total' => $total,
+			// 'siswa' => $id_siswa,
+		);
+		if($this->CalonModel->edit_calon($inCalon, $id_calon)){
+			$pesan = " berhasil memilih";
+			$status = true;
+
+		}
+
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $pesan,
+		));
+
+
+	
+
+	
+
+	# code...
+}
         
 }
         
