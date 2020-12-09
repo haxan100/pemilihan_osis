@@ -57,7 +57,16 @@ public function pilih()
 
 	# code...
 }
-        
+public function cart()
+{
+	$obj['judul'] = "Data Calon";
+	$obj['graph'] = $this->CalonModel->GetPie();
+	// var_dump($data);die;
+	$this->load->view('templating/header');
+	$this->load->view('templating/sidebar');
+	$this->load->view('user/cart', $obj);
+	$this->load->view('templating/footer');
+}
 }
         
     /* End of file  User.php */

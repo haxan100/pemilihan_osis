@@ -76,6 +76,11 @@ class CalonModel extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
+	public function GetPie()
+	{
+		$data = $this->db->query("SELECT * from calon");
+		return $data->result();
+	}
 	public function getCalonByID($id_calon)
 	{
 		$this->db->from('calon');
