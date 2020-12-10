@@ -214,6 +214,7 @@ public function index()
 
 	public function ubah_siswa_proses()
 	{
+		// var_dump($_POST);die;
 		$id_siswa = $this->input->post('id_siswa', TRUE);
 		$nisn = $this->input->post('nisn', TRUE);
 		$nama = $this->input->post('nama', TRUE);

@@ -33,30 +33,39 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= base_url() ?>admin/siswa" class="nav-link active">
+							<a href="<?= base_url() ?>User/Profile" class="nav-link active">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Master Siswa</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url() ?>admin/calon" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Master Calon</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url() ?>User" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Pilih</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="./index3.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Setting</p>
+								<p>Profile</p>
 							</a>
 						</li>
 					</ul>
+
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a href="<?= base_url() ?>admin/siswa" class="nav-link active">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Master Siswa</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url() ?>admin/calon" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Master Calon</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?= base_url() ?>User" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Pilih</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="./index3.html" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Setting</p>
+						</a>
+					</li>
+				</ul>
 				</li>
 				<li class="nav-item">
 					<a href="<?= base_url() ?>Admin/Logout" class="nav-link">
