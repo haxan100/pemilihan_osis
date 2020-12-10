@@ -142,6 +142,17 @@ public function getAllSiswa()
 		$query = $this->db->get();
 		return $query;
 	}
+	public function	GetSiswaNIS($username, $password)
+	{
+		$this->db->from('siswa');
+		$this->db->where('username', $username);
+		$this->db->where('password', $password);
+		$query = $this->db->get();
+		// var_dump($this->db->last_query());
+		// die();
+		return $query;		
+		# code...
+	}
                         
                             
                         
