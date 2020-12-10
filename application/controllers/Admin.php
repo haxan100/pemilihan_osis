@@ -10,26 +10,50 @@ class Admin extends CI_Controller {
 	}	
 
 public function index()
-{ 
+{
+		$this->cekLoginAdmin();
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar');
 		$this->load->view('templating/index');
 		$this->load->view('templating/footer');
 		
 }
-public function siswa()
-{
-	// $obj['data'] = $this->SiswaModel->getAllSiswa();
-	// var_dump($data);die;
-		$obj['judul'] = "Data Siswa";
-		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar');
-		$this->load->view('templating/data',$obj);
-		$this->load->view('templating/footer');
-	
+ public function isLoggedInAdmin()
+    {
+        // Cek apakah terdapat session "admin_session"
 
-	# code...
-}
+        if ($this->session->userdata('admin_session'))
+            return true; // sudah login
+        else
+            return false; // belum login
+    }
+  function cekLoginAdmin()
+  {
+    if (!$this->isLoggedInAdmin()) {
+      $this->session->set_flashdata(
+        'notifikasi',
+        array(
+          'alert' => 'alert-danger',
+          'message' => 'Silahkan Login terlebih dahulu.',
+        )
+      );
+      redirect('admin/login');
+    }
+  }
+	public function siswa()
+	{
+			$this->cekLoginAdmin();
+		// $obj['data'] = $this->SiswaModel->getAllSiswa();
+		// var_dump($_SESSION);die;
+			$obj['judul'] = "Data Siswa";
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar');
+			$this->load->view('templating/data',$obj);
+			$this->load->view('templating/footer');
+		
+
+		# code...
+	}
 	public function getAllSiswa()
 	{
 
@@ -295,6 +319,16 @@ public function siswa()
 			'status' => $status,
 			'message' => $message,
 		));
+	}
+	public function Logout()
+	{
+		
+		$this->session->sess_destroy();
+
+		 $this->login();
+		
+		
+		# code...
 	}
    
         
