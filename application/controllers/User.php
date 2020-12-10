@@ -59,9 +59,10 @@ public function pilih()
 }
 public function cart()
 {
-	$obj['judul'] = "Data Calon";
+	$obj['judul'] = "Hasil Quick Count";
+	$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
 	$obj['graph'] = $this->CalonModel->GetPie();
-	// var_dump($data);die;
+	// var_dump($obj['data']);die;
 	$this->load->view('templating/header');
 	$this->load->view('templating/sidebar');
 	$this->load->view('user/cart', $obj);

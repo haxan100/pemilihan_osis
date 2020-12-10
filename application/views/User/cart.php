@@ -82,6 +82,41 @@ $bu = base_url();
 
 			<div id="container"></div>
 
+			<hr>
+			<div class="row">
+				<?php
+				foreach ($graph as $key => $value) {
+					// echo $value;
+
+
+				?>
+					<div class="col-md-3 col-sm-6 col-12">
+						<div class="info-box bg-info">
+							<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon/<?= $value->foto ?>"> </span>
+
+							<div class="info-box-content">
+								<span class="info-box-text">Nama : <?= $value->nama_calon ?></span>
+								<div class="progress">
+									<div class="progress-bar" style="width: 100%"></div>
+								</div>
+								<span class="progress-description">
+									Jumlah Total Suara
+								</span>
+								<hr>
+								<span class="progress-description">
+									<b> <?= $value->total ?></b>
+								</span>
+							</div>
+							<!-- /.info-box-content -->
+						</div>
+						<!-- /.info-box -->
+					</div>
+
+				<?php
+					# code...
+				}
+				?>
+			</div>
 		</body>
 
 		</html>
