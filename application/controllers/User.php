@@ -7,6 +7,7 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('CalonModel');
+		$this->load->model('SiswaModel');
 	}	
 
 public function index()
@@ -68,6 +69,22 @@ public function cart()
 	$this->load->view('user/cart', $obj);
 	$this->load->view('templating/footer');
 }
+	public function profile()
+	{
+		$obj['judul'] = "Profile";
+		$obj['graph'] = $this->CalonModel->GetPie();
+		$id = $_SESSION['id_siswa'];
+		$getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
+		$obj['data']= $getUser->row();
+		// var_dump($r);die;
+
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar');
+		$this->load->view('user/profile', $obj);
+		$this->load->view('templating/footer');
+
+		# code...
+	}
 }
         
     /* End of file  User.php */

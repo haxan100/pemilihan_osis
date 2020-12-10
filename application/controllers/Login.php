@@ -22,7 +22,7 @@ public function index()
 }
 public function login_proses()
 {	$status = false;
-	$message = 'Gagal menghapus Siswa!';
+	$message = 'Gagal Login <br> Mohon Isi Username dan Password dengan benar!';
 
 	$username= $this->input->post('username');
 	$password= $this->input->post('password');
