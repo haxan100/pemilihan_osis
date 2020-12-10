@@ -4,7 +4,9 @@ class Admin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('SiswaModel');		
+		$this->load->model('SiswaModel');
+		$this->load->model('CalonModel');
+		$this->load->model('AdminModel');		
 	}	
 
 public function index()
@@ -254,6 +256,47 @@ public function siswa()
 		$this->load->view('admin/calon', $obj);
 		$this->load->view('templating/footer');
 	}
+	public function login()
+	{
+		$obj['judul'] = "Data Calon";
+		$obj['data'] = $this->CalonModel->ListUserCalon()->result();
+		$obj['ci'] = $this;
+		// var_dump($data);die;
+		// $this->load->view('templating/header');
+		// $this->load->view('templating/sidebar');
+		$this->load->view('admin/Login', $obj);
+		// $this->load->view('templating/footer');
+	}
+	public function login_proses()
+	{
+		$status = false;
+		$message = 'Gagal menghapus Login! , <br> Mohon Masukan Username dan Password dengan benar';
+
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$isUser = $this->AdminModel->GetAdminLogin($username, $password);
+		$r = $isUser->row();
+		// var_dump($r);die;
+		if ($isUser->num_rows() == 1) {
+			$session = array(
+				'admin_session' => true,
+				'id_admin' => $r->id,
+				'nama' => $r->nama,
+				'username' => $r->username,
+				'password' => $r->password,
+			);
+
+			$this->session->set_userdata($session); // Buat session sesuai $session
+			$status = true;
+
+			$message = 'Selamat datang Admin <span class="font-weight-bold">' . $r->nama . '</span>, sedang mengalihkan..';
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+		));
+	}
+   
         
 }
         
