@@ -274,6 +274,8 @@ public function index()
 
 	public function calon()
 	{
+
+		$this->cekLoginAdmin();
 		$obj['judul'] = "Data Calon";
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar');
@@ -321,13 +323,10 @@ public function index()
 		));
 	}
 	public function Logout()
-	{
-		
+	{		
 		$this->session->sess_destroy();
-
 		 $this->login();
-		
-		
+	
 		# code...
 	}
    
