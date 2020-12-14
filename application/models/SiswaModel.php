@@ -161,6 +161,14 @@ public function getAllSiswa()
 		return $query;
 		# code...
 	}
+	public function getIsUserHasChose($id_siswa)
+	{
+		$this->db->select('pilih');
+		$this->db->where('id_siswa', $id_siswa);
+		$query = $this->db->get('siswa s');
+		return $query;
+		# code...
+	}
                         
                             
                         

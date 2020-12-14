@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="../../index2.html"><b>Admin</b>LTE</a>
+			<a href="../../index2.html"><b>Login Pemilihan Calon</b></a>
 		</div>
 		<div id="alertNotif" class="p-2">
 			<?php
@@ -41,7 +41,7 @@
 		<!-- /.login-logo -->
 		<div class="card">
 			<div class="card-body login-card-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg">User Siswa</p>
 
 				<form>
 					<div class="input-group mb-3">

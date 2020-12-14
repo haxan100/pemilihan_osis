@@ -32,7 +32,7 @@ $bu = base_url();
 				// echo $key->nama_calon;
 			?>
 				<div class="col-md-3 col-sm-6 col-12">
-					<div class="info-box bg-info">
+					<div class="info-box bg-info" style="max-width: 95%;max-height: 100%;">
 						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon/<?= $key->foto ?>"> </span>
 
 						<div class="info-box-content">
@@ -92,7 +92,7 @@ $bu = base_url();
 					$checked = 1;
 			}
 			if ($checked == 0) {
-				alert("Mohon Pilih Setidaknya 1 Produk");
+				alert("Mohon Pilih Setidaknya 1 Calon");
 				return false
 			}
 

@@ -28,18 +28,18 @@ public function index()
             return false; // belum login
     }
   function cekLoginAdmin()
-  {
-    if (!$this->isLoggedInAdmin()) {
-      $this->session->set_flashdata(
-        'notifikasi',
-        array(
-          'alert' => 'alert-danger',
-          'message' => 'Silahkan Login terlebih dahulu.',
-        )
-      );
-      redirect('admin/login');
-    }
-  }
+	{
+		if (!$this->isLoggedInAdmin()) {
+		$this->session->set_flashdata(
+			'notifikasi',
+			array(
+			'alert' => 'alert-danger',
+			'message' => 'Silahkan Login terlebih dahulu.',
+			)
+		);
+		redirect('admin/login');
+		}
+	}
 	public function siswa()
 	{
 			$this->cekLoginAdmin();

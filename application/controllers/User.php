@@ -12,13 +12,26 @@ class User extends CI_Controller {
 
 public function index()
 {
+		$this->cekLoginAdmin();
+	// if($this->isLoginUser()){
+		$id = $this->session->userdata('id_siswa');
+		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+		$obs['data']= $getUserByID;
+
 		$obj['judul'] = "Data Calon";
-		$obj['data']= $this->CalonModel->ListUserCalon()->result();
+
+		$obj['data'] = $this->CalonModel->ListUserCalon()->result();
 		// var_dump($data);die;
 		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar');
+		$this->load->view('templating/sidebar', $obs);
 		$this->load->view('user/pilih', $obj);
 		$this->load->view('templating/footer');
+		
+}
+public function getIsUserHasChose($id)
+{
+	$data = $this->SiswaModel->getIsUserHasChose($id);
+	# code...
 }
 public function pilih()
 {
@@ -60,17 +73,31 @@ public function pilih()
 }
 public function cart()
 {
+	$this->cekLoginAdmin();
+	// if($this->isLoginUser()){
+	$id = $this->session->userdata('id_siswa');
+	$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+	$obs['data'] = $getUserByID;
+
 	$obj['judul'] = "Hasil Quick Count";
 	$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
 	$obj['graph'] = $this->CalonModel->GetPie();
 	// var_dump($obj['data']);die;
 	$this->load->view('templating/header');
-	$this->load->view('templating/sidebar');
+	// $this->load->view('templating/sidebar');
+
+	$this->load->view('templating/sidebar', $obs);
 	$this->load->view('user/cart', $obj);
 	$this->load->view('templating/footer');
 }
-	public function profile()
+public function profile()
 	{
+		$this->cekLoginAdmin();
+		// if($this->isLoginUser()){
+		$id = $this->session->userdata('id_siswa');
+		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+		$obs['data']= $getUserByID;
+
 		$obj['judul'] = "Profile";
 		$obj['graph'] = $this->CalonModel->GetPie();
 		$id = $_SESSION['id_siswa'];
@@ -79,12 +106,34 @@ public function cart()
 		// var_dump($r);die;
 
 		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar');
+		$this->load->view('templating/sidebar', $obs);
 		$this->load->view('user/profile', $obj);
 		$this->load->view('templating/footer');
 
 		# code...
 	}
+	public function isLoginUser()
+	{
+		// var_dump($this->session->userdata());die;
+		if ($this->session->userdata('id_siswa'))
+			return true; // sudah login
+		else
+			return false; // belum login
+	}
+	function cekLoginAdmin()
+	{
+		if (!$this->isLoginUser()) {
+			$this->session->set_flashdata(
+				'notifikasi',
+				array(
+					'alert' => 'alert-danger',
+					'message' => 'Silahkan Login terlebih dahulu.',
+				)
+			);
+			redirect('login');
+		}
+	}
+
 }
         
     /* End of file  User.php */

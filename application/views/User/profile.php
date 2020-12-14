@@ -1,6 +1,7 @@
 <!-- Content Wrapper. Contains page content -->
 <?php
 $bu = base_url();
+
 ?>
 <style>
 	.card-header {
