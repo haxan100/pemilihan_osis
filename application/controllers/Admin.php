@@ -11,9 +11,15 @@ class Admin extends CI_Controller {
 
 public function index()
 {
-		$this->cekLoginAdmin();
+
+	$this->cekLoginAdmin();
+		// var_dump($this->session->userdata('id_admin'));die;
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
 		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar');
+		$this->load->view('templating/sidebar', $obs);
+		// $this->load->view('templating/sidebar');
 		$this->load->view('templating/index');
 		$this->load->view('templating/footer');
 		
@@ -46,8 +52,11 @@ public function index()
 		// $obj['data'] = $this->SiswaModel->getAllSiswa();
 		// var_dump($_SESSION);die;
 			$obj['judul'] = "Data Siswa";
+			$id = $this->session->userdata('id_admin');
+			$getUserByID = $this->AdminModel->getAdminById($id)[0];
+			$obs['data'] = $getUserByID;
 			$this->load->view('templating/header');
-			$this->load->view('templating/sidebar');
+			$this->load->view('templating/sidebar', $obs);
 			$this->load->view('templating/data',$obj);
 			$this->load->view('templating/footer');
 		
@@ -278,8 +287,11 @@ public function index()
 
 		$this->cekLoginAdmin();
 		$obj['judul'] = "Data Calon";
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
 		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar');
+		$this->load->view('templating/sidebar', $obs);
 		$this->load->view('admin/calon', $obj);
 		$this->load->view('templating/footer');
 	}

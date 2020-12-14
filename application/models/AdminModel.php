@@ -17,6 +17,14 @@ public function login(){
 		return $query;
 		# code...
 	}
+	public function getAdminById($id)
+	{
+		$this->db->select('*');
+		$this->db->where('id', $id);
+		$query = $this->db->get('admin s');
+		return $query->result();
+		# code...
+	}
                         
                             
                         
