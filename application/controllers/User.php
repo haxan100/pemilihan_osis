@@ -135,23 +135,58 @@ public function cart()
 }
 public function profile()
 	{
-		$this->cekLoginAdmin();
-		// if($this->isLoginUser()){
 		$id = $this->session->userdata('id_siswa');
-		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
-		$obs['data']= $getUserByID;
+		$this->cekLoginAdmin();
 
-		$obj['judul'] = "Profile";
-		$obj['graph'] = $this->CalonModel->GetPie();
-		$id = $_SESSION['id_siswa'];
-		$getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
-		$obj['data']= $getUser->row();
-		// var_dump($r);die;
 
-		$this->load->view('templating/header');
-		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('user/profile', $obj);
-		$this->load->view('templating/footer');
+		if ($this->getIsUserHasChose($id)) {
+			$dataCalon = $this->SiswaModel->getIsUserHasChoseAndCalon($id)[0];
+
+			$obj['calon'] = $dataCalon;
+			$obj['statcalon'] = 	true;
+
+			$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+			$obs['data'] = $getUserByID;
+
+			$obj['judul'] = "Profile";
+			$obj['graph'] = $this->CalonModel->GetPie();
+			$id = $_SESSION['id_siswa'];
+			$getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
+			$obj['data'] = $getUser->row();
+			// var_dump($r);die;
+
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('user/profile', $obj);
+			$this->load->view('templating/footer');
+
+			// echo json_encode(array(
+			// 	'status' => $status,
+			// 	'message' => $data,
+			// ));
+
+		} else {
+			$obj['calon'] = "Belum Memilih";
+			$obj['statcalon'] = 	false;
+
+			$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+			$obs['data'] = $getUserByID;
+
+			$obj['judul'] = "Profile";
+			$obj['graph'] = $this->CalonModel->GetPie();
+			$id = $_SESSION['id_siswa'];
+			$getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
+			$obj['data'] = $getUser->row();
+			// var_dump($r);die;
+
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('user/profile', $obj);
+			$this->load->view('templating/footer');
+		
+		}
+		// if($this->isLoginUser()){
+		
 
 		# code...
 	}

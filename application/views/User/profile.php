@@ -58,6 +58,28 @@ $bu = base_url();
 		<!-- About Me Box -->
 
 		<!-- /.card -->
+		<?php
+		// var_dump($calon);
+		// die;
+		if ($statcalon) {
+		?>
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Terimakasih!</h5>
+				Terima Kasih Sudah Memilih <br>
+				Anda Memilih : <?= $calon->nama_calon ?> <br>
+				Waktu Memilih : <?= $calon->waktu_milih ?> WIB <br>
+			</div>
+		<?php } else {
+		?>
+			<div class="alert alert-danger alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-ban"></i> Perhatian!</h5>
+			Mohon Untuk Memilih Calon Pada Waktu Yang Sudah Di tentukan
+			</div>
+		<?php } ?>
+
+
 </div>
 <div class="modal fade bs-example-modal-lg" id="modal-detail" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -194,6 +216,8 @@ $bu = base_url();
 
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!-- /.modal -->
+
+
 
 </section>
 <!-- /.content -->

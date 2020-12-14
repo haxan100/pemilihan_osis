@@ -169,6 +169,16 @@ public function getAllSiswa()
 		return $query->result();
 		# code...
 	}
+	public function getIsUserHasChoseAndCalon($id_siswa)
+	{
+		$this->db->select('sudah_milih,pilih,waktu_milih,nama_calon');
+		$this->db->where('id_siswa', $id_siswa);
+		$this->db->join('calon c', 'c.id_calon = s.pilih');
+
+		$query = $this->db->get('siswa s');
+		return $query->result();
+		# code...
+	}
                         
                             
                         
