@@ -163,10 +163,10 @@ public function getAllSiswa()
 	}
 	public function getIsUserHasChose($id_siswa)
 	{
-		$this->db->select('pilih');
+		$this->db->select('sudah_milih');
 		$this->db->where('id_siswa', $id_siswa);
 		$query = $this->db->get('siswa s');
-		return $query;
+		return $query->result();
 		# code...
 	}
                         

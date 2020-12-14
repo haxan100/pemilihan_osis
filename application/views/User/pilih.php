@@ -24,6 +24,30 @@ $bu = base_url();
 	<!-- Main content -->
 	<section class="content">
 
+		<div id="alertNotif" class="p-2">
+			<?php
+			if ($this->session->flashdata('notifikasi')) {
+				// $oke = 1;
+				$e = $this->session->flashdata('notifikasi');
+				echo '
+				<input name="oke" id="oke" class="btn btn-primary" type="hidden" value="1">
+								<div class="alert ' . $e['alert'] . ' alert-dismissible show" role="alert">
+										<span>' . $e['message'] . '</span>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								</div>
+
+								<script>
+								setTimeout(function() {
+								window.location.href = "User/Cart";
+							}, 2000);
+								</script>
+
+				
+						';
+			}
+			?>
+		</div>
+
 		<!-- =========================================================== -->
 
 		<div class="row">
@@ -69,10 +93,15 @@ $bu = base_url();
 	<!-- /.content -->
 </div>
 <!-- DataTables CSS -->
-
+<!--  -->
 
 <script>
 	$(document).ready(function() {
+
+		var d = $('#oke').val();
+		if (d == 1) {
+			$('#pilih').hide(); // untuk menyembunyikan  tombol
+		}
 
 		$('input.cekbox').on('change', function() {
 			$('input.cekbox').not(this).prop('checked', false);

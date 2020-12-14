@@ -15,6 +15,30 @@ public function index()
 		$this->cekLoginAdmin();
 	// if($this->isLoginUser()){
 		$id = $this->session->userdata('id_siswa');
+
+	if ($this->getIsUserHasChose($id)) {
+			$this->session->set_flashdata(
+				'notifikasi',
+				array(
+					'alert' => 'alert-danger',
+					'message' => 'Maaf, Anda Sudah Memilih Calon',
+				)
+			);
+			$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+			$obs['data'] = $getUserByID;
+
+			$obj['judul'] = "Data Calon";
+
+			$obj['data'] = $this->CalonModel->ListUserCalon()->result();
+			// var_dump($data);die;
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('user/pilih', $obj);
+			$this->load->view('templating/footer');
+
+		} else {
+
+		
 		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
 		$obs['data']= $getUserByID;
 
@@ -26,45 +50,57 @@ public function index()
 		$this->load->view('templating/sidebar', $obs);
 		$this->load->view('user/pilih', $obj);
 		$this->load->view('templating/footer');
+		}
 		
 }
 public function getIsUserHasChose($id)
 {
-	$data = $this->SiswaModel->getIsUserHasChose($id);
-	# code...
+	$data = $this->SiswaModel->getIsUserHasChose($id)[0]->sudah_milih;
+	if($data==1){
+		return true; // sudah Milih		
+	}else{
+		return false; // belum Milih 
+	}
 }
 public function pilih()
 {
-	$this->cekLoginAdmin();
+		$this->cekLoginAdmin();
 		$pesan = " gagal memilih";
 		$status = false;
-
+		
 		$id_calon = $this->input->post('pilih');
 		
 		$id = $this->session->userdata('id_siswa');
-		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
-		$obs['data'] = $getUserByID;
 
-		$getJumlama = $this->CalonModel->getCalonByID($id_calon)->result()[0]->total;
-		$total = $getJumlama + 1;
-		// var_dump(date("Y-m-d h:i:s"));die;
+		if($this->getIsUserHasChose($id)){
+			$pesan = " Maaf, Anda Sudah Memilih Calon";
+			$status = false;
+		}else{
+			$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+			$obs['data'] = $getUserByID;
 
-		$inSiswa = array(
-			'pilih' => $id_calon,
-			'sudah_milih' => 1,
-			'waktu_milih' => date("Y-m-d h:i:s"),
-		);
-		$inCalon = array(
-			'id_calon' => $id_calon,
-			'total' => $total,
-			// 'siswa' => $id_siswa,
-		);
-		if($this->CalonModel->edit_calon($inCalon, $id_calon)){
+			$getJumlama = $this->CalonModel->getCalonByID($id_calon)->result()[0]->total;
+			$total = $getJumlama + 1;
+			// var_dump(date("Y-m-d h:i:s"));die;
 
-			$this->SiswaModel->edit_siswa($inSiswa, $getUserByID->id_siswa);
-			$pesan = " berhasil memilih";
-			$status = true;
+			$inSiswa = array(
+				'pilih' => $id_calon,
+				'sudah_milih' => 1,
+				'waktu_milih' => date("Y-m-d h:i:s"),
+			);
+			$inCalon = array(
+				'id_calon' => $id_calon,
+				'total' => $total,
+				// 'siswa' => $id_siswa,
+			);
+			if($this->CalonModel->edit_calon($inCalon, $id_calon)){
+
+				$this->SiswaModel->edit_siswa($inSiswa, $getUserByID->id_siswa);
+				$pesan = " berhasil memilih";
+				$status = true;
+			}
 		}
+
 
 		echo json_encode(array(
 			'status' => $status,
