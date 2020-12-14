@@ -109,14 +109,29 @@ $bu = base_url();
 				}).done(function(e) {
 					// console.log(e);
 					if (e.status) {
-						alert(e.message);
+						// alert(e.message);
+						Swal.fire(
+							':)',
+							e.message,
+							'success'
+						);
+						setTimeout(function() {
+							window.location.href = "User/Cart";
+						}, 2000);
+
 						// notifikasi('#alertNotif', e.message, false);
 						// $('#modalMetodSekaligus').modal('hide');
 						// datatable.ajax.reload();
 						// resetForm();
 
 					} else {
-						alert(e.message);
+						// alert(e.message);
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: e.message,
+
+						})
 
 						// $('#modalMetodSekaligus').modal('hide');
 						// var alert = 'biz-alert-success';

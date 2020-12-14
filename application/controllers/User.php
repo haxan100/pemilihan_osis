@@ -35,18 +35,24 @@ public function getIsUserHasChose($id)
 }
 public function pilih()
 {
+	$this->cekLoginAdmin();
 		$pesan = " gagal memilih";
 		$status = false;
 
-	$id_calon = $this->input->post('pilih');
-		// $this->session->userdata('');
+		$id_calon = $this->input->post('pilih');
+		
+		$id = $this->session->userdata('id_siswa');
+		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+		$obs['data'] = $getUserByID;
 
 		$getJumlama = $this->CalonModel->getCalonByID($id_calon)->result()[0]->total;
 		$total = $getJumlama + 1;
+		// var_dump(date("Y-m-d h:i:s"));die;
 
 		$inSiswa = array(
-			'id_calon' => $id_calon,
-			// 'siswa' => $id_siswa,
+			'pilih' => $id_calon,
+			'sudah_milih' => 1,
+			'waktu_milih' => date("Y-m-d h:i:s"),
 		);
 		$inCalon = array(
 			'id_calon' => $id_calon,
@@ -54,9 +60,10 @@ public function pilih()
 			// 'siswa' => $id_siswa,
 		);
 		if($this->CalonModel->edit_calon($inCalon, $id_calon)){
+
+			$this->SiswaModel->edit_siswa($inSiswa, $getUserByID->id_siswa);
 			$pesan = " berhasil memilih";
 			$status = true;
-
 		}
 
 		echo json_encode(array(
