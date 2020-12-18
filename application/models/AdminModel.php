@@ -25,6 +25,11 @@ public function login(){
 		return $query->result();
 		# code...
 	}
+	public function edit_waktu($in, $id_siswa)
+	{
+		$this->db->where('id_setting', $id_siswa);
+		return $this->db->update('setting', $in);
+	}
                         
                             
                         

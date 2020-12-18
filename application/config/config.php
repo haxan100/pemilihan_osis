@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set("Asia/Jakarta");
+
+
 
 $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
 $url = str_replace("index.php", "", $_SERVER['SCRIPT_NAME']);
