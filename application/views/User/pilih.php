@@ -2,6 +2,40 @@
 <?php
 $bu = base_url();
 ?>
+<style>
+	input[type=checkbox] {
+		position: relative;
+		cursor: pointer;
+	}
+
+	input[type=checkbox]:before {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		top: 0;
+		left: 0;
+		border: 2px solid #555555;
+		border-radius: 3px;
+		background-color: white;
+	}
+
+	input[type=checkbox]:checked:after {
+		content: "";
+		display: block;
+		width: 5px;
+		height: 10px;
+		border: solid black;
+		border-width: 0 2px 2px 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+		position: absolute;
+		top: 2px;
+		left: 6px;
+	}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -117,8 +151,17 @@ $bu = base_url();
 							<span class="progress-description">
 								<?= $key->visi ?>
 							</span>
-							<button class="btn btn-info detailCalon" data-id="<?= $key->id_calon ?>" type="button">Detail</button>
-							<input class="cekbox" type="checkbox" value="<?= $key->id_calon ?>" name="pilihan" id="<?= $key->id_calon ?>">
+							<div class="row">
+								<div class="col-6">
+									<input class="cekbox" type="checkbox" value="<?= $key->id_calon ?>" name="pilihan" id="<?= $key->id_calon ?>">
+								</div>
+								<div class="col-6">
+									<button class="btn btn-info detailCalon" data-id="<?= $key->id_calon ?>" type="button">Detail</button>
+								</div>
+
+							</div>
+
+
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -132,7 +175,7 @@ $bu = base_url();
 		</div>
 		<center>
 
-			<button class="btn btn-primary" id="pilih" type="button">Pilih</button>
+			<button class="btn btn-lg btn-primary" id="pilih" type="button">Pilih</button>
 		</center>
 		<!-- /.row -->
 
