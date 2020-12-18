@@ -17,10 +17,14 @@ public function index()
 		$id = $this->session->userdata('id_admin');
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
+		$obj['siswa']= count($this->SiswaModel->getAllSiswa()->result());
+		$obj['siswaSudahMilih'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
+		$obj['calon'] = count($this->CalonModel->ListUserCalon()->result());
+		// var_dump($siswa);die;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
 		// $this->load->view('templating/sidebar');
-		$this->load->view('templating/index');
+		$this->load->view('templating/index',$obj);
 		$this->load->view('templating/footer');
 		
 }

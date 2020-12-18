@@ -16,6 +16,15 @@ public function getAllSiswa()
 		return $data;
 		# code...
 	}
+	public function getAllSiswaHasChose()
+	{
+		$this->db->select('*');
+		$this->db->from('siswa');
+		$this->db->where('sudah_milih',1);		
+		$data =  $this->db->get();
+		return $data;
+		# code...
+	}
 	public function dt_Siswa($post)
 	{
 		// untuk sort
