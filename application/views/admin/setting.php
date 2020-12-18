@@ -48,14 +48,14 @@ $bu = base_url();
 								<button class="btn btn-primary" type="button">Edit</button>
 								<hr>
 								<hr>
-								<!-- <div class="col-6">
+								<div class="col-6">
 									<label for="birthdaytime">Mulai:</label>
 									<input type="datetime-local" id="mulai" name="birthdaytime">
 									<br>
 									<label for="birthdaytime">Akhir:</label>
 									<input type="datetime-local" id="akhir" name="birthdaytime">
 								</div>
-								<button class="btn btn-primary" type="button" id="edit">Simpan</button> -->
+								<button class="btn btn-primary" type="button" id="edit">Simpan</button>
 							</div>
 						</tr>
 					</thead>

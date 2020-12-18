@@ -8,10 +8,34 @@ class User extends CI_Controller {
 		parent::__construct();
 		$this->load->model('CalonModel');
 		$this->load->model('SiswaModel');
+		$this->load->model('AdminModel');
 	}	
 
 public function index()
 {
+	$wak = $this->AdminModel->getWaktuSetting()->row();
+	$now = date('Y-m-d H:m:s');
+
+	 if ($now <= $wak->mulai) {
+			$this->session->set_flashdata(
+				'notifikasi',
+				array(
+					'alert' => 'alert-danger',
+					'message' => 'Maaf, Waktu Memilih Belum Di Mulai',
+				)
+			);
+		}else if ($now >= $wak->akhir) {
+			$this->session->set_flashdata(
+				'notifikasi',
+				array(
+					'alert' => 'alert-danger',
+					'message' => 'Maaf, Waktu Memilih Sudah Terlewatkan',
+				)
+			);
+		}
+	// var_dump(date('Y-m-d H:m:s')<=$wak->akhir ,
+	// 				 date('Y-m-d H:m:s') ,$wak->akhir);die;
+
 		$this->cekLoginAdmin();
 	// if($this->isLoginUser()){
 		$id = $this->session->userdata('id_siswa');
