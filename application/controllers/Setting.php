@@ -15,15 +15,16 @@ class Setting extends CI_Controller {
 public function index()
 {
 		$this->cekLoginAdmin();
-		// $obj['data'] = $this->SiswaModel->getAllSiswa();
-		// var_dump($_SESSION);die;
+		$obj['waktu'] = $this->AdminModel->getWaktuSetting()->row();
+		// var_dump($obj);die;
 		$obj['judul'] = "Setting";
 		$id = $this->session->userdata('id_admin');
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('admin/setting', $obj);
+		$this->load->view('admin/settings', $obj);
+		// $this->load->view('admin/setting', $obj);
 		$this->load->view('templating/footer');
 
 
@@ -73,6 +74,35 @@ public function index()
 			'message' => $message,
 		));
 
+	}
+	public function getSetting()
+	{
+		$bu = base_url();
+		$dt = $this->AdminModel->dt_Setting($_POST);
+		// var_dump($dt);die;
+		$datatable['draw']   = isset($_POST['draw']) ? $_POST['draw'] : 1;
+		$datatable['recordsTotal']    = $dt['totalData'];
+		$datatable['recordsFiltered'] = $dt['totalData'];
+		$datatable['data']            = array();
+		$start  = isset($_POST['start']) ? $_POST['start'] : 0;
+		// var_dump($dt['data']->result());die();
+		$no = $start + 1;
+		foreach ($dt['data']->result() as $row) {
+
+			$fields = array($no++);
+			$fields[] = $row->mulai . '<br>';
+			$fields[] = $row->akhir . '<br>';
+			$fields[] = '
+        <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
+		  data-id_setting="' . $row->id_setting . '"
+		  
+          data-akhir="' . $row->akhir . '"
+          data-mulai="' . $row->mulai . '"
+        ><i class="far fa-edit"></i> Ubah</button>   ';
+			$datatable['data'][] = $fields;
+		}
+		echo json_encode($datatable);
+		exit();
 	}
         
 }

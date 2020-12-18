@@ -40,17 +40,23 @@ $bu = base_url();
 				<table id="example1" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-
-
-							<label for="birthdaytime">Mulai:</label>
-							<input type="datetime-local" id="mulai" name="birthdaytime">
-							<br>
-							<label for="birthdaytime">Akhir:</label>
-							<input type="datetime-local" id="akhir" name="birthdaytime">
-
-							<button class="btn btn-primary" type="button" id="edit">Simpan</button>
-
-
+							<div class="row">
+								<div class="col-6">
+									Waktu Mulai : <?= $waktu->mulai ?> WIB<br>
+									Waktu Akhir : <?= $waktu->akhir ?> WIB
+								</div>
+								<button class="btn btn-primary" type="button">Edit</button>
+								<hr>
+								<hr>
+								<!-- <div class="col-6">
+									<label for="birthdaytime">Mulai:</label>
+									<input type="datetime-local" id="mulai" name="birthdaytime">
+									<br>
+									<label for="birthdaytime">Akhir:</label>
+									<input type="datetime-local" id="akhir" name="birthdaytime">
+								</div>
+								<button class="btn btn-primary" type="button" id="edit">Simpan</button> -->
+							</div>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,8 +92,6 @@ $bu = base_url();
 					'error'
 				)
 			} else {
-
-
 				// alert(m, a)
 				$.ajax({
 					url: bu + 'Setting/Setting',
