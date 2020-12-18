@@ -342,6 +342,16 @@ public function index()
 	
 		# code...
 	}
+	public function getCalonByID()
+	{
+		$id = $this->input->post('data');
+		$data = $this->CalonModel->getCalonByID($id)->row();
+		$datas = array(
+			'status' => true,
+			'data'=> $data,
+		 );
+		echo json_encode($datas);
+	}
    
         
 }

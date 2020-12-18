@@ -24,6 +24,52 @@ $bu = base_url();
 	<!-- Main content -->
 	<section class="content">
 
+		<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Calon Detail</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<!-- About Me Box -->
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">About Me</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<strong><i class="fas fa-book mr-1"></i> Nama</strong>
+
+								<p class="text-muted" id="nama">
+
+								</p>
+								<hr>
+								<strong><i class="fas fa-map-marker-alt mr-1"></i> VISI</strong>
+								<p class="text-muted" id="visi"></p>
+								<hr>
+								<strong><i class="fas fa-pencil-alt mr-1"></i> MISI</strong>
+
+								<p class="text-muted" id="misi">
+									<span class="tag tag-danger"></span>
+								</p>
+								<hr>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 		<div id="alertNotif" class="p-2">
 			<?php
 			if ($this->session->flashdata('notifikasi')) {
@@ -56,7 +102,7 @@ $bu = base_url();
 				// echo $key->nama_calon;
 			?>
 				<div class="col-md-3 col-sm-6 col-12">
-					<div class="info-box bg-info" style="max-width: 95%;max-height: 100%;">
+					<div class="info-box bg-primary" style="max-width: 95%;max-height: 100%;">
 						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon/<?= $key->foto ?>"> </span>
 
 						<div class="info-box-content">
@@ -71,6 +117,7 @@ $bu = base_url();
 							<span class="progress-description">
 								<?= $key->visi ?>
 							</span>
+							<button class="btn btn-info detailCalon" data-id="<?= $key->id_calon ?>" type="button">Detail</button>
 							<input class="cekbox" type="checkbox" value="<?= $key->id_calon ?>" name="pilihan" id="<?= $key->id_calon ?>">
 						</div>
 						<!-- /.info-box-content -->
@@ -105,6 +152,29 @@ $bu = base_url();
 
 		$('input.cekbox').on('change', function() {
 			$('input.cekbox').not(this).prop('checked', false);
+		});
+		$('.detailCalon').on('click', function() {
+			$('#modalDetail').modal('show');
+			var data = $(this).data("id")
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: "<?= $bu; ?>Admin/getCalonByID",
+				data: {
+					data: data,
+				},
+			}).done(function(e) {
+				var data = e.data
+				console.log(data)
+				$('#visi').html(data.visi)
+				$('#misi').html(data.moto)
+				$('#nama').html(data.nama_calon)
+
+
+			}).fail(function(e) {
+
+			});
+
 		});
 		// klass cekbox
 		$('#pilih').on('click', function() {
