@@ -140,22 +140,38 @@ public function pilih()
 }
 public function cart()
 {
-	$this->cekLoginAdmin();
-	// if($this->isLoginUser()){
-	$id = $this->session->userdata('id_siswa');
-	$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
-	$obs['data'] = $getUserByID;
 
-	$obj['judul'] = "Hasil Quick Count";
-	$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
-	$obj['graph'] = $this->CalonModel->GetPie();
-	// var_dump($obj['data']);die;
-	$this->load->view('templating/header');
-	// $this->load->view('templating/sidebar');
+	// $this->cekLoginAdmin();
+	if($this->isLoginUser()){
+		$obs['login'] = true;
 
-	$this->load->view('templating/sidebar', $obs);
-	$this->load->view('user/cart', $obj);
-	$this->load->view('templating/footer');
+		$id = $this->session->userdata('id_siswa');
+		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+		$obs['data'] = $getUserByID;
+
+		$obj['judul'] = "Hasil Quick Count";
+		$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
+		$obj['graph'] = $this->CalonModel->GetPie();
+		// var_dump($obj['data']);die;
+		$this->load->view('templating/header');
+		// $this->load->view('templating/sidebar');
+
+		$this->load->view('templating/sidebar', $obs);
+		$this->load->view('user/cart', $obj);
+		$this->load->view('templating/footer');
+	}else{
+		$obs['login']=false;
+			$obj['judul'] = "Hasil Quick Count";
+			$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
+			$obj['graph'] = $this->CalonModel->GetPie();
+			// var_dump($obj['data']);die;
+			$this->load->view('templating/header');
+			// $this->load->view('templating/sidebar');
+
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('user/cart', $obj);
+			$this->load->view('templating/footer');
+	}
 }
 public function profile()
 	{
