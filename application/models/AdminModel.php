@@ -112,6 +112,13 @@ public function login(){
 			'data' => $data,
 		);
 	}
+
+	public function edit_profile_admin($in, $id_siswa)
+	{
+
+		$this->db->where('id', $id_siswa);
+		return $this->db->update('admin', $in);
+	}
                         
                             
                         

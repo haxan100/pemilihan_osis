@@ -385,6 +385,74 @@ public function index()
 		$this->load->view('user/cart', $obj);
 		$this->load->view('templating/footer');
 	}
+	public function profile()
+	{
+			$id = $this->session->userdata('id_admin');
+			$nama = $this->session->userdata('nama');
+			// var_dump($_SESSION);die;
+			$this->cekLoginAdmin();
+			$obs['admin'] = true;
+			$obs['login'] = true;
+			$obj['calon'] = "Belum Memilih";
+			$obj['statcalon'] = 	false;
+
+			$getUserByID = $this->AdminModel->getAdminById($id)[0];
+			$obs['data'] = $getUserByID;
+
+			$obj['judul'] = "Profile";
+			$obj['graph'] = $this->CalonModel->GetPie();
+
+			$getUser = $this->AdminModel->getAdminById($id)[0];
+			// var_dump($getUser);die;
+			$obj['data'] = $getUser;
+
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('admin/profile', $obj);
+			$this->load->view('templating/footer');
+		
+		// if($this->isLoginUser()){
+
+
+		# code...
+	}
+	public function ubah_profile_admin()
+	{
+		// var_dump($_POST);die;
+		$id = $this->input->post('id', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+		$no_hp = $this->input->post('noHP', TRUE);
+
+		$message = 'Gagal mengedit data !<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		$in = array(
+			'nama' => $nama,
+			'username' => $username,
+			'password' =>
+			$password,
+			'no_telpon' => $no_hp,
+		);
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if ($status) {
+			$this->AdminModel->edit_profile_admin($in, $id);
+			$message = "Berhasil Mengedit Data ";
+			$status = true;
+		} else {
+			$message = "Gagal Mengubah Data #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
+		));
+	}
    
         
 }
