@@ -39,6 +39,8 @@ public function index()
 		$this->cekLoginAdmin();
 	// if($this->isLoginUser()){
 		$id = $this->session->userdata('id_siswa');
+		$obs['login'] = true;
+		$obs['admin'] = false;
 
 	if ($this->getIsUserHasChose($id)) {
 			$this->session->set_flashdata(
@@ -88,7 +90,7 @@ public function getIsUserHasChose($id)
 }
 public function pilih()
 	{
-		$obs['login'] = true;
+		
 		$this->cekLoginAdmin();
 		$pesan = " gagal memilih";
 		$status = false;
@@ -145,6 +147,8 @@ public function cart()
 	// $this->cekLoginAdmin();
 	if($this->isLoginUser()){
 		$obs['login'] = true;
+			$obs['admin'] = false;
+
 
 		$id = $this->session->userdata('id_siswa');
 		$getUserByID = $this->SiswaModel->getSiswaById($id)[0];
@@ -161,6 +165,8 @@ public function cart()
 		$this->load->view('user/cart', $obj);
 		$this->load->view('templating/footer');
 	}else{
+		
+		$obs['admin'] = false;
 		$obs['login']=false;
 			$obj['judul'] = "Hasil Quick Count";
 			$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
@@ -178,7 +184,7 @@ public function profile()
 	{
 		$id = $this->session->userdata('id_siswa');
 		$this->cekLoginAdmin();
-
+		$obs['admin'] = false;
 		$obs['login'] = true;
 
 		if ($this->getIsUserHasChose($id)) {

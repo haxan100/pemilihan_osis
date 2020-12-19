@@ -123,18 +123,6 @@
 
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= base_url() ?>admin/siswa" class="nav-link ">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Master Siswa</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?= base_url() ?>admin/calon" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Master Calon</p>
-									</a>
-								</li>
-								<li class="nav-item">
 									<a href="<?= base_url() ?>User" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Pilih</p>
@@ -144,12 +132,6 @@
 									<a href="<?= base_url() ?>User/cart" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Quick Count</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="<?= base_url() ?>Setting" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Setting</p>
 									</a>
 								</li>
 							</ul>
