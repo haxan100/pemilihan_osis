@@ -75,6 +75,9 @@
 						</div>
 						<!-- /.col -->
 					</div>
+					<hr>
+					<label for="Cart">Untuk Melihat Hasil Quick Count Sementara, Cek <a href="<?= base_url() ?>Cart">Disini</a></label>
+
 				</form>
 
 			</div>
