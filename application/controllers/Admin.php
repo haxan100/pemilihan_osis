@@ -12,6 +12,8 @@ class Admin extends CI_Controller {
 public function index()
 {
 
+	$obs['login'] = true;
+	$obs['admin'] = true;
 	$this->cekLoginAdmin();
 		// var_dump($this->session->userdata('id_admin'));die;
 		$id = $this->session->userdata('id_admin');
@@ -52,9 +54,10 @@ public function index()
 	}
 	public function siswa()
 	{
+
+		$obs['admin'] = true;
+		$obs['login'] = true;
 			$this->cekLoginAdmin();
-		// $obj['data'] = $this->SiswaModel->getAllSiswa();
-		// var_dump($_SESSION);die;
 			$obj['judul'] = "Data Siswa";
 			$id = $this->session->userdata('id_admin');
 			$getUserByID = $this->AdminModel->getAdminById($id)[0];
@@ -289,6 +292,8 @@ public function index()
 	public function calon()
 	{
 
+		$obs['admin'] = true;
+		$obs['login'] = true;
 		$this->cekLoginAdmin();
 		$obj['judul'] = "Data Calon";
 		$id = $this->session->userdata('id_admin');
@@ -362,6 +367,23 @@ public function index()
 			'data'=> $data,
 		 );
 		echo json_encode($datas);
+	}
+	public function cart()
+	{
+		$obs['admin'] = true;
+		$obs['login'] = true;
+		$this->cekLoginAdmin();
+		$obj['judul'] = "Data Calon";
+
+		$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
+		$obj['graph'] = $this->CalonModel->GetPie();
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar', $obs);
+		$this->load->view('user/cart', $obj);
+		$this->load->view('templating/footer');
 	}
    
         

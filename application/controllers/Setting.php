@@ -14,7 +14,10 @@ class Setting extends CI_Controller {
 
 public function index()
 {
-		$this->cekLoginAdmin();
+	$this->cekLoginAdmin();
+
+		$obs['admin'] = true;
+		$obs['login'] = true;
 		$obj['waktu'] = $this->AdminModel->getWaktuSetting()->row();
 		// var_dump($obj);die;
 		$obj['judul'] = "Setting";

@@ -87,7 +87,8 @@ public function getIsUserHasChose($id)
 	}
 }
 public function pilih()
-{
+	{
+		$obs['login'] = true;
 		$this->cekLoginAdmin();
 		$pesan = " gagal memilih";
 		$status = false;
@@ -178,6 +179,7 @@ public function profile()
 		$id = $this->session->userdata('id_siswa');
 		$this->cekLoginAdmin();
 
+		$obs['login'] = true;
 
 		if ($this->getIsUserHasChose($id)) {
 			$dataCalon = $this->SiswaModel->getIsUserHasChoseAndCalon($id)[0];
