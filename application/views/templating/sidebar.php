@@ -1,5 +1,6 @@
 <!-- Main Sidebar Container -->
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -71,7 +72,7 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a href="<?= base_url() ?>Admin/Logout" class="nav-link">
+					<a href="#" id="logout" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>Logout</p>
 					</a>
@@ -83,3 +84,48 @@
 	</div>
 	<!-- /.sidebar -->
 </aside>
+
+<script>
+	var bu = '<?= base_url(); ?>';
+	$('#logout').on('click', function() {
+
+		Swal.fire({
+			title: 'Apakah Anda Yakin ?',
+			text: "Anda akan Keluar: ",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes,'
+		}).then((result) => {
+
+			if (result.value) {
+				$.ajax({
+					url: bu + 'Admin/Logout',
+					dataType: 'json',
+					method: 'POST',
+				}).done(function(e) {
+					console.log(e);
+					Swal.fire(
+						'Logout!',
+						e.message,
+						'success'
+					)
+					setTimeout(() => {
+						window.location.href = "<?php echo site_url('Login'); ?>";
+
+					}, 2000);
+
+					// $('#modal-detail').modal('hide');
+					// datatable.ajax.reload();
+				}).fail(function(e) {
+					console.log('gagal');
+					console.log(e);
+					var message = 'Terjadi Kesalahan. #JSMP01';
+					// notifikasi('#alertNotif', message, true);
+				});
+			}
+		})
+
+	});
+</script>

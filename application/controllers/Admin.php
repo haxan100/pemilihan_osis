@@ -342,7 +342,14 @@ public function index()
 	public function Logout()
 	{		
 		$this->session->sess_destroy();
-		 $this->login();
+			$status=true;
+			$message="berhasil keluar";
+		
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+		));
+		// $this->login();
 	
 		# code...
 	}
