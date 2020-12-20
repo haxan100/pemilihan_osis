@@ -32,7 +32,7 @@ $bu = base_url();
 		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
 			<a href="javascript:void(0)" data-toggle="modal" data-target="#myImport" class="btn m-t-20 btn-info waves-effect waves-light btnTambah">
 				<i class="fas fa-upload "></i>
-				<i class="fa fa-file-excel"></i> Import Spek HP
+				<i class="fa fa-file-excel"></i> Import Data Siswa
 			</a>
 		</span>
 		<br>
@@ -77,7 +77,7 @@ $bu = base_url();
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Import Spesifikasi HP </h4>
+						<h4 class="modal-title">Import Data Siswa</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">

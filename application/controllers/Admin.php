@@ -453,6 +453,30 @@ public function index()
 			'errorInputs' => $errorInputs
 		));
 	}
+		public function admin()
+	{
+
+		$obs['admin'] = true;
+		$obs['login'] = true;
+			$this->cekLoginAdmin();
+			$obj['judul'] = "Data Admin";
+			$id = $this->session->userdata('id_admin');
+			$getUserByID = $this->AdminModel->getAdminById($id)[0];
+			$obs['data'] = $getUserByID;
+			$this->load->view('templating/header');
+			$this->load->view('templating/sidebar', $obs);
+			$this->load->view('templating/data_admin',$obj);
+			$this->load->view('templating/footer');
+		
+
+		# code...
+	}
+	  public function downloadTemplateSpekHP()
+  {
+    $this->load->helper('download');
+    $sFileName = 'assets/template/template_siswa.xlsx';
+    force_download($sFileName, NULL);
+  }
    
         
 }

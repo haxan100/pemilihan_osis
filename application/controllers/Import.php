@@ -74,8 +74,11 @@ class Import extends CI_Controller {
 							'nama' => $row['C'],
 							'id_kelas' => $row['D'],
 							'no_telpon' => $row['E'],
-							'jenis_kelamin' => $row['F'],
-							'alamat' => $row['G'], 	  	  
+							'tgl_lahir' => $row['F'],
+							'jenis_kelamin' => $row['G'],
+							'alamat' => $row['H'], 	  	  
+							'username' => $row['I'], 	  	  
+							'password' => $row['J'], 	  	  
 						);
 						$this->SiswaModel->tambah_siswa($data);
 						$this->session->set_flashdata('flash_data', "$hasilRow  Data Siswa berhasil di import.");
