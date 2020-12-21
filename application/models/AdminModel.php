@@ -119,6 +119,74 @@ public function login(){
 		$this->db->where('id', $id_siswa);
 		return $this->db->update('admin', $in);
 	}
+	public function dt_Admin($post)
+	{
+		// untuk sort
+		$columns = array(
+			'nama',
+			'username',
+			'no_telpon'
+		);
+		// untuk search
+		$columnsSearch = array(
+			'nama',
+			'username',
+			'no_telpon'
+		);
+		// gunakan join disini
+		$from = 'admin s';
+		// custom SQL
+		$sql = "SELECT *  FROM {$from}  ";
+		$where = "";
+		
+		$whereTemp = "";
+		if ($whereTemp != '' && $where != ''
+		) $where .= " AND (" . $whereTemp . ")";
+		else if ($whereTemp != '') $where .= $whereTemp;
+		// search
+		if (isset($post['search']['value']) && $post['search']['value'] != '') {
+			$search = $post['search']['value'];
+			// create parameter pencarian kesemua kolom yang tertulis
+
+			// di $columns
+			$whereTemp = "";
+			for ($i = 0; $i < count($columnsSearch); $i++) {
+				$whereTemp .= $columnsSearch[$i] . ' LIKE "%' . $search . '%"';
+				// agar tidak menambahkan 'OR' diakhir Looping
+				if ($i < count($columnsSearch) - 1) {
+					$whereTemp .= ' OR ';
+				}
+			}
+			if ($where != '') $where .= " AND (" . $whereTemp . ")";
+			else $where .= $whereTemp;
+		}
+		if ($where != '') $sql .= ' where (' . $where . ')';
+		//SORT Kolom
+		$sortColumn = isset($post['order'][0]['column']) ? $post['order'][0]['column'] : 1;
+		$sortDir    = isset($post['order'][0]['dir']) ? $post['order'][0]['dir'] : 'asc';
+		$sortColumn = $columns[$sortColumn - 1];
+		// $sql .= " group by id_siswa ";
+		// $sql .= " ORDER BY {$sortColumn} {$sortDir}";
+		// var_dump($sql);die();
+		$count = $this->db->query($sql);
+		// hitung semua data
+		$totaldata = $count->num_rows();
+		// memberi Limit
+		$start  = isset($post['start']) ? $post['start'] : 0;
+		$length = isset($post['length']) ? $post['length'] : 10;
+		$sql .= " LIMIT {$start}, {$length}";
+		// var_dump($sql);die();
+		$data  = $this->db->query($sql);
+		return array(
+			'totalData' => $totaldata,
+			'data' => $data,
+		);
+	}
+	public function edit_admin($in, $id_siswa)
+	{
+		$this->db->where('id', $id_siswa);
+		return $this->db->update('admin', $in);
+	}
                         
                             
                         

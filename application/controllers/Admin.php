@@ -477,6 +477,91 @@ public function index()
     $sFileName = 'assets/template/template_siswa.xlsx';
     force_download($sFileName, NULL);
   }
+  	public function getAllAdmin()
+	{
+		$bu = base_url();
+		$dt = $this->AdminModel->dt_Admin($_POST);
+		// var_dump($dt);die;
+		$datatable['draw']   = isset($_POST['draw']) ? $_POST['draw'] : 1;
+		$datatable['recordsTotal']    = $dt['totalData'];
+		$datatable['recordsFiltered'] = $dt['totalData'];
+		$datatable['data']            = array();
+		$start  = isset($_POST['start']) ? $_POST['start'] : 0;
+		// var_dump($dt['data']->result());die();
+		$no = $start + 1;
+		foreach ($dt['data']->result() as $row) {
+			$role = "Master Admin";
+			if($row->id_role!=1){
+				$role = "Admin";
+			}
+			$fields = array($no++);
+			$fields[] = $row->nama . '<br>';
+			$fields[] = $row->username . '<br>';
+			$fields[] = $row->no_telpon . '<br>';
+			$fields[] = $role . '<br>';
+
+			$fields[] = '
+        <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
+          data-id="' . $row->id . '"
+          data-nama="' . $row->nama . '"
+          data-username="' . $row->username . '"
+          data-password="' . $row->password . '"
+          data-id_role="' . $row->id_role . '"
+          data-no_telpon="' . $row->no_telpon . '"
+        ><i class="far fa-edit"></i> Ubah</button>
+        
+        <button class="btn btn-danger my-1  btn-block btnHapus text-white" 
+		  data-id="' . $row->id . '"          
+		  data-nama="' . $row->nama . '"
+				><i class="fas fa-trash"></i> Hapus</button>        ';
+			$datatable['data'][] = $fields;
+		}
+		echo json_encode($datatable);
+		exit();
+	}
+	public function ubah_admin_proses()
+	{
+		// var_dump($_POST);die;
+		$id = $this->input->post('id', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$role = $this->input->post('role', TRUE);
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+		$no_hp = $this->input->post('noHP', TRUE);
+
+		$message = 'Gagal mengedit data !<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		$in = array(
+			'nama' => $nama,
+			'id_role' => $role,
+			'username' => $username,
+			'password' =>$password,
+			'no_telpon' => $no_hp,
+		);
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if (empty($role)) {
+			$status = false;
+			$errorInputs[] = array('#role', 'Silahkan pilih Role');
+		}
+		if ($status) {
+			$this->AdminModel->edit_admin($in, $id);
+			$message = "Berhasil Mengedit Data ";
+			$status = true;
+		} else {
+			$message = "Gagal Mengubah Data #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
+		));
+	}
+
    
         
 }

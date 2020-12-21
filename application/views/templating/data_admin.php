@@ -29,12 +29,6 @@ $bu = base_url();
 		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
 			<a class="btn m-t-20 btn-info waves-effect waves-light" href="" id="btnExport"> <i class="fas fa-download"></i> EXPORT </a>
 		</span>
-		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
-			<a href="javascript:void(0)" data-toggle="modal" data-target="#myImport" class="btn m-t-20 btn-info waves-effect waves-light btnTambah">
-				<i class="fas fa-upload "></i>
-				<i class="fa fa-file-excel"></i> Import Spek HP
-			</a>
-		</span>
 		<br>
 		<?php if ($this->session->flashdata()) : ?>
 			<div class="container-fluid">
@@ -45,7 +39,7 @@ $bu = base_url();
 			</div>
 		<?php endif ?>
 
-		
+
 		<div class="card">
 			<div class="card-header">
 			</div>
@@ -56,10 +50,9 @@ $bu = base_url();
 						<tr>
 							<th>No</th>
 							<th>Nama</th>
-							<th>NIS</th>
-							<th>Kelas</th>
+							<th>Username</th>
 							<th>No Telpon</th>
-							<th>Sudah Memilih</th>
+							<th>Role</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -69,49 +62,6 @@ $bu = base_url();
 			<!-- /.card-body -->
 		</div>
 		<!-- Modal Add Category -->
-
-		<!-- // MODAL Import -->
-		<div id="myImport" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-md">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Import Spesifikasi HP </h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="container-fluid">
-
-							<form method="post" enctype="multipart/form-data" action="<?= $bu; ?>Import/import_siswa">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<p> Pilih File : </p>
-										<div class="box">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" name="fileURL" required="required" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-
-											<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-											<span class="btn btn-info"><a href="downloadTemplateSpekHP" title="Download Template Excel" class="download" style="color: #fff">
-													<i class="fas fa-cloud-download-alt"></i>Download Template </a>
-											</span>
-										</div>
-									</div>
-								</div>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="submit" name="upload" class="btn btn-success"> IMPORT </button>
-						<button type="button" class="btn btn-default" data-dismiss="modal"> BATAL </button>
-					</div>
-				</div>
-
-				</form>
-
-			</div>
-		</div>
-
-
 		<div class="modal fade bs-example-modal-lg" id="modal-detail" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<form id="form">
@@ -132,13 +82,11 @@ $bu = base_url();
 											<br />
 											<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 												<div class="row">
-													<input id="id_siswa" name="id_siswa" class="form-control " readonly type="hidden" class="form-control">
+													<input id="id" name="id" class="form-control " readonly type="hidden" readonly class="form-control">
 
-													<div class=" form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> NISN <span class="required">*</span>
-														</label>
-														<input id="nisn" name="nisn" class="form-control " placeholder="Isikan NISN" readonly type="number" class="form-control">
-													</div>
+
+												</div>
+												<div class="row">
 
 													<div class="item form-group col-md-6 col-sm-6">
 														<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Nama <span class="required">*</span>
@@ -148,68 +96,27 @@ $bu = base_url();
 														</div>
 													</div>
 
-												</div>
-												<div class="row">
 													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Alamat <span class="required">*</span>
+														<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Admin <span class="required">*</span>
 														</label>
 														<div class="">
-															<input id="alamat" name="alamat" class="form-control " placeholder="Isikan Alamat" type="text" class="form-control">
-
-														</div>
-													</div>
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kelas <span class="required">*</span>
-														</label>
-														<div class="">
-															<select class="form-control " name="kelas" id="kelas">
-																<option value="default" desable>Pilih Kelas</option>
-																<option value="10">X</option>
-																<option value="11">XI</option>
-																<option value="12">XII</option>
+															<select class="form-control " name="role" id="role">
+																<option value="default" desable>Pilih Role</option>
+																<option value="0">Admin</option>
+																<option value="1">Master Admin</option>
 															</select>
 														</div>
 													</div>
 												</div>
-												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label " for="last-name">Jenis Kelamin <span class="required">*</span>
-														</label>
-														<div class="">
-															<select class="form-control select " id="jk" name="jk">
-																<option value="l">Laki-laki</option>
-																<option value="p">Perempuan</option>
-															</select>
-														</div>
-													</div>
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Tanggal Lahir <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="tanggal_lahir" name="tanggal_lahir" class="form-control " placeholder="Isikan kelas" type="date" class="form-control">
 
-														</div>
-													</div>
-												</div>
 												<div class="row">
-													<div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label label-align" for="last-name">Tempat Lahir <span class="required">*</span>
-														</label>
-														<div class="">
-															<input id="tempat_lahir" name="tempat_lahir" class="form-control " placeholder="Isikan tempat lahir" type="text" class="form-control">
-
-														</div>
-													</div>
 													<div class="item form-group col-md-6 col-sm-6 ">
 														<label class="col-form-label label-align" for="last-name">Username <span class="required">*</span>
 														</label>
 														<div class="">
 															<input id="username" name="username" class="form-control " placeholder="Isikan Username" type="text" class="form-control">
-
 														</div>
 													</div>
-												</div>
-												<div class="row">
 													<div class="item form-group col-md-6 col-sm-6 ">
 														<label class="col-form-label label-align" for="last-name">Password <span class="required">*</span>
 														</label>
@@ -218,8 +125,12 @@ $bu = base_url();
 
 														</div>
 													</div>
+												</div>
 
-													<div class="item form-group col-md-6 col-sm-6 ">
+												<div class="row">
+
+
+													<div class="item form-group col-md-12 col-sm-12 ">
 														<label class="col-form-label label-align" for="last-name">No Hp <span class="required">*</span>
 														</label>
 														<div class="">
@@ -227,11 +138,6 @@ $bu = base_url();
 
 														</div>
 													</div>
-													<!-- <div class="item form-group col-md-6 col-sm-6 ">
-														<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Foto <span class="required">*</span>
-															<input type="file" name="foto" id="foto">
-														</label>
-													</div> -->
 
 												</div>
 												<div class="ln_solid"></div>
@@ -266,7 +172,7 @@ $bu = base_url();
 		var bu = '<?= base_url(); ?>';
 
 		var url_form_tambah = bu + 'admin/tambah_siswa_proses';
-		var url_form_ubah = bu + 'admin/ubah_siswa_proses';
+		var url_form_ubah = bu + 'admin/ubah_admin_proses';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
 				[5, 10, 25, 50, -1],
@@ -305,7 +211,7 @@ $bu = base_url();
 				[2, "desc"]
 			],
 			'ajax': {
-				url: bu + 'admin/getAllSiswa',
+				url: bu + 'admin/getAllAdmin',
 				type: 'POST',
 				"data": function(d) {
 					return d;
@@ -582,56 +488,36 @@ $bu = base_url();
 			$('#tambah_act').hide();
 
 			var no_telpon = $(this).data('no_telpon');
-			var id_siswa = $(this).data('id_siswa');
-			var nisn = $(this).data('nis');
+			var id = $(this).data('id');
 			var nama = $(this).data('nama');
-			var kelas = $(this).data('id_kelas');
-			var jenkel = $(this).data('jenis_kelamin');
-			var tempat_lahir = $(this).data('tempat_lahir');
-			var tanggal_lahir = $(this).data('tgl_lahir');
-			var alamat = $(this).data('alamat');
+			var id_role = $(this).data('id_role');
 			var username = $(this).data('username');
 			var password = $(this).data('password');
-			// console.log(username)
+			console.log(id_role)
 			$('#modal-detail').modal('show');
-			// var foto = $(this).data('foto');
-			// console.log(kelas)
 
-			$('#id_siswa').val(id_siswa);
+			$('#id').val(id);
 			$('#nama').val(nama);
-			$('#nama').val(nama);
-			$('#alamat').val(alamat);
-			$('#jk').val(jenkel);
-			$('#tempat_lahir').val(tempat_lahir);
-			$('#tanggal_lahir').val(tanggal_lahir);
+
 			$('#username').val(username);
 			$('#password').val(password);
 			$('#noHP').val(no_telpon);
 			$('#Edit').show();
-			$("#kelas").val(parseInt(kelas));
-			$("#nisn").val(parseInt(nisn));
-
-
+			$("#role").val(parseInt(id_role));
 		});
 
 		$('#Edit').on('click', function() {
-
-			var id_siswa = $('#id_siswa').val();
-			var nisn = $('#nis').val();
+			var id = $('#id').val();
 			var nama = $('#nama').val();
-			var kelas = $('#kelas').val();
-			var jenis_kelamin = $('#jk').val();
-			var tanggal_lahir = $('#tanggal_lahir').val();
-			var tempat_lahir = $('#tempat_lahir').val();
+			var role = $('#role').val();
 			var username = $('#username').val();
 			var password = $('#password').val();
 			var noHP = $('#noHP').val();
 
 			if (
-				nama && kelas && kelas && jenis_kelamin && noHP && username && password && tempat_lahir
+				nama && role && noHP && username && password 
 			) {
 				$("#form").submit();
-
 			}
 
 
