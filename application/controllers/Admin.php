@@ -453,11 +453,21 @@ public function index()
 			'errorInputs' => $errorInputs
 		));
 	}
+	public function roleAdmin()
+	{
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		return $role =  $getUserByID->id_role;
+		# code...
+	}
 		public function admin()
 	{
 
 		$obs['admin'] = true;
 		$obs['login'] = true;
+		$role = $this->roleAdmin();
+		// var_dump($role);die;
+		if($role){
 			$this->cekLoginAdmin();
 			$obj['judul'] = "Data Admin";
 			$id = $this->session->userdata('id_admin');
@@ -467,6 +477,14 @@ public function index()
 			$this->load->view('templating/sidebar', $obs);
 			$this->load->view('templating/data_admin',$obj);
 			$this->load->view('templating/footer');
+		}else{
+			echo "<script>
+			alert('Anda Tidak Di perbolehkan Di Halaman Ini!');			
+			</script>";			
+			redirect('admin','refresh');
+			
+		}
+
 		
 
 		# code...

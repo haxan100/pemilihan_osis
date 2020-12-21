@@ -12,6 +12,7 @@
 	<?php
 	if ($login) {
 		if ($admin) {
+			$role = $data->id_role;
 	?>
 			<!-- Sidebar -->
 			<div class="sidebar">
@@ -48,12 +49,19 @@
 							</ul>
 
 							<ul class="nav nav-treeview">
+								<?php
+								if ($role == 1) {
+								
+								?>
 								<li class="nav-item">
 									<a href="<?= base_url() ?>admin/admin" class="nav-link ">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Master Admin</p>
 									</a>
 								</li>
+								<?php
+								}
+								?>
 								<li class="nav-item">
 									<a href="<?= base_url() ?>admin/siswa" class="nav-link ">
 										<i class="far fa-circle nav-icon"></i>
