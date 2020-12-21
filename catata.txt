@@ -1,3 +1,7 @@
+#oot 
+#share
+#sale
+#untukbelajar
 
 Pemilihan Calon Osis Dengan Web
 bisa juga untuk pemilihan / votting lain misal RT/ RW, ketua kelas , dll.
@@ -44,3 +48,13 @@ role: Super Admin ,  Admin  , Calon Ketua(bisa untuk calon voting lain), dan use
 - ketika user memilih sebelum tanggal di tetapkan untuk memilih , maka akan warning
 - ketika user memilih setelah tanggal di tetapkan untuk memilih/ lewat dari tanggal , maka akan warning
 - Edit Profil , (tidak bisa edit  NISN, Hanya Admin yang dapat meng-edit NISN)
+
+link : pm
+
+
+ user : http://heyiamhasan.com/pemilihan_osis/
+
+
+ admin : http://heyiamhasan.com/pemilihan_osis/admin
+akun admin : =>  username : admin || pass: admin
+akun user(pemilih/ voter) : username : hasan|| pass: hasan (atau bisa di buat oleh admin )

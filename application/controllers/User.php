@@ -59,7 +59,7 @@ public function index()
 			// var_dump($data);die;
 			$this->load->view('templating/header');
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/pilih', $obj);
+			$this->load->view('User/pilih', $obj);
 			$this->load->view('templating/footer');
 
 		} else {
@@ -74,7 +74,7 @@ public function index()
 		// var_dump($data);die;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('user/pilih', $obj);
+			$this->load->view('User/pilih', $obj);
 		$this->load->view('templating/footer');
 		}
 		
@@ -162,7 +162,7 @@ public function cart()
 		// $this->load->view('templating/sidebar');
 
 		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('user/cart', $obj);
+		$this->load->view('User/cart', $obj);
 		$this->load->view('templating/footer');
 	}else{
 		
@@ -176,7 +176,7 @@ public function cart()
 			// $this->load->view('templating/sidebar');
 
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/cart', $obj);
+			$this->load->view('User/cart', $obj);
 			$this->load->view('templating/footer');
 	}
 }
@@ -205,7 +205,7 @@ public function profile()
 
 			$this->load->view('templating/header');
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/profile', $obj);
+			$this->load->view('User/profile', $obj);
 			$this->load->view('templating/footer');
 
 			// echo json_encode(array(
@@ -229,7 +229,7 @@ public function profile()
 
 			$this->load->view('templating/header');
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/profile', $obj);
+			$this->load->view('User/profile', $obj);
 			$this->load->view('templating/footer');
 		
 		}

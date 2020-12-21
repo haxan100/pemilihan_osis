@@ -32,7 +32,7 @@ class Cart extends CI_Controller {
 			// $this->load->view('templating/sidebar');
 
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/cart', $obj);
+			$this->load->view('User/cart', $obj);
 			$this->load->view('templating/footer');
 		} else {
 
@@ -46,7 +46,7 @@ class Cart extends CI_Controller {
 			// $this->load->view('templating/sidebar');
 
 			$this->load->view('templating/sidebar', $obs);
-			$this->load->view('user/cart', $obj);
+			$this->load->view('User/cart', $obj);
 			$this->load->view('templating/footer');
 		}
 	}

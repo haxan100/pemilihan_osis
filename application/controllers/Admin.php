@@ -382,7 +382,7 @@ public function index()
 		$obs['data'] = $getUserByID;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('user/cart', $obj);
+		$this->load->view('User/cart', $obj);
 		$this->load->view('templating/footer');
 	}
 	public function profile()

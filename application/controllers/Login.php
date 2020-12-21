@@ -17,7 +17,7 @@ public function index()
 		// var_dump($data);die;
 		// $this->load->view('templating/header');
 		// $this->load->view('templating/sidebar');
-		$this->load->view('user/login', $obj);
+		$this->load->view('User/Login', $obj);
 		// $this->load->view('templating/footer');
 }
 public function login_proses()
