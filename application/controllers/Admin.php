@@ -561,6 +561,46 @@ public function index()
 			'errorInputs' => $errorInputs
 		));
 	}
+	public function tambah_admin_proses()
+	{
+		// var_dump($_POST);die;
+		$noHP = $this->input->post('noHP', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$role = $this->input->post('role', TRUE);
+		$username = $this->input->post('username', TRUE);
+		$password = $this->input->post('password', TRUE);
+		$message = 'Gagal menambah data !<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		if (empty($username)) {
+			$status = false;
+			$errorInputs[] = array('#username', 'Silahkan isi Alamat');
+		}
+		if (empty($password)) {
+			$status = false;
+			$errorInputs[] = array('#$password', 'Silahkan isi Alamat');
+		}
+		$in = array(
+			'nama' => $nama,
+			'no_telpon' => $noHP,
+			'id_role' => $role,
+			'username' => $username,
+			'password' => $password,
+		);if($status){
+			$this->AdminModel->tambah_admin($in);
+			$message = "Berhasil Menambah Data #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
+		));
+	}
 
    
         

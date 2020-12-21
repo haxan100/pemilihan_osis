@@ -187,6 +187,10 @@ public function login(){
 		$this->db->where('id', $id_siswa);
 		return $this->db->update('admin', $in);
 	}
+	public function tambah_admin($in)
+	{
+		return $this->db->insert('admin', $in);
+	}
                         
                             
                         

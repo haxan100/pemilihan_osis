@@ -24,7 +24,7 @@ $bu = base_url();
 	<!-- Main content -->
 	<section class="content">
 		<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-detail" class="btn m-t-18 btn-info waves-effect waves-light btnTambah">
-			<i class="ti-plus"></i> Tambah Siswa Baru
+			<i class="ti-plus"></i> Tambah Admin Baru
 		</a>
 		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
 			<a class="btn m-t-20 btn-info waves-effect waves-light" href="" id="btnExport"> <i class="fas fa-download"></i> EXPORT </a>
@@ -171,7 +171,7 @@ $bu = base_url();
 
 		var bu = '<?= base_url(); ?>';
 
-		var url_form_tambah = bu + 'admin/tambah_siswa_proses';
+		var url_form_tambah = bu + 'admin/tambah_admin_proses';
 		var url_form_ubah = bu + 'admin/ubah_admin_proses';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
@@ -329,27 +329,50 @@ $bu = base_url();
 		}
 		$('#tambah_act').on('click', function() {
 
-			var nisn = $('#nisn').val();
 			var nama = $('#nama').val();
-			var alamat = $('#alamat').val();
-			var kelas = $('#kelas').val();
-			var jenis_kelamin = $('#jk').val();
-			var tanggal_lahir = $('#tanggal_lahir').val();
-			var tempat_lahir = $('#tempat_lahir').val();
+			var role = $('#role').val();
+			var noHP = $('#noHP').val();
 			var user_name = $('#username').val();
 			var password = $('#password').val();
-
-			if (
-				nama && kelas
-			) {
+			if (nama == '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'masukan Nama!',
+				})
+				return false;
+			}
+			if (noHP == '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'masukan No HP!',
+				});
+				return false;
+			}
+			if (user_name == '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'masukan Username',
+				});
+				return false;
+			}
+			if (password == '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: ' Masukan password!',
+				});
+				return false;
+			} else {
 				$("#form").submit();
-				// console.log(_foto);
-				// return;
-				// console.log("draft");
 			}
 			// return false;
 		});
 		$('#btnTambah').on('click', function() {
+
+
 			var _cekNama = cekNama();
 			var _cekNIS = cekNIS();
 			var _cekKelas = cekKelas();
@@ -384,8 +407,10 @@ $bu = base_url();
 			url_form = url_form_tambah;
 			// url_form = url_form_tambah;
 			// console.log(url_form);
+			console.log("s")
+			$("#tambah_act").show();
+
 			$('#Edit').hide();
-			$("#nisn").removeAttr('readonly');
 			$('.modalProdukTitleTambah').show();
 			$('.modalProdukTitleUbah').hide();
 
@@ -493,7 +518,6 @@ $bu = base_url();
 			var id_role = $(this).data('id_role');
 			var username = $(this).data('username');
 			var password = $(this).data('password');
-			console.log(id_role)
 			$('#modal-detail').modal('show');
 
 			$('#id').val(id);
@@ -515,7 +539,7 @@ $bu = base_url();
 			var noHP = $('#noHP').val();
 
 			if (
-				nama && role && noHP && username && password 
+				nama && role && noHP && username && password
 			) {
 				$("#form").submit();
 			}
