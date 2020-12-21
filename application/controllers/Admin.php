@@ -318,7 +318,7 @@ public function index()
 	public function login_proses()
 	{
 		$status = false;
-		$message = 'Gagal menghapus Login! , <br> Mohon Masukan Username dan Password dengan benar';
+		$message = 'Gagal Login! , <br> Mohon Masukan Username dan Password dengan benar';
 
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
