@@ -197,6 +197,16 @@ public function login(){
 		$query = $this->db->get();
 		return $query;
 	}
+	public function HapusAdmin($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('admin');
+		$query = $this->db->get('admin s');
+		return $query->result();
+
+
+		# code...
+	}
                         
                             
                         

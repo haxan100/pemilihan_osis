@@ -544,10 +544,6 @@ public function index()
 			$status = false;
 			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
 		}
-		if (empty($role)) {
-			$status = false;
-			$errorInputs[] = array('#role', 'Silahkan pilih Role');
-		}
 		if ($status) {
 			$this->AdminModel->edit_admin($in, $id);
 			$message = "Berhasil Mengedit Data ";
@@ -599,6 +595,24 @@ public function index()
 			'status' => $status,
 			'message' => $message,
 			'errorInputs' => $errorInputs
+		));
+	}
+	public function hapusAdmin()
+	{
+		$id = $this->input->post('id', TRUE);
+		$data = $this->AdminModel->getAdminById($id);
+		$status = false;
+		$message = 'Gagal menghapus Admin!';
+		if (count($data) == 0) {
+			$message .= '<br>Tidak terdapat Admin yang dimaksud.';
+		} else {
+			$this->AdminModel->HapusAdmin($id);
+			$status = true;
+			$message = 'Berhasil menghapus Admin: <b>' . $data[0]->nama . '</b>';
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
 		));
 	}
 
