@@ -96,6 +96,48 @@ public function master_list_siswa()
 		header('Cache-Control: max-age=0');
 		$writer->save('php://output');
 	}
+	public function master_list_admin()
+	{
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$lisUser = $this->AdminModel->ListUserAdmin();
+
+		$spreadsheet->setActiveSheetIndex(0)
+			->setCellValue('A1', 'ID')
+			->setCellValue('B1', 'Nama Admin')
+			->setCellValue('C1', 'No HP')
+			->setCellValue('D1', 'UserName')
+			->setCellValue('E1', 'Role');
+		$i = 1;
+		foreach ($lisUser->result() as $row) {
+			$role = "Master Admin";
+			if ($row->id_role != 1) {
+				$role = "Admin";
+			}
+			$i++;
+			$sheet->setCellValue('A' . $i, $row->id);
+			$sheet->setCellValue('B' . $i, $row->nama);
+			$sheet->setCellValue('C' . $i, $row->no_telpon);
+			$sheet->setCellValue('D' . $i, $row->username);
+			$sheet->setCellValue('E' . $i, $role);
+		}
+
+		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(17);
+		$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+
+
+		$writer = new Xlsx($spreadsheet);
+
+		$filename = 'List_Admin';
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+		header('Cache-Control: max-age=0');
+		$writer->save('php://output');
+	}
         
 }
         

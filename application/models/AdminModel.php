@@ -191,6 +191,12 @@ public function login(){
 	{
 		return $this->db->insert('admin', $in);
 	}
+	public function ListUserAdmin()
+	{
+		$this->db->from('admin');
+		$query = $this->db->get();
+		return $query;
+	}
                         
                             
                         
