@@ -36,7 +36,7 @@ $bu = base_url();
 		left: 6px;
 	}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="<?= base_url(); ?>aseets/adminlte/dist/js/sweetalert.js"></script>
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<div class="content-header">

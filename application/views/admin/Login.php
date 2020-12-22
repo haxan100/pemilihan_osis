@@ -76,7 +76,8 @@
 						<!-- /.col -->
 					</div>
 				</form>
-
+				<hr>
+			<label for="Cart">Untuk Login User <a href="<?= base_url() ?>Login">Disini</a></label>
 			</div>
 			<!-- /.login-card-body -->
 		</div>

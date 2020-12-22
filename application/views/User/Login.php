@@ -77,6 +77,8 @@
 					</div>
 					<hr>
 					<label for="Cart">Untuk Melihat Hasil Quick Count Sementara, Cek <a href="<?= base_url() ?>Cart">Disini</a></label>
+						<hr>
+					<label for="Cart">Untuk Login Admin <a href="<?= base_url() ?>/admin/login">Disini</a></label>
 
 				</form>
 

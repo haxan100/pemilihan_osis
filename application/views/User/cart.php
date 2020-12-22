@@ -2,7 +2,9 @@
 <?php
 $bu = base_url();
 ?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script src="<?= base_url(); ?>aseets/adminlte/dist/js/sweetalert.js"></script>
+
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<div class="content-header">
@@ -30,8 +32,7 @@ $bu = base_url();
 		<head>
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 			<title>Data Penduduk Indonesia - Jaranguda.com</title>
-			<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-			<script src="http://code.highcharts.com/highcharts.js"></script>
+			<script src="<?= base_url(); ?>aseets/adminlte/dist/js/highcharts.js"></script>
 			<script type="text/javascript">
 				$(function() {
 					$('#container').highcharts({

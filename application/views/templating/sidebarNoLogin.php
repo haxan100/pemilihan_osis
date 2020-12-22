@@ -1,7 +1,6 @@
 <!-- Main Sidebar Container -->
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+<script src="<?= base_url(); ?>aseets/adminlte/dist/js/sweetalert.js"></script>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
