@@ -455,11 +455,11 @@ $bu = base_url();
 		});
 
 		$('body').on('click', '.btnHapus', function() {
-			var id_siswa = $(this).data('id_siswa');
-			var nama = $(this).data('nama');
+			var id_siswa = $(this).data('id_calon');
+			var nama = $(this).data('nama_calon');
 			Swal.fire({
 				title: 'Apakah Anda Yakin ?',
-				text: "Anda akan Menghapus Siswa: " + nama,
+				text: "Anda akan Menghapus Calon: " + nama,
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -469,7 +469,7 @@ $bu = base_url();
 
 				if (result.value) {
 					$.ajax({
-						url: bu + 'admin/hapusSiswa',
+						url: bu + 'Calon/hapusCalon',
 						dataType: 'json',
 						method: 'POST',
 						data: {

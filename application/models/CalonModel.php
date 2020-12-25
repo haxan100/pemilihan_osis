@@ -89,6 +89,17 @@ class CalonModel extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
+	public function HapusCalon($id_siswa)
+	{
+		$this->db->where('id_calon', $id_siswa);
+		$this->db->delete('calon');
+		$query = $this->db->get('calon s');
+
+		return $query->result();
+
+
+		# code...
+	}
                             
                         
 }
