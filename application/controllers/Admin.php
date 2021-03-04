@@ -75,7 +75,6 @@ public function index()
 
 		$bu = base_url();
 		$dt = $this->SiswaModel->dt_Siswa($_POST);
-		// var_dump($dt);die;
 		$datatable['draw']   = isset($_POST['draw']) ? $_POST['draw'] : 1;
 		$datatable['recordsTotal']    = $dt['totalData'];
 		$datatable['recordsFiltered'] = $dt['totalData'];

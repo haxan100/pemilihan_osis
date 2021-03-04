@@ -45,7 +45,7 @@ $bu = base_url();
 			</div>
 		<?php endif ?>
 
-		
+
 		<div class="card">
 			<div class="card-header">
 			</div>
@@ -268,39 +268,10 @@ $bu = base_url();
 		var url_form_tambah = bu + 'admin/tambah_siswa_proses';
 		var url_form_ubah = bu + 'admin/ubah_siswa_proses';
 		var datatable = $('#example1').DataTable({
-			'lengthMenu': [
-				[5, 10, 25, 50, -1],
-				[5, 10, 25, 50, 'All']
-			],
-			'pageLength': 10,
-			"processing": true,
-			"language": {
-				processing: '....loading<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>loading....<span class="sr-only">Loading...</span> '
-			},
+			"pagingType": "full_numbers",
+			"processing":true,
 			"serverSide": true,
-			"columnDefs": [{
-					"targets": 0,
-					"className": "dt-body-center dt-head-center",
-					"width": "20px",
-					"orderable": false
-				},
-				{
-					"targets": 1,
-					"className": "dt-head-center"
-				},
-				{
-					"targets": 2,
-					"className": "dt-body-center dt-head-center"
-				},
-				{
-					"targets": 3,
-					"className": "dt-body-center dt-head-center"
-				},
-				{
-					"targets": 4,
-					"className": "dt-body-center dt-head-center",
-				},
-			],
+			"paging": true,
 			"order": [
 				[2, "desc"]
 			],

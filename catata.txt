@@ -57,4 +57,10 @@ link : pm
 
  admin : http://heyiamhasan.com/pemilihan_osis/admin
 akun admin : =>  username : admin || pass: admin
-akun user(pemilih/ voter) : username : hasan|| pass: hasan (atau bisa di buat oleh admin )
+akun user(pemilih/ voter saya buatkan ada 3) :
+ username : hasan|| pass: hasan
+username : 1233|| pass: 1233
+username : 87878787|| pass: 87878787
+
+
+ (atau bisa di buat oleh admin )
