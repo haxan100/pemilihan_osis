@@ -234,57 +234,62 @@ $bu = base_url();
 					$checked = 1;
 			}
 			if ($checked == 0) {
-				alert("Mohon Pilih Setidaknya 1 Calon");
+				// alert("Mohon Pilih Setidaknya 1 Calon");
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Mohon Pilih Setidaknya 1 Calon',
+				})
 				return false
 			}
 
-			var r = confirm("Apakah Anda Yakin Untuk Memilih Calon ?");
-			if (r == true) {
+			Swal.fire({
+				title: 'Apakah Anda Yakin Untuk Memilih Calon ?',
+				text: "Anda Tidak Dapat Membatalkan Atau Mengedit Pillihan Anda!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Pilih'
+			}).then((result) => {
+				if (result.isConfirmed) {
 
-				$.ajax({
-					type: "POST",
-					dataType: 'json',
-					url: "<?= $bu; ?>User/pilih",
-					data: {
-						pilih: pilihan,
-					},
-				}).done(function(e) {
-					// console.log(e);
-					if (e.status) {
-						// alert(e.message);
-						Swal.fire(
-							':)',
-							e.message,
-							'success'
-						);
-						setTimeout(function() {
-							window.location.href = "User/Cart";
-						}, 2000);
+					$.ajax({
+						type: "POST",
+						dataType: 'json',
+						url: "<?= $bu; ?>User/pilih",
+						data: {
+							pilih: pilihan,
+						},
+					}).done(function(e) {
+						// console.log(e);
+						if (e.status) {
+							// alert(e.message);
+							Swal.fire(
+								':)',
+								e.message,
+								'success'
+							);
+							setTimeout(function() {
+								window.location.href = "User/Cart";
+							}, 2000);
+							
+						} else {
+							// alert(e.message);
+							Swal.fire({
+								icon: 'error',
+								title: 'Oops...',
+								text: e.message,
 
-						// notifikasi('#alertNotif', e.message, false);
-						// $('#modalMetodSekaligus').modal('hide');
-						// datatable.ajax.reload();
-						// resetForm();
+							})
 
-					} else {
-						// alert(e.message);
-						Swal.fire({
-							icon: 'error',
-							title: 'Oops...',
-							text: e.message,
+						}
+					}).fail(function(e) {
 
-						})
+					});
 
-						// $('#modalMetodSekaligus').modal('hide');
-						// var alert = 'biz-alert-success';
-						// $('#alertNotifFloat').html('<div class="alert ' + alert + ' alert alert-primary" role="alert"><span>' + e.message + '</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-					}
-				}).fail(function(e) {
-					// $('.modalMetodSekaligus').modal('hide');
-					// datatable.ajax.reload();
-					// resetForm();
-				});
-			}
+				}
+			})
 
 		});
 

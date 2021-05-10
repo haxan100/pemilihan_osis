@@ -188,6 +188,16 @@ public function getAllSiswa()
 		return $query->result();
 		# code...
 	}
+	public function getSiswaAndCalon($id)
+	{
+		$this->db->from('siswa s');
+		$this->db->join('calon c', 'c.id_calon = s.pilih');
+		$this->db->where('id_siswa', $id);
+		return $sql = $this->db->get();
+		
+		
+		
+	}
                         
                             
                         
