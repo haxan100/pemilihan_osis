@@ -269,7 +269,7 @@ $bu = base_url();
 		var url_form_ubah = bu + 'admin/ubah_siswa_proses';
 		var datatable = $('#example1').DataTable({
 			"pagingType": "full_numbers",
-			"processing":true,
+			"processing": true,
 			"serverSide": true,
 			"paging": true,
 			"order": [
@@ -603,8 +603,14 @@ $bu = base_url();
 			) {
 				$("#form").submit();
 
-			}
+			} else {
+				Swal.fire(
+					'Errorr!',
+					'Mohon Isi Semua Field',
+					'error'
+				)
 
+			}
 
 		});
 
