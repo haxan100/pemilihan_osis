@@ -84,35 +84,32 @@ public function index()
 		// var_dump($dt['data']->result());die();
 		$no = $start + 1;
 		foreach ($dt['data']->result() as $row) {
-			$sudah = " Belum Memilih";
-			if($row->sudah_milih==1){
-				$sudah = " Sudah Memilih";
+			$sudah_bem = " Belum Memilih (BEM)";
+			$sudah_dpm = " Belum Memilih (DPM)";
+			if($row->sudah_milih_bem==1){
+				$sudah_bem = " Sudah Memilih(BEM)";
+			}
+			if($row->sudah_milih_dpm==1){
+				$sudah_dpm = " Sudah Memilih(DPM)";
 			}
 			$fields = array($no++);
 			$fields[] = $row->nama . '<br>';
-			$fields[] = $row->NIS . '<br>';
-			$fields[] = $row->id_kelas . '<br>';
-			$fields[] = $row->no_telpon . '<br>';
-			$fields[] = $sudah . '<br>';
+			$fields[] = $row->nim . '<br>';
+			$fields[] = $row->prodi . '<br>';
+			$fields[] = $sudah_bem . '<br>'.$sudah_dpm;
 
 			$fields[] = '
         <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
           data-id_siswa="' . $row->id_siswa . '"
           data-nama="' . $row->nama . '"
-          data-id_kelas="' . $row->id_kelas . '"
-          data-no_telpon="' . $row->no_telpon . '"
-          data-tgl_lahir="' . $row->tgl_lahir . '"
-          data-jenis_kelamin="' . $row->jenis_kelamin . '"
-          data-alamat="' . $row->alamat . '"
-          data-username="' . $row->username . '"
+          data-prodi="' . $row->prodi . '"
           data-password="' . $row->password . '"
-          data-jenis_kelamin="' . $row->jenis_kelamin . '"
-          data-tempat_lahir="' . $row->tempat_lahir . '"
-          data-nis="' . $row->NIS . '"
+          data-nis="' . $row->nim . '"
         ><i class="far fa-edit"></i> Ubah</button>
         
         <button class="btn btn-danger my-1  btn-block btnHapus text-white" 
-          data-id_siswa="' . $row->id_siswa . '"          data-nama="' . $row->nama . '"
+          data-id_siswa="' . $row->id_siswa . '"          
+					data-nama="' . $row->nama . '"
 				><i class="fas fa-trash"></i> Hapus</button>        ';
 			$datatable['data'][] = $fields;
 		}

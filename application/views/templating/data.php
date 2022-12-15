@@ -29,12 +29,6 @@ $bu = base_url();
 		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
 			<a class="btn m-t-20 btn-info waves-effect waves-light" href="" id="btnExport"> <i class="fas fa-download"></i> EXPORT </a>
 		</span>
-		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
-			<a href="javascript:void(0)" data-toggle="modal" data-target="#myImport" class="btn m-t-20 btn-info waves-effect waves-light btnTambah">
-				<i class="fas fa-upload "></i>
-				<i class="fa fa-file-excel"></i> Import Data Siswa
-			</a>
-		</span>
 		<br>
 		<?php if ($this->session->flashdata()) : ?>
 			<div class="container-fluid">
@@ -56,10 +50,9 @@ $bu = base_url();
 						<tr>
 							<th>No</th>
 							<th>Nama</th>
-							<th>NIS</th>
-							<th>Kelas</th>
-							<th>No Telpon</th>
-							<th>Sudah Memilih</th>
+							<th>NIM</th>
+							<th>Prodi</th>
+							<th>Sudah Memilih <br> BEM - DPM </th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -69,48 +62,6 @@ $bu = base_url();
 			<!-- /.card-body -->
 		</div>
 		<!-- Modal Add Category -->
-
-		<!-- // MODAL Import -->
-		<div id="myImport" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-md">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Import Data Siswa</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="container-fluid">
-
-							<form method="post" enctype="multipart/form-data" action="<?= $bu; ?>Import/import_siswa">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 col-sm-12">
-										<p> Pilih File : </p>
-										<div class="box">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" name="fileURL" required="required" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-
-											<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-											<span class="btn btn-info"><a href="downloadTemplateSpekHP" title="Download Template Excel" class="download" style="color: #fff">
-													<i class="fas fa-cloud-download-alt"></i>Download Template </a>
-											</span>
-										</div>
-									</div>
-								</div>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="submit" name="upload" class="btn btn-success"> IMPORT </button>
-						<button type="button" class="btn btn-default" data-dismiss="modal"> BATAL </button>
-					</div>
-				</div>
-
-				</form>
-
-			</div>
-		</div>
-
 
 		<div class="modal fade bs-example-modal-lg" id="modal-detail" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
