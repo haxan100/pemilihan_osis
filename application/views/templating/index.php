@@ -57,14 +57,28 @@
 					<!-- small box -->
 					<div class="small-box bg-warning">
 						<div class="inner">
-							<h3><?= $calon ?></h3>
+							<h3><?= $calon_bem ?></h3>
 
-							<p>Calon Ketua Osis</p>
+							<p>Calon Ketua BEM</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-person-add"></i>
 						</div>
-						<a href="<?= base_url() ?>Admin/calon" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="<?= base_url() ?>Admin/calon_bem" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-4">
+					<!-- small box -->
+					<div class="small-box bg-warning">
+						<div class="inner">
+							<h3><?= $calon_dpm ?></h3>
+
+							<p>Calon Ketua DPM</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-person-add"></i>
+						</div>
+						<a href="<?= base_url() ?>Admin/calon_dpm" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->

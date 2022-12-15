@@ -242,6 +242,110 @@ public function index()
 			'message' => $message,
 		));
 	}
+		public function getAllCalon_bem()
+	{
+
+		$bu = base_url();
+		$dt = $this->CalonModel->dt_Calon($_POST,'bem');
+		// var_dump($dt);die;
+		$datatable['draw']   = isset($_POST['draw']) ? $_POST['draw'] : 1;
+		$datatable['recordsTotal']    = $dt['totalData'];
+		$datatable['recordsFiltered'] = $dt['totalData'];
+		$datatable['data']            = array();
+		$start  = isset($_POST['start']) ? $_POST['start'] : 0;
+		// var_dump($dt['data']->result());die();
+		$no = $start + 1;
+		foreach ($dt['data']->result() as $row) {
+
+			$fields = array($no++);
+			$fields[] = $row->nama_calon . '<br>';
+			$fields[] = $row->nim . '<br>';
+			$fields[] = $row->visi . '<br>';
+			$fields[] = $row->moto . '<br>';
+			$fields[] =  '<img class="img-fluid" id="foto_wrapper" id="foto_wrapper"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/upload/images/Calon/' . $row->foto . ' "/> ';
+
+			$fields[] = '
+        <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
+          data-id_calon="' . $row->id_calon . '"
+          data-nama_calon="' . $row->nama_calon. '"
+          data-visi="' . $row->visi . '"
+          data-misi="' . $row->moto . '"
+          data-nim="' . $row->nim . '"
+        ><i class="far fa-edit"></i> Ubah</button>
+        
+        <button class="btn btn-danger my-1  btn-block btnHapus text-white" 
+		  data-id_calon="' . $row->id_calon . '"    
+		  data-nama_calon="' . $row->nama_calon . '"
+
+
+
+
+				><i class="fas fa-trash"></i> Hapus</button>        ';
+			$datatable['data'][] = $fields;
+		}
+		echo json_encode($datatable);
+		exit();
+	}
+		public function tambah_calon_proses_bem()
+	{
+		$nisn = $this->input->post('nisn', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+		$visi = $this->input->post('visi', TRUE);
+		$misi = $this->input->post('misi', TRUE);
+
+		$message = 'Gagal menambah data Calon BEM!<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+		$cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
+
+		if (!$cekFoto) {
+
+			$_FILES['f']['name']     = $_FILES['foto']['name'];
+			$_FILES['f']['type']     = $_FILES['foto']['type'];
+			$_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
+			$_FILES['f']['error']     = $_FILES['foto']['error'];
+			$_FILES['f']['size']     = $_FILES['foto']['size'];
+			$config['upload_path']          = './upload/images/calon_bem';
+			$config['allowed_types']        = 'jpg|jpeg|png|gif';
+			$config['max_size']             = 3 * 1024; // kByte
+			$config['max_width']            = 10 * 1024;
+			$config['max_height']           = 10 * 1024;
+			$config['file_name'] = $nisn . "-" . date("Y-m-d-H-i-s") . ".jpg";
+			$this->load->library('image_lib');
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if (!$this->upload->do_upload('f')) {
+				$errorUpload = $this->upload->display_errors() . '<br>';
+				var_dump($errorUpload);die;
+			} else {
+				$fileName = $this->upload->data()["file_name"];
+				$foto = array(
+					'foto' => $fileName,
+				);
+			$in = array(
+				'nim' => $nisn,
+				'nama_calon' => $nama,
+				'visi' => $visi,
+				'moto' => $misi,
+				'foto' => $fileName,
+			);
+			$this->CalonModel->tambah_Calon($in,"bem");
+
+				$message = "Berhasil Menambah Calon #1";
+				echo json_encode(array(
+					'status' => $status,
+					'message' => $message,
+					'errorInputs' => $errorInputs
+				));
+				}
+		}
+	}
 
 }
         

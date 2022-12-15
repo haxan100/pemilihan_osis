@@ -4,12 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         
 class CalonModel extends CI_Model {
   
-	public function dt_Calon($post)
+	public function dt_Calon($post,$type='bem')
 	{
 		$columns = array(
-			'NIS',
+			'nim',
 			'nama_calon',
-			'id_kelas'
 		);
 		// untuk search
 		$columnsSearch = array(
@@ -18,7 +17,7 @@ class CalonModel extends CI_Model {
 			'visi',
 		);
 		// gunakan join disini
-		$from = 'calon s';
+		$from = "calon_$type s";
 		// custom SQL
 		$sql = "SELECT *  FROM {$from}  ";
 		$where = "";
@@ -60,9 +59,9 @@ class CalonModel extends CI_Model {
 		);
 	}
 
-	public function tambah_Calon($in)
+	public function tambah_Calon($in,$type="bem")
 	{
-		return $this->db->insert('calon', $in);
+		return $this->db->insert("calon_$type", $in);
 	}
 
 	public function edit_calon($in, $id_siswa)
@@ -70,9 +69,9 @@ class CalonModel extends CI_Model {
 		$this->db->where('id_calon', $id_siswa);
 		return $this->db->update('calon', $in);
 	}
-	public function ListUserCalon()
+	public function ListUserCalon($type)
 	{
-		$this->db->from('calon');
+		$this->db->from("calon_$type");
 		$query = $this->db->get();
 		return $query;
 	}

@@ -21,7 +21,8 @@ public function index()
 		$obs['data'] = $getUserByID;
 		$obj['siswa']= count($this->SiswaModel->getAllSiswa()->result());
 		$obj['siswaSudahMilih'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
-		$obj['calon'] = count($this->CalonModel->ListUserCalon()->result());
+		$obj['calon_bem'] = count($this->CalonModel->ListUserCalon('bem')->result());
+		$obj['calon_dpm'] = count($this->CalonModel->ListUserCalon('dpm')->result());
 		// var_dump($siswa);die;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
@@ -631,6 +632,21 @@ public function index()
 			'status' => $status,
 			'message' => $message,
 		));
+	}
+
+		public function calon_bem()
+	{
+		$obs['admin'] = true;
+		$obs['login'] = true;
+		$this->cekLoginAdmin();
+		$obj['judul'] = "Data Calon";
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar', $obs);
+		$this->load->view('admin/calon_bem', $obj);
+		$this->load->view('templating/footer');
 	}
 
    
