@@ -178,7 +178,7 @@ $bu = base_url();
 		var bu = '<?= base_url(); ?>';
 
 		var url_form_tambah = bu + 'Calon/tambah_calon_proses_bem';
-		var url_form_ubah = bu + 'Calon/ubah_siswa_proses';
+		var url_form_ubah = bu + 'Calon/ubah_siswa_proses_bem';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
 				[5, 10, 25, 50, -1],
@@ -492,11 +492,10 @@ $bu = base_url();
 			var id_siswa = $('#id_siswa').val();
 			var nis = $('#nis').val();
 			var nama = $('#nama').val();
-			var kelas = $('#kelas').val();
 			var misi = $('#misi').val();
 			var visi = $('#visi').val();
 			if (
-				nama && kelas && visi && misi
+				nama && visi && misi
 			) {
 				$("#form").submit();
 			}

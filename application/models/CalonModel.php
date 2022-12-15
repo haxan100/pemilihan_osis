@@ -64,10 +64,10 @@ class CalonModel extends CI_Model {
 		return $this->db->insert("calon_$type", $in);
 	}
 
-	public function edit_calon($in, $id_siswa)
+	public function edit_calon($in, $id_siswa,$type)
 	{
 		$this->db->where('id_calon', $id_siswa);
-		return $this->db->update('calon', $in);
+		return $this->db->update("calon_$type", $in);
 	}
 	public function ListUserCalon($type)
 	{

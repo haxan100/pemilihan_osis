@@ -131,13 +131,11 @@ public function index()
 			}
 		}
 	}
-	public function ubah_siswa_proses()
+	public function ubah_siswa_proses_bem()
 	{
-		// var_dump($_POST,$_FILES);die;
 		$id_calon = $this->input->post('id_siswa', TRUE);
 		$nisn = $this->input->post('nisn', TRUE);
 		$nama = $this->input->post('nama', TRUE);
-		$kelas = $this->input->post('kelas', TRUE);
 		$visi = $this->input->post('visi', TRUE);
 		$misi = $this->input->post('misi', TRUE);
 
@@ -147,10 +145,9 @@ public function index()
 
 		$in = array(
 			'nama_calon' => $nama,
-			'kelas_calon' => $kelas,
 			'moto' => $misi,
 			'visi' => $visi,
-			'nis' => $nisn,
+			'nim' => $nisn,
 		);
 		$cekFoto = empty($_FILES['foto']['name'][0]) || $_FILES['foto']['name'][0] == '';
 		if (!$cekFoto) {
@@ -164,7 +161,7 @@ public function index()
 			$_FILES['f']['tmp_name'] = $_FILES['foto']['tmp_name'];
 			$_FILES['f']['error']     = $_FILES['foto']['error'];
 			$_FILES['f']['size']     = $_FILES['foto']['size'];
-			$config['upload_path']          = './upload/images/Calon/';
+			$config['upload_path']          = './upload/images/Calon_bem/';
 			$config['allowed_types']        = 'jpg|jpeg|png|gif';
 			$config['max_size']             = 3 * 1024; // kByte
 			$config['max_width']            = 10 * 1024;
@@ -174,15 +171,15 @@ public function index()
 			$this->upload->initialize($config);
 
 			$data_kode = array('id_calon' => $id_calon);
-			$foto = $this->db->get_where('calon', $data_kode);
+			$foto = $this->db->get_where('calon_bem', $data_kode);
 			if ($foto->num_rows() > 0) {
 				$pros = $foto->row();
 				// var_dump($pros);die;
 				$name = $pros->foto;
-				if (file_exists($lok = FCPATH . '/upload/images/Calon' . $name)) {
+				if (file_exists($lok = FCPATH . '/upload/images/Calon_bem' . $name)) {
 					unlink($lok);
 				}
-				if (file_exists($lok = FCPATH . './upload/images/Calon/' . $name)) {
+				if (file_exists($lok = FCPATH . './upload/images/Calon_bem/' . $name)) {
 					unlink($lok);
 				}
 			}
@@ -194,7 +191,7 @@ public function index()
 			$inFoto = array(
 				'foto' => $nameFoto = str_replace(' ', '_', $config['file_name']),
 			);
-			$this->CalonModel->edit_calon($inFoto, $id_calon);
+			$this->CalonModel->edit_calon($inFoto, $id_calon,'bem');
 		}
 
 
@@ -202,16 +199,12 @@ public function index()
 			$status = false;
 			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
 		}
-		if (empty($kelas)) {
-			$status = false;
-			$errorInputs[] = array('#kelas', 'Silahkan pilih Kelas');
-		}
 		if (empty($misi)) {
 			$status = false;
 			$errorInputs[] = array('#misi', 'Silahkan isi Misi');
 		}
 		if ($status) {
-			$this->CalonModel->edit_calon($in, $id_calon);
+			$this->CalonModel->edit_calon($in, $id_calon,'bem');
 			$message = "Berhasil Mengedit Data ";
 			$status = true;
 		} else {
@@ -262,7 +255,7 @@ public function index()
 			$fields[] = $row->nim . '<br>';
 			$fields[] = $row->visi . '<br>';
 			$fields[] = $row->moto . '<br>';
-			$fields[] =  '<img class="img-fluid" id="foto_wrapper" id="foto_wrapper"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/upload/images/Calon/' . $row->foto . ' "/> ';
+			$fields[] =  '<img class="img-fluid" id="foto_wrapper" id="foto_wrapper"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/upload/images/calon_bem/' . $row->foto . ' "/> ';
 
 			$fields[] = '
         <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
