@@ -216,17 +216,17 @@ public function index()
 			'errorInputs' => $errorInputs
 		));
 	}
-	public function hapusCalon()
+	public function hapusCalon_bem()
 	{
 		$id_siswa = $this->input->post('id_siswa', TRUE);
-		$data = $this->CalonModel->getCalonByID($id_siswa)->result();
+		$data = $this->CalonModel->getCalonByID($id_siswa,'bem')->result();
 		// var_dump($data);die;
 		$status = false;
 		$message = 'Gagal menghapus Data!';
 		if (count($data) == 0) {
 			$message .= '<br>Tidak terdapat Data yang dimaksud.';
 		} else {
-			$this->CalonModel->HapusCalon($id_siswa);
+			$this->CalonModel->HapusCalon($id_siswa,'bem');
 			$status = true;
 			$message = 'Berhasil menghapus Calon: <b>' . $data[0]->nama_calon . '</b>';
 		}

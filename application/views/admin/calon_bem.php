@@ -438,7 +438,7 @@ $bu = base_url();
 
 				if (result.value) {
 					$.ajax({
-						url: bu + 'Calon/hapusCalon',
+						url: bu + 'Calon/hapusCalon_bem',
 						dataType: 'json',
 						method: 'POST',
 						data: {
