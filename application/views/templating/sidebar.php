@@ -10,6 +10,10 @@
 		<span class="brand-text font-weight-light">Pemilihan</span>
 	</a>
 	<?php
+
+
+	$uri = $this->uri->segment(2);	
+
 	if ($login) {
 		if ($admin) {
 			$role = $data->id_role;
@@ -41,7 +45,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= base_url() ?>Admin/Profile" class="nav-link ">
+									<a href="<?= base_url() ?>Admin/Profile" class="nav-link  <?php if($uri=='profile') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Profile</p>
 									</a>
@@ -54,7 +58,7 @@
 								
 								?>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>admin/admin" class="nav-link ">
+									<a href="<?= base_url() ?>admin/admin" class="nav-link  <?php if($uri=='admin') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Master Admin</p>
 									</a>
@@ -63,19 +67,25 @@
 								}
 								?>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>admin/siswa" class="nav-link ">
+									<a href="<?= base_url() ?>admin/siswa" class="nav-link  <?php if($uri=='siswa') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Master Siswa</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>admin/calon" class="nav-link">
+									<a href="<?= base_url() ?>admin/calon_dpm" class="nav-link  <?php if($uri=='calon_dpm') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Master Calon</p>
+										<p>Master Calon DPM</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>Admin/cart" class="nav-link">
+									<a href="<?= base_url() ?>admin/calon_bem" class="nav-link <?php if($uri=='calon_bem') echo 'active' ?> ">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Master Calon BEM</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?= base_url() ?>Admin/cart" class="nav-link  <?php if($uri=='cart') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Quick Count</p>
 									</a>

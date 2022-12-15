@@ -3,14 +3,14 @@
 $bu = base_url();
 ?>
 
-<script src="<?= base_url(); ?>aseets/adminlte/dist/js/sweetalert.js"></script>
+<script src="<?=base_url();?>aseets/adminlte/dist/js/sweetalert.js"></script>
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark"><?= $judul ?></h1>
+					<h1 class="m-0 text-dark"><?=$judul?></h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -25,20 +25,20 @@ $bu = base_url();
 	<!-- Main content -->
 	<section class="content">
 		<a href="javascript:void(0)" data-toggle="modal" data-target="#modal-detail" class="btn m-t-18 btn-info waves-effect waves-light btnTambah">
-			<i class="ti-plus"></i> Tambah Calon Bem Baru
+			<i class="ti-plus"></i> Tambah Calon DPM  Baru
 		</a>
 		<span class="col-lg-2 col-md-3 col-sm-6 col-xs-12 px-0 my-1">
 			<a class="btn m-t-20 btn-info waves-effect waves-light" href="" id="btnExport"> <i class="fas fa-download"></i> EXPORT </a>
 		</span>
 		<br>
-		<?php if ($this->session->flashdata()) : ?>
+		<?php if ($this->session->flashdata()): ?>
 			<div class="container-fluid">
 				<div class="alert alert-success alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<?= $this->session->flashdata('flash_data') ?>
+					<?=$this->session->flashdata('flash_data')?>
 				</div>
 			</div>
-		<?php endif ?>
+		<?php endif?>
 
 
 		<div class="card">
@@ -52,6 +52,7 @@ $bu = base_url();
 							<th>No</th>
 							<th>Nama</th>
 							<th>NIM</th>
+							<th>Prodi</th>
 							<th>Visi</th>
 							<th>Misi</th>
 							<th>Foto</th>
@@ -100,7 +101,21 @@ $bu = base_url();
 														</div>
 													</div>
 												</div>
-												
+												<div class="row">
+													<div class="item form-group col-md-12 col-sm-12 ">
+														<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Prodi <span class="required">*</span>
+														</label>
+														<div class="">
+															<select class="form-control " name="prodi" id="prodi">
+																<option value="default" desable>Pilih Prodi</option>
+																<option value="10">X</option>
+																<option value="11">XI</option>
+																<option value="12">XII</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
 												<div class="row">
 													<div class="item form-group col-md-12 col-sm-12 ">
 														<label class="col-form-label label-align" for="last-name">Visi<span class="required">*</span>
@@ -175,9 +190,9 @@ $bu = base_url();
 <script>
 	$(document).ready(function() {
 
-		var bu = '<?= base_url(); ?>';
+		var bu = '<?=base_url();?>';
 
-		var url_form_tambah = bu + 'Calon/tambah_calon_proses_bem';
+		var url_form_tambah = bu + 'Calon/tambah_calon_proses_dpm';
 		var url_form_ubah = bu + 'Calon/ubah_siswa_proses_bem';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
@@ -331,7 +346,7 @@ $bu = base_url();
 			var password = $('#password').val();
 
 			if (
-				nama 
+				nama
 			) {
 				$("#form").submit();
 

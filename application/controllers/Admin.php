@@ -648,6 +648,20 @@ public function index()
 		$this->load->view('admin/calon_bem', $obj);
 		$this->load->view('templating/footer');
 	}
+		public function calon_dpm()
+	{
+		$obs['admin'] = true;
+		$obs['login'] = true;
+		$this->cekLoginAdmin();
+		$obj['judul'] = "Data Calon";
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar', $obs);
+		$this->load->view('admin/calon_dpm', $obj);
+		$this->load->view('templating/footer');
+	}
 
    
         
