@@ -76,7 +76,7 @@ $bu = base_url();
 							</button>
 						</div>
 						<div class="modal-body">
-							<h4>Detail Calon</h4>
+							<h4>Detail Calon DPM</h4>
 
 							<div class="row">
 								<div class="col-md-12 col-sm-12 ">
@@ -108,9 +108,14 @@ $bu = base_url();
 														<div class="">
 															<select class="form-control " name="prodi" id="prodi">
 																<option value="default" desable>Pilih Prodi</option>
-																<option value="10">X</option>
-																<option value="11">XI</option>
-																<option value="12">XII</option>
+																<?php
+																	foreach ($prodi as $key => $v) {
+
+																	?>
+																		<option value="<?= $v->nama_prodi ?>"><?= $v->nama_prodi ?></option>
+																		<?php 
+																	}
+																?>
 															</select>
 														</div>
 													</div>
@@ -193,7 +198,7 @@ $bu = base_url();
 		var bu = '<?=base_url();?>';
 
 		var url_form_tambah = bu + 'Calon/tambah_calon_proses_dpm';
-		var url_form_ubah = bu + 'Calon/ubah_siswa_proses_bem';
+		var url_form_ubah = bu + 'Calon/ubah_siswa_proses_dpm';
 		var datatable = $('#example1').DataTable({
 			'lengthMenu': [
 				[5, 10, 25, 50, -1],
@@ -232,7 +237,7 @@ $bu = base_url();
 				[2, "desc"]
 			],
 			'ajax': {
-				url: bu + 'Calon/getAllCalon_bem',
+				url: bu + 'Calon/getAllCalon_dpm',
 				type: 'POST',
 				"data": function(d) {
 					return d;
@@ -397,6 +402,7 @@ $bu = base_url();
 			$('#listFoto').html('');
 			$('#foto_wrappers').html('');
 		});
+
 		$("#form").submit(function(e) {
 			console.log('form submitted');
 			// return false;
@@ -410,8 +416,6 @@ $bu = base_url();
 				cache: false,
 				async: false,
 			}).done(function(e) {
-				console.log(e);
-				return false
 				if (e.status) {
 					notifikasi('#alertNotif', e.message, false);
 					$('#modal-detail').modal('hide');
@@ -453,7 +457,7 @@ $bu = base_url();
 
 				if (result.value) {
 					$.ajax({
-						url: bu + 'Calon/hapusCalon_bem',
+						url: bu + 'Calon/hapusCalon_dpm',
 						dataType: 'json',
 						method: 'POST',
 						data: {

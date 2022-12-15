@@ -1,6 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');        
-class Admin extends CI_Controller {	
+class Admin extends MY_Controller {	
 	public function __construct()
 	{
 		parent::__construct();
@@ -657,6 +657,8 @@ public function index()
 		$id = $this->session->userdata('id_admin');
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
+		$dataProdi = $this->ConfigModel->getData('prodi');
+		$obs['prodi'] = $dataProdi;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
 		$this->load->view('admin/calon_dpm', $obj);

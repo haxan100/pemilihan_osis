@@ -80,7 +80,7 @@ class CalonModel extends CI_Model {
 		$data = $this->db->query("SELECT * from calon");
 		return $data->result();
 	}
-	public function getCalonByID($id_calon,$type='bem')
+	public function getCalonByID($id_calon,$type)
 	{
 		$this->db->from("calon_$type");
 		$this->db->where('id_calon', $id_calon);
@@ -88,12 +88,12 @@ class CalonModel extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
-	public function HapusCalon($id_siswa,$type='bem')
+	public function HapusCalon($id_siswa,$type)
 	{
+		
 		$this->db->where('id_calon', $id_siswa);
 		$this->db->delete("calon_$type");
-		$query = $this->db->get('calon s');
-
+		$query = $this->db->get("calon_$type");
 		return $query->result();
 
 
