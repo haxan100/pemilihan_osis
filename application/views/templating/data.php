@@ -53,6 +53,8 @@ $bu = base_url();
 							<th>NIM</th>
 							<th>Prodi</th>
 							<th>Sudah Memilih <br> BEM - DPM </th>
+							<th>Foto KTM</th>
+							<th>Foto Diri</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>

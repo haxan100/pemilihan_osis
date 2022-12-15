@@ -87,7 +87,13 @@
 								<li class="nav-item">
 									<a href="<?= base_url() ?>Admin/cart" class="nav-link  <?php if($uri=='cart') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Quick Count</p>
+										<p>Quick Count BEM</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?= base_url() ?>Admin/cart_dpm" class="nav-link  <?php if($uri=='cart_dpm') echo 'active' ?>">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Quick Count DPM</p>
 									</a>
 								</li>
 								<li class="nav-item">

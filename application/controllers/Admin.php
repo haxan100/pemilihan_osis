@@ -86,17 +86,22 @@ public function index()
 		foreach ($dt['data']->result() as $row) {
 			$sudah_bem = " Belum Memilih (BEM)";
 			$sudah_dpm = " Belum Memilih (DPM)";
+
 			if($row->sudah_milih_bem==1){
 				$sudah_bem = " Sudah Memilih(BEM)";
 			}
 			if($row->sudah_milih_dpm==1){
 				$sudah_dpm = " Sudah Memilih(DPM)";
 			}
+
 			$fields = array($no++);
 			$fields[] = $row->nama . '<br>';
 			$fields[] = $row->nim . '<br>';
 			$fields[] = $row->prodi . '<br>';
 			$fields[] = $sudah_bem . '<br>'.$sudah_dpm;
+
+			$fields[] = '<img class="img-fluid"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/images/ktm/' . $row->foto_ktm . ' "/> ';
+			$fields[] = '<img class="img-fluid"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/images/mahasiswa/' . $row->foto_diri . ' "/> ';
 
 			$fields[] = '
         <button class="btn btn-warning my-1  btn-block btnUbah text-white" 
@@ -372,8 +377,10 @@ public function index()
 		$this->cekLoginAdmin();
 		$obj['judul'] = "Data Calon";
 
-		$obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
-		$obj['graph'] = $this->CalonModel->GetPie();
+		$obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
+		$obj['graph_bem'] = $this->CalonModel->GetPie('bem');
+		$obj['graph_dpm'] = $this->CalonModel->GetPie('dpm');
+
 		$id = $this->session->userdata('id_admin');
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
@@ -661,7 +668,35 @@ public function index()
 		$this->load->view('admin/calon_dpm', $obj);
 		$this->load->view('templating/footer');
 	}
+	public function getProdi()
+	{
+		$dataProdi = $this->ConfigModel->getData('prodi');
+		$obs['prodi'] = $dataProdi;
+		$this->res($dataProdi,'ada',201);
+	}
 
+		public function cart_dpm()
+	{
+		$obs['admin'] = true;
+		$obs['login'] = true;
+		$this->cekLoginAdmin();
+		$obj['judul'] = "Data Calon";
+
+		$obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
+		
+		$dataProdi = $this->ConfigModel->getData('prodi');
+		$obs['prodi'] = $dataProdi;
+		
+		$obj['graph_dpm'] = $this->CalonModel->GetPie('dpm');
+
+		$id = $this->session->userdata('id_admin');
+		$getUserByID = $this->AdminModel->getAdminById($id)[0];
+		$obs['data'] = $getUserByID;
+		$this->load->view('templating/header');
+		$this->load->view('templating/sidebar', $obs);
+		$this->load->view('User/cart_dpm', $obj);
+		$this->load->view('templating/footer');
+	}
    
         
 }

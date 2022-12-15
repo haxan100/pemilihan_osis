@@ -138,6 +138,91 @@ public function master_list_siswa()
 		header('Cache-Control: max-age=0');
 		$writer->save('php://output');
 	}
+	public function master_Bem()
+	{
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $lisUser = $this->CalonModel->ListUserCalon('bem');
+
+    $spreadsheet->setActiveSheetIndex(0)
+        ->setCellValue('A1', 'ID Calon')
+        ->setCellValue('B1', 'NIM')
+        ->setCellValue('C1', 'Nama Siswa')
+        ->setCellValue('D1', 'Misi')
+        ->setCellValue('E1', 'Visi')
+        ->setCellValue('E1', 'Total Di Pilih')
+				
+				;
+    $i = 1;
+    foreach ($lisUser->result() as $row) {
+        $i++;
+        $sheet->setCellValue('A' . $i, $row->id_calon);
+        $sheet->setCellValue('B' . $i, $row->nim);
+        $sheet->setCellValue('C' . $i, $row->nama_calon);
+        $sheet->setCellValue('D' . $i, $row->moto);
+        $sheet->setCellValue('E' . $i, $row->visi);
+        $sheet->setCellValue('E' . $i, $row->total);
+    }
+
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(17);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+
+    $writer = new Xlsx($spreadsheet);
+
+    $filename = 'List_Calon_BEM';
+
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+    header('Cache-Control: max-age=0');
+    $writer->save('php://output');
+	}	
+	public function master_DPM()
+	{
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $lisUser = $this->CalonModel->ListUserCalon('dpm');
+
+    $spreadsheet->setActiveSheetIndex(0)
+        ->setCellValue('A1', 'ID Calon')
+        ->setCellValue('B1', 'NIM')
+        ->setCellValue('C1', 'Prodi')
+        ->setCellValue('D1', 'Nama Siswa')
+        ->setCellValue('E1', 'Misi')
+        ->setCellValue('F1', 'Visi')
+        ->setCellValue('G1', 'Total Di Pilih')
+				
+				;
+    $i = 1;
+    foreach ($lisUser->result() as $row) {
+        $i++;
+        $sheet->setCellValue('A' . $i, $row->id_calon);
+        $sheet->setCellValue('B' . $i, $row->nim);
+        $sheet->setCellValue('C' . $i, $row->prodi);
+        $sheet->setCellValue('D' . $i, $row->nama_calon);
+        $sheet->setCellValue('E' . $i, $row->moto);
+        $sheet->setCellValue('F' . $i, $row->visi);
+        $sheet->setCellValue('G' . $i, $row->total);
+    }
+
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(17);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+
+    $writer = new Xlsx($spreadsheet);
+
+    $filename = 'List_Calon_dpm';
+
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+    header('Cache-Control: max-age=0');
+    $writer->save('php://output');
+	}	
+
         
 }
         

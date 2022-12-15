@@ -11,7 +11,12 @@ $bu = base_url();
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark"><?= $judul ?></h1>
+					<h1 class="m-0 text-dark"><?= $judul ?>
+					
+					<a class="btn m-t-20 btn-info waves-effect waves-light" href="" id="btnExportBem"> <i class="fas fa-download"></i> EXPORT BEM </a>
+
+					<button class="btn btn-primary" type="button">Export DPM</button>
+				</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -24,6 +29,7 @@ $bu = base_url();
 	</div>
 	<!-- /.content-header -->
 	<!-- Main content -->
+	
 	<section class="content">
 
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -31,18 +37,26 @@ $bu = base_url();
 
 		<head>
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<title>Data Penduduk Indonesia - Jaranguda.com</title>
 			<script src="<?= base_url(); ?>aseets/adminlte/dist/js/highcharts.js"></script>
 			<script type="text/javascript">
 				$(function() {
-					$('#container').highcharts({
+
+						$('#btnExportBem').on('click', function() {
+							var url = bu + 'Export/master_Bem/?';
+							window.location = url;
+							return (false);
+
+						});
+
+
+					$('#containerdpm').highcharts({
 						chart: {
 							plotBackgroundColor: null,
 							plotBorderWidth: null,
 							plotShadow: false
 						},
 						title: {
-							text: 'Data Calon Osis'
+							text: 'Data Calon DPM'
 						},
 						tooltip: {
 							pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -66,8 +80,48 @@ $bu = base_url();
 							data: [
 								<?php
 								// data yang diambil dari database
-								if (count($graph) > 0) {
-									foreach ($graph as $data) {
+								if (count($graph_dpm) > 0) {
+									foreach ($graph_dpm as $data) {
+										echo "['" . $data->nama_calon . "'," . $data->total . "],\n";
+									}
+								}
+								?>
+							]
+						}]
+					});
+					$('#containerbem').highcharts({
+						chart: {
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false
+						},
+						title: {
+							text: 'Data Calon Bem'
+						},
+						tooltip: {
+							pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+						},
+						plotOptions: {
+							pie: {
+								allowPointSelect: true,
+								cursor: 'pointer',
+								dataLabels: {
+									enabled: true,
+									format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+									style: {
+										color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+									}
+								}
+							}
+						},
+						series: [{
+							type: 'pie',
+							name: 'Persentase Calon',
+							data: [
+								<?php
+								// data yang diambil dari database
+								if (count($graph_bem) > 0) {
+									foreach ($graph_bem as $data) {
 										echo "['" . $data->nama_calon . "'," . $data->total . "],\n";
 									}
 								}
@@ -80,46 +134,79 @@ $bu = base_url();
 		</head>
 
 		<body>
-
-			<div id="container"></div>
+			<div class="row">
+				<div class="col-6">
+					<div id="containerdpm"></div>		
+						<div class="row">
+							<?php
+							foreach ($graph_dpm as $key => $value) {			
+							?>
+								<div class="col-md-6 col-sm-6 col-12">
+									<div class="info-box bg-info">
+										<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon_dpm/<?= $value->foto ?>"> </span>
+			
+										<div class="info-box-content">
+											<span class="info-box-text">Nama : <?= $value->nama_calon ?></span>
+											<div class="progress">
+												<div class="progress-bar" style="width: 100%"></div>
+											</div>
+											<span class="progress-description">
+												Jumlah Total Suara
+											</span>
+											<hr>
+											<span class="progress-description">
+												<b> <?= $value->total ?></b>
+											</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+			
+							<?php
+								# code...
+							}
+							?>
+						</div>
+				</div>
+				<div class="col-6">
+					<div id="containerbem"></div>
+					<div class="row">
+							<?php
+							foreach ($graph_bem as $key => $value) {			
+							?>
+								<div class="col-md-6 col-sm-6 col-12">
+									<div class="info-box bg-info">
+										<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon_bem/<?= $value->foto ?>"> </span>
+			
+										<div class="info-box-content">
+											<span class="info-box-text">Nama : <?= $value->nama_calon ?></span>
+											<div class="progress">
+												<div class="progress-bar" style="width: 100%"></div>
+											</div>
+											<span class="progress-description">
+												Jumlah Total Suara
+											</span>
+											<hr>
+											<span class="progress-description">
+												<b> <?= $value->total ?></b>
+											</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+			
+							<?php
+								# code...
+							}
+							?>
+						</div>
+				</div>
+			</div>
 
 			<hr>
-			<div class="row">
-				<?php
-				foreach ($graph as $key => $value) {
-					// echo $value;
-
-
-				?>
-					<div class="col-md-3 col-sm-6 col-12">
-						<div class="info-box bg-info">
-							<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon/<?= $value->foto ?>"> </span>
-
-							<div class="info-box-content">
-								<span class="info-box-text">Nama : <?= $value->nama_calon ?></span>
-								<div class="progress">
-									<div class="progress-bar" style="width: 100%"></div>
-								</div>
-								<span class="progress-description">
-									Jumlah Total Suara
-								</span>
-								<hr>
-								<span class="progress-description">
-									<b> <?= $value->total ?></b>
-								</span>
-							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-
-				<?php
-					# code...
-				}
-				?>
-			</div>
 		</body>
-
 		</html>
 
 
