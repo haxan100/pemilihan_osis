@@ -305,8 +305,6 @@ class User extends CI_Controller
     }
     public function cart_bem()
     {
-
-        // $this->cekLoginAdmin();
         if ($this->isLoginUser()) {
             $obs['login'] = true;
             $obs['admin'] = false;
@@ -316,28 +314,28 @@ class User extends CI_Controller
             $obs['data'] = $getUserByID;
 
             $obj['judul'] = "Hasil Quick Count";
-            $obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
-            $obj['graph'] = $this->CalonModel->GetPie();
+            $obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
+            $obj['graph'] = $this->CalonModel->GetPie('bem');
             // var_dump($obj['data']);die;
             $this->load->view('templating/header');
-            // $this->load->view('templating/sidebar');
-
             $this->load->view('templating/sidebar', $obs);
-            $this->load->view('User/cart', $obj);
+            $this->load->view('User/cart_bem', $obj);
             $this->load->view('templating/footer');
         } else {
 
             $obs['admin'] = false;
             $obs['login'] = false;
             $obj['judul'] = "Hasil Quick Count";
-            $obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
-            $obj['graph'] = $this->CalonModel->GetPie();
+            
+            $obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
+            $obj['graph'] = $this->CalonModel->GetPie('bem');
             // var_dump($obj['data']);die;
             $this->load->view('templating/header');
             // $this->load->view('templating/sidebar');
 
             $this->load->view('templating/sidebar', $obs);
-            $this->load->view('User/cart', $obj);
+            $this->load->view('User/cart_bem', $obj);
+            
             $this->load->view('templating/footer');
         }
     }
