@@ -396,7 +396,7 @@ $bu = base_url();
 				async: false,
 			}).done(function(e) {
 				console.log(e);
-				return false
+				// return false
 				if (e.status) {
 					notifikasi('#alertNotif', e.message, false);
 					$('#modal-detail').modal('hide');

@@ -363,7 +363,8 @@ public function index()
 	public function getCalonByID()
 	{
 		$id = $this->input->post('data');
-		$data = $this->CalonModel->getCalonByID($id)->row();
+		$type = $this->input->post('type');
+		$data = $this->CalonModel->getCalonByID($id,$type)->row();
 		$datas = array(
 			'status' => true,
 			'data'=> $data,

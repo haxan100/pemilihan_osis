@@ -81,6 +81,68 @@ class User extends CI_Controller
         }
 
     }
+
+    public function pilih_bem()
+    {
+        $wak = $this->AdminModel->getWaktuSetting()->row();
+        $now = date('Y-m-d H:m:s');
+
+        if ($now <= $wak->mulai) {
+            $this->session->set_flashdata(
+                'notifikasi',
+                array(
+                    'alert' => 'alert-danger',
+                    'message' => 'Maaf, Waktu Memilih Belum Di Mulai',
+                )
+            );
+        } else if ($now >= $wak->akhir) {
+            $this->session->set_flashdata(
+                'notifikasi',
+                array(
+                    'alert' => 'alert-danger',
+                    'message' => 'Maaf, Waktu Memilih Sudah Terlewatkan',
+                )
+            );
+        }
+        $this->cekLoginAdmin();
+        $id = $this->session->userdata('id_siswa');
+        $obs['login'] = true;
+        $obs['admin'] = false;
+        if ($this->getIsUserHasChose($id,'bem')) {
+            $this->session->set_flashdata(
+                'notifikasi',
+                array(
+                    'alert' => 'alert-danger',
+                    'message' => 'Maaf, Anda Sudah Memilih Calon',
+                )
+            );
+            $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+            $obs['data'] = $getUserByID;
+
+            $obj['judul'] = "Data Calon";
+
+            $obj['data'] = $this->CalonModel->ListUserCalon('bem')->result();
+            $this->load->view('templating/header');
+            $this->load->view('templating/sidebar', $obs);
+            $this->load->view('User/pilih', $obj);
+            $this->load->view('templating/footer');
+
+        } else {
+
+            $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+            $obs['data'] = $getUserByID;
+
+            $obj['judul'] = "Data Calon";
+
+            $obj['data'] = $this->CalonModel->ListUserCalon("bem")->result();
+            // var_dump($data);die;
+            $this->load->view('templating/header');
+            $this->load->view('templating/sidebar', $obs);
+            $this->load->view('User/pilih', $obj);
+            $this->load->view('templating/footer');
+        }
+
+    }
     public function bem()
     {
         $wak = $this->AdminModel->getWaktuSetting()->row();
@@ -148,9 +210,9 @@ class User extends CI_Controller
         }
 
     }
-    public function getIsUserHasChose($id)
+    public function getIsUserHasChose($id,$type)
     {
-        $data = $this->SiswaModel->getIsUserHasChose($id)[0]->sudah_milih_bem;
+        $data = $this->SiswaModel->getIsUserHasChose($id,$type)[0]->sudah_milih_bem;
         if ($data == 1) {
             return true; // sudah Milih
         } else {
@@ -165,30 +227,30 @@ class User extends CI_Controller
         $status = false;
 
         $id_calon = $this->input->post('pilih');
-
+        $type = $this->input->post('type');
         $id = $this->session->userdata('id_siswa');
 
-        if ($this->getIsUserHasChose($id)) {
+        if ($this->getIsUserHasChose($id,$type)) {
             $pesan = " Maaf, Anda Sudah Memilih Calon";
             $status = false;
         } else {
             $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
             $obs['data'] = $getUserByID;
-            $getJumlama = $this->CalonModel->getCalonByID($id_calon)->result()[0]->total;
+            $getJumlama = $this->CalonModel->getCalonByID($id_calon,$type)->result()[0]->total;
             $total = $getJumlama + 1;
             // var_dump(date("Y-m-d h:i:s"));die;
 
             $inSiswa = array(
-                'pilih' => $id_calon,
-                'sudah_milih' => 1,
-                'waktu_milih' => date("Y-m-d h:i:s"),
+                "pilih_$type" => $id_calon,
+                "sudah_milih_$type" => 1,
+                "waktu_pilih_$type" => date("Y-m-d h:i:s"),
             );
             $inCalon = array(
                 'id_calon' => $id_calon,
                 'total' => $total,
                 // 'siswa' => $id_siswa,
             );
-            if ($this->CalonModel->edit_calon($inCalon, $id_calon)) {
+            if ($this->CalonModel->edit_calon($inCalon, $id_calon,$type)) {
 
                 $this->SiswaModel->edit_siswa($inSiswa, $getUserByID->id_siswa);
                 $pesan = " berhasil memilih";
@@ -204,6 +266,44 @@ class User extends CI_Controller
         # code...
     }
     public function cart()
+    {
+
+        // $this->cekLoginAdmin();
+        if ($this->isLoginUser()) {
+            $obs['login'] = true;
+            $obs['admin'] = false;
+
+            $id = $this->session->userdata('id_siswa');
+            $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
+            $obs['data'] = $getUserByID;
+
+            $obj['judul'] = "Hasil Quick Count";
+            $obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
+            $obj['graph'] = $this->CalonModel->GetPie();
+            // var_dump($obj['data']);die;
+            $this->load->view('templating/header');
+            // $this->load->view('templating/sidebar');
+
+            $this->load->view('templating/sidebar', $obs);
+            $this->load->view('User/cart', $obj);
+            $this->load->view('templating/footer');
+        } else {
+
+            $obs['admin'] = false;
+            $obs['login'] = false;
+            $obj['judul'] = "Hasil Quick Count";
+            $obj['data'] = $this->CalonModel->ListUserCalon()->result_array();
+            $obj['graph'] = $this->CalonModel->GetPie();
+            // var_dump($obj['data']);die;
+            $this->load->view('templating/header');
+            // $this->load->view('templating/sidebar');
+
+            $this->load->view('templating/sidebar', $obs);
+            $this->load->view('User/cart', $obj);
+            $this->load->view('templating/footer');
+        }
+    }
+    public function cart_bem()
     {
 
         // $this->cekLoginAdmin();

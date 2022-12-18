@@ -109,21 +109,22 @@ $bu = base_url();
 			if ($this->session->flashdata('notifikasi')) {
 				// $oke = 1;
 				$e = $this->session->flashdata('notifikasi');
-				echo '
-				<input name="oke" id="oke" class="btn btn-primary" type="hidden" value="1">
-								<div class="alert ' . $e['alert'] . ' alert-dismissible show" role="alert">
-										<span>' . $e['message'] . '</span>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				$pesan = $e['message'];
+				$bu = base_url();
+				echo "
+				<input name='oke' id='oke' class='btn btn-primary' type='hidden' value='1'>
+								<div class='alert alert-danger alert-dismissible show' role='alert'> <span> $pesan </span>
+										<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 								</div>
 
 								<script>
 								setTimeout(function() {
-								window.location.href = "User/Cart";
+								window.location.href = '$bu/User/Cart_bem';
 							}, 2000);
 								</script>
 
 				
-						';
+						";
 			}
 			?>
 		</div>
@@ -137,7 +138,7 @@ $bu = base_url();
 			?>
 				<div class="col-md-3 col-sm-6 col-12">
 					<div class="info-box bg-primary" style="max-width: 95%;max-height: 100%;">
-						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon/<?= $key->foto ?>"> </span>
+						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon_bem/<?= $key->foto ?>"> </span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Nama : <?= $key->nama_calon ?></span>
@@ -205,6 +206,7 @@ $bu = base_url();
 				url: "<?= $bu; ?>Admin/getCalonByID",
 				data: {
 					data: data,
+					type: 'bem',
 				},
 			}).done(function(e) {
 				var data = e.data
@@ -260,6 +262,7 @@ $bu = base_url();
 						url: "<?= $bu; ?>User/pilih",
 						data: {
 							pilih: pilihan,
+							type: 'bem',
 						},
 					}).done(function(e) {
 						// console.log(e);
