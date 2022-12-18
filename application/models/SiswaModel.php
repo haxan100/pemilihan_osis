@@ -180,9 +180,9 @@ public function getAllSiswa()
 		return $query;
 		# code...
 	}
-	public function getIsUserHasChose($id_siswa)
+	public function getIsUserHasChose($id_siswa,$type="bem")
 	{
-		$this->db->select('sudah_milih');
+		$this->db->select("sudah_milih_$type");
 		$this->db->where('id_siswa', $id_siswa);
 		$query = $this->db->get('siswa s');
 		return $query->result();

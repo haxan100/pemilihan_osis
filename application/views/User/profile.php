@@ -35,17 +35,11 @@ $bu = base_url();
 			<div class="card-body box-profile">
 				<h3 class="profile-username text-center"> <?= $data->nama ?> </h3>
 
-				<p class="text-muted text-center"> <?= $data->NIS ?></p>
+				<p class="text-muted text-center"> <?= $data->nim ?></p>
 
 				<ul class="list-group list-group-unbordered mb-3">
 					<li class="list-group-item">
-						<b>Kelas</b> <a class="float-right"> <?= $data->id_kelas ?></a>
-					</li>
-					<li class="list-group-item">
-						<b>Nomor Telpon</b> <a class="float-right"> <?= $data->no_telpon ?></a>
-					</li>
-					<li class="list-group-item">
-						<b>Alamat</b> <a class="float-right"> <?= $data->alamat ?></a>
+						<b>Kelas</b> <a class="float-right"> <?= $data->prodi ?></a>
 					</li>
 				</ul>
 
@@ -106,7 +100,7 @@ $bu = base_url();
 											<div class=" form-group col-md-6 col-sm-6 ">
 												<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> NISN <span class="required">*</span>
 												</label>
-												<input id="nisn" name="nisn" class="form-control " placeholder="Isikan NISN" readonly type="number" value="<?= $data->NIS ?>" class="form-control">
+												<input id="nisn" name="nisn" class="form-control " placeholder="Isikan NISN" readonly type="number" value="<?= $data->nim ?>" class="form-control">
 
 												<div class="card-header" id="NISAlert">
 													<h3 class="card-title">Edit NIS Tidak Di Perbolehkan</h3>
@@ -125,75 +119,18 @@ $bu = base_url();
 										</div>
 										<div class="row">
 											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Alamat <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="alamat" name="alamat" class="form-control " placeholder="Isikan Alamat" type="text" class="form-control" value="<?= $data->alamat ?>">
-
-												</div>
-											</div>
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kelas <span class="required">*</span>
+												<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Prodi <span class="required">*</span>
 												</label>
 												<div class="">
 
-													<input id="kelas" name="kelas" class="form-control " placeholder="Isikan kelas" type="text" readonly value="<?= $data->id_kelas ?>" class="form-control">
+													<input id="kelas" name="kelas" class="form-control " placeholder="Isikan kelas" type="text" readonly value="<?= $data->prodi ?>" class="form-control">
 
 													<div class="card-header" id="KelasAlert">
-														<h3 class="card-title">Edit Kelas Tidak Di Perbolehkan</h3>
+														<h3 class="card-title">Edit Prodi Tidak Di Perbolehkan</h3>
 													</div>
 
 												</div>
 											</div>
-										</div>
-
-										<div class="row">
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label label-align" for="last-name">Tanggal Lahir <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="tanggal_lahir" name="tanggal_lahir" class="form-control " placeholder="Isikan kelas" type="date" value="<?= $data->tgl_lahir ?>" class="form-control">
-
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label label-align" for="last-name">Tempat Lahir <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="tempat_lahir" name="tempat_lahir" class="form-control " placeholder="Isikan tempat lahir" type="text" class="form-control" value="<?= $data->tempat_lahir ?>">
-
-												</div>
-											</div>
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label label-align" for="last-name">Username <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="username" name="username" class="form-control " placeholder="Isikan Username" type="text" class="form-control" value="<?= $data->username ?>">
-
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label label-align" for="last-name">Password <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="password" name="password" class="form-control " placeholder="Isikan Password" type="text" class="form-control" value="<?= $data->password ?>">
-
-												</div>
-											</div>
-
-											<div class="item form-group col-md-6 col-sm-6 ">
-												<label class="col-form-label label-align" for="last-name">No Hp <span class="required">*</span>
-												</label>
-												<div class="">
-													<input id="noHP" name="noHP" class="form-control " placeholder="Isikan No HP" type="text" class="form-control" value="<?= $data->no_telpon ?>">
-
-												</div>
-											</div>
-
 										</div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">
@@ -252,59 +189,27 @@ $bu = base_url();
 			var url_form_ubah = bu + 'admin/ubah_siswa_proses';
 			url_form = url_form_ubah;
 			var id_siswa = $('#id_siswa').val();
-			var nisn = '<?= $data->NIS ?> ';
 			var nama = $('#nama').val();
-			var kelas = '<?= $data->id_kelas ?> ';
-			var tanggal_lahir = $('#tanggal_lahir').val();
-			var tempat_lahir = $('#tempat_lahir').val();
 			var username = $('#username').val();
-			var password = $('#password').val();
-			var noHP = $('#noHP').val();
-			var alamat = $('#alamat').val();
-			var jenis_kelamin = '<?= $data->jenis_kelamin ?> ';
 			if (nama == '') {
 				salah('nama');
-				return false
-			}
-			if (alamat == '') {
-				salah('alamat');
 				return false
 			}
 			if (username == '') {
 				salah('username');
 				return false
 			}
-			if (password == '') {
-				salah('password');
-				return false
-			}
-			if (noHP == '') {
-				salah('noHP');
-				return false
-			}
-			if (tempat_lahir == '') {
-				salah('tempat_lahir');
-				return false
-			}
 
 			if (
-				id_siswa
+				nama
 			)
 				$.ajax({
-					url: bu + 'admin/ubah_siswa_proses',
+					url: bu + 'user/ubah_siswa_proses',
 					dataType: 'json',
 					method: 'POST',
 					data: {
 						id_siswa: id_siswa,
-						nisn: nisn,
 						nama: nama,
-						kelas: kelas,
-						tanggal_lahir: tanggal_lahir,
-						tempat_lahir: tempat_lahir,
-						username: username,
-						password: password,
-						alamat: alamat,
-						noHP: noHP,
 					}
 				}).done(function(e) {
 					// return false

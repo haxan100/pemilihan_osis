@@ -72,7 +72,7 @@ class User extends CI_Controller
 
             $obj['judul'] = "Data Calon";
 
-            $obj['data'] = $this->CalonModel->ListUserCalon()->result();
+            $obj['data'] = $this->CalonModel->ListUserCalon("bem")->result();
             // var_dump($data);die;
             $this->load->view('templating/header');
             $this->load->view('templating/sidebar', $obs);
@@ -150,7 +150,7 @@ class User extends CI_Controller
     }
     public function getIsUserHasChose($id)
     {
-        $data = $this->SiswaModel->getIsUserHasChose($id)[0]->sudah_milih;
+        $data = $this->SiswaModel->getIsUserHasChose($id)[0]->sudah_milih_bem;
         if ($data == 1) {
             return true; // sudah Milih
         } else {
@@ -273,7 +273,7 @@ class User extends CI_Controller
             $obs['data'] = $getUserByID;
 
             $obj['judul'] = "Profile";
-            $obj['graph'] = $this->CalonModel->GetPie();
+            // $obj['graph'] = $this->CalonModel->GetPie();
             $id = $_SESSION['id_siswa'];
             $getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
             $obj['data'] = $getUser->row();
@@ -314,6 +314,40 @@ class User extends CI_Controller
             redirect('login');
         }
     }
+    public function ubah_siswa_proses()
+	{
+		// var_dump($_POST);die;
+		$id_siswa = $this->input->post('id_siswa', TRUE);
+		$nama = $this->input->post('nama', TRUE);
+        
+		$message = 'Gagal mengedit data siswa!<br>Silahkan lengkapi data yang diperlukan.';
+		$errorInputs = array();
+		$status = true;
+
+		$in = array(
+			'nama' => $nama,
+		);
+		if (empty($nama)) {
+			$status = false;
+			$errorInputs[] = array('#nama', 'Silahkan Isi Nama');
+		}
+    
+		if ($status) {
+			$this->SiswaModel->edit_siswa($in, $id_siswa);
+			$message = "Berhasil Mengedit Data ";
+			 $status = true;
+
+
+
+		} else {
+			$message = "Gagal Mengubah Siswa #1";
+		}
+		echo json_encode(array(
+			'status' => $status,
+			'message' => $message,
+			'errorInputs' => $errorInputs
+		));
+	}
 
 }
 
