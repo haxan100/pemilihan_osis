@@ -44,7 +44,7 @@
 				<p class="login-box-msg">User Siswa</p>
 
 				<form id="form">
-					<span class="label">Nim</span>					
+					<span class="label">Nim</span>
 					<div class="input-group mb-3">
 						<input type="text" id="nim" name="nim" class="form-control" value="12345" placeholder="Nim">
 						<div class="input-group-append">
@@ -56,7 +56,7 @@
 
 					<span class="label">Nama</span>
 					<div class="input-group mb-3">
-						<input type="text" id="nama" name="nama"class="form-control" value="terisi" placeholder="Nama">
+						<input type="text" id="nama" name="nama" class="form-control" value="terisi" placeholder="Nama">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
@@ -65,17 +65,27 @@
 					</div>
 
 					<span class="label">Angkatan</span>
-					<div class="input-group mb-3">		
-						<input type="text"name="angkatan" id="angkatan" class="form-control" value="terisi" placeholder="angkatan">
+					<div class="input-group mb-3">
+						<input type="text" name="angkatan" id="angkatan" class="form-control" value="terisi" placeholder="angkatan">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
 							</div>
 						</div>
 					</div>
-					<span class="label">Prodi</span>					
+					<span class="label">Prodi</span>
 					<div class="input-group mb-3">
-						<input type="text" name="prodi" id="prodi" class="form-control" value="" placeholder="prodi">
+						<select class="form-control " name="prodi" id="prodi">
+							<option value="default" desable disabled >Pilih Prodi</option>
+							<?php
+							foreach ($prodi as $key => $v) {
+
+							?>
+								<option value="<?= $v->id_prodi ?>"><?= $v->nama_prodi ?></option>
+							<?php
+							}
+							?>
+						</select>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
@@ -85,22 +95,23 @@
 
 					<span class="label">Foto KTM</span>
 					<div class="input-group mb-3">
-						<input type="file" id="foto_ktm" name="foto_ktm" class="form-control" placeholder="Foto KTM">
+						<input type="file" id="foto_ktm" accept="image/*;capture=camera" name="foto_ktm" class="form-control" placeholder="Foto KTM">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
 							</div>
 						</div>
 					</div>
+					<span class="label">Foto Diri</span>
 					<div class="input-group mb-3">
-						<input type="file" id="foto_diri" name="foto_diri" class="form-control" placeholder="foto_diri">
+						<input type="file" id="foto_diri" accept="image/*;capture=camera" name="foto_diri" class="form-control" placeholder="foto_diri">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<!-- /.col -->
 						<div class="col-12">
@@ -112,9 +123,9 @@
 					<hr>
 					<label for="Cart">Untuk Melihat Hasil Quick Count Sementara, Cek <a href="<?= base_url() ?>Cart">Disini</a></label>
 
-					<label for="Cart">Untuk Login Silahkan Klik Disini <a href="<?= base_url() ?>Cart">						
-					<button class="btn btn-success btn-block" type="submit" id="loginBtn">Login</button>
-					</a></label>
+					<label for="Cart">Untuk Login Silahkan Klik Disini <a href="<?= base_url() ?>Cart">
+							<button class="btn btn-success btn-block" type="submit" id="login">Login</button>
+						</a></label>
 					<hr>
 				</form>
 
@@ -130,7 +141,7 @@
 	<script src="<?= base_url(); ?>/aseets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../../dist/js/adminlte.min.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -138,30 +149,34 @@
 		$(document).ready(function() {
 			var bu = '<?= base_url(); ?>';
 			var captcha;
+			$('#login').click(function(e) {
+				e.preventDefault();
+				window.location.href = '<?= base_url() ?>/login';
 
+			});
 			$(".preloader").fadeOut();
 
-			$('#loginBtn').click(function (e) { 
+			$('#loginBtn').click(function(e) {
 				e.preventDefault();
 				$("#form").submit();
 
-				
+
 			});
-			$("#form").submit(function (e) {
+			$("#form").submit(function(e) {
 
 				$.ajax({
-					url: bu+"/Register/process",
-					method: "post",
-					dataType: "json",
-					data: new FormData(this),
-					processData: false,
-					contentType: false,
-					cache: false,
-					async: false,
-				})
-					.done(function (e) {
+						url: bu + "/Register/process",
+						method: "post",
+						dataType: "json",
+						data: new FormData(this),
+						processData: false,
+						contentType: false,
+						cache: false,
+						async: false,
+					})
+					.done(function(e) {
 						if (e.status) {
-							
+
 							Swal.fire(
 								'Berhasil',
 								e.message,
@@ -170,17 +185,17 @@
 							setTimeout(() => {
 								window.location.href = '<?= base_url() ?>User/';
 							}, 2500);
-							
+
 						} else {
 							Swal.fire(
 								'Maaf',
 								e.message,
 								'error'
 							)
-							
+
 						}
 					})
-					.fail(function (e) {
+					.fail(function(e) {
 						// console.log(e);
 						notifikasi("#alertNotif", "Terjadi kesalahan!", true);
 					});

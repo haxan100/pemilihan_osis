@@ -14,6 +14,8 @@ class Register extends MY_Controller
     public function index()
     {
         $obj['judul'] = "Data Calon";
+        $dataProdi = $this->ConfigModel->getData('prodi');
+		$obj['prodi'] = $dataProdi;
         // $obj['data'] = $this->CalonModel->ListUserCalon()->result();
         $obj['ci'] = $this;
         $this->load->view('User/Register', $obj);
@@ -28,7 +30,7 @@ class Register extends MY_Controller
         $prodi = $this->input->post('prodi');
         // $foto_ktm= $this->input->post('foto_ktm');
         // $foto_diri= $this->input->post('foto_diri');
-
+        // var_dump($_POST);die;
         $nim_cek = $this->ConfigModel->getDataWhereFromTable('siswa', '*', ['nim' => $nim]);
 
         if (count($nim_cek) > 0) {
@@ -44,6 +46,8 @@ class Register extends MY_Controller
             'prodi' => $prodi,
             'password' => $this->bizEncrypt($nim),
         );
+        $nama_file  = $nama ;
+        var_dump($nama_file);die;
         if ($_FILES['foto_ktm']['name'] != null) {
             $config['upload_path'] = './images/ktm';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';

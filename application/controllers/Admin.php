@@ -20,7 +20,7 @@ public function index()
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
 		$obj['siswa']= count($this->SiswaModel->getAllSiswa()->result());
-		$obj['siswaSudahMilih'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
+		// $obj['siswaSudahMilih'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
 		$obj['calon_bem'] = count($this->CalonModel->ListUserCalon('bem')->result());
 		$obj['calon_dpm'] = count($this->CalonModel->ListUserCalon('dpm')->result());
 		// var_dump($siswa);die;
@@ -309,7 +309,7 @@ public function index()
 	public function login()
 	{
 		$obj['judul'] = "Data Calon";
-		$obj['data'] = $this->CalonModel->ListUserCalon()->result();
+		// $obj['data'] = $this->CalonModel->ListUserCalon()->result();
 		$obj['ci'] = $this;
 		// var_dump($data);die;
 		// $this->load->view('templating/header');

@@ -2,7 +2,7 @@
         
 defined('BASEPATH') OR exit('No direct script access allowed');
         
-class Login extends CI_Controller {
+class Login extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -22,20 +22,24 @@ public function index()
 }
 public function login_proses()
 {	$status = false;
-	$message = 'Gagal Login <br> Mohon Isi Username dan Password dengan benar!';
+	$message = 'Gagal Login <br> Mohon Isi Nim dan Password dengan benar!';
 
 	$username= $this->input->post('username');
 	$password= $this->input->post('password');
-	$isUser = $this->SiswaModel->GetSiswaNIS($username,$password);
+
+	$isUser = $this->SiswaModel->GetSiswaUName($username);
 	$r = $isUser->row();
-	// var_dump($r);die;
-	if($isUser->num_rows() == 1){
+	
+	$pw = $this->passwordMatch($password,$r->password);
+
+	if($pw){
         $session = array(
             'admin_session' => false, 
             'id_siswa' => $r->id_siswa,
-			'nisn' => $r->NIS, 
+						'nim' => $r->nim, 
             'nama' => $r->nama, 
-            'sudah_milih' => $r->sudah_milih, 
+            'sudah_milih_bem' => $r->sudah_milih_bem, 
+            'sudah_milih_dpm' => $r->sudah_milih_dpm, 
           );
 
 		  $this->session->set_userdata($session); // Buat session sesuai $session
