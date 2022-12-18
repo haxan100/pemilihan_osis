@@ -14,7 +14,7 @@ class Register extends MY_Controller
     public function index()
     {
         $obj['judul'] = "Data Calon";
-        $obj['data'] = $this->CalonModel->ListUserCalon()->result();
+        // $obj['data'] = $this->CalonModel->ListUserCalon()->result();
         $obj['ci'] = $this;
         $this->load->view('User/Register', $obj);
     }

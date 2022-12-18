@@ -12,7 +12,7 @@ class Login extends CI_Controller {
 public function index()
 {
 		$obj['judul'] = "Data Calon";
-		$obj['data'] = $this->CalonModel->ListUserCalon()->result();
+		// $obj['data'] = $this->CalonModel->ListUserCalon()->result();
 		$obj['ci'] = $this;
 		// var_dump($data);die;
 		// $this->load->view('templating/header');
