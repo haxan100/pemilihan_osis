@@ -387,7 +387,8 @@ class Calon extends CI_Controller
     {
 
         $bu = base_url();
-        $dt = $this->CalonModel->dt_Calon($_POST, 'dpm');
+        $dt = $this->CalonModel->dt_Calon_dpm($_POST);
+        // var_dump($dt);die;
         $datatable['draw'] = isset($_POST['draw']) ? $_POST['draw'] : 1;
         $datatable['recordsTotal'] = $dt['totalData'];
         $datatable['recordsFiltered'] = $dt['totalData'];
@@ -395,13 +396,12 @@ class Calon extends CI_Controller
         $start = isset($_POST['start']) ? $_POST['start'] : 0;
         $no = $start + 1;
         foreach ($dt['data']->result() as $row) {
-
             $fields = array($no++);
             $fields[] = $row->nama_calon . '<br>';
             $fields[] = $row->nim . '<br>';
             $fields[] = $row->visi . '<br>';
             $fields[] = $row->moto . '<br>';
-            $fields[] = $row->prodi . '<br>';
+            $fields[] = $row->nama_prodi . '<br>';
             $fields[] = '<img class="img-fluid" id="foto_wrapper" id="foto_wrapper"  data-target="#modalBaru" data-toggle="modal"  src="' . $bu . '/upload/images/calon_dpm/' . $row->foto . ' "/> ';
 
             $fields[] = '

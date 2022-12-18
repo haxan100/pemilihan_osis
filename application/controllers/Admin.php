@@ -379,7 +379,7 @@ public function index()
 		$obj['judul'] = "Data Calon";
 
 		$obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
-		$obj['graph_bem'] = $this->CalonModel->GetPie('bem');
+		$obj['graph'] = $this->CalonModel->GetPie('bem');
 		$obj['graph_dpm'] = $this->CalonModel->GetPie('dpm');
 
 		$id = $this->session->userdata('id_admin');
@@ -387,7 +387,7 @@ public function index()
 		$obs['data'] = $getUserByID;
 		$this->load->view('templating/header');
 		$this->load->view('templating/sidebar', $obs);
-		$this->load->view('User/cart', $obj);
+		$this->load->view('User/cart_bem', $obj);
 		$this->load->view('templating/footer');
 	}
 	public function profile()

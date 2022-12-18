@@ -58,6 +58,63 @@ class CalonModel extends CI_Model {
 			'data' => $data,
 		);
 	}
+	public function dt_Calon_dpm($post)
+	{
+		$columns = array(
+			'nim',
+			'nama_calon',
+		);
+		// untuk search
+		$columnsSearch = array(
+			'nama_calon',
+			'moto',
+			'visi',
+		);
+		// gunakan join disini
+		$from = "calon_dpm s
+		join prodi p 
+		on s.prodi = p.id_prodi
+		";
+		// custom SQL
+		$sql = "SELECT *  FROM {$from}  ";
+		$where = "";
+		$whereTemp = "";
+		if ($whereTemp != '' && $where != '') $where .= " AND (" . $whereTemp . ")";
+		else if ($whereTemp != '') $where .= $whereTemp;
+		// search
+		if (isset($post['search']['value']) && $post['search']['value'] != '') {
+			$search = $post['search']['value'];
+			// di $columns
+			$whereTemp = "";
+			for ($i = 0; $i < count($columnsSearch); $i++) {
+				$whereTemp .= $columnsSearch[$i] . ' LIKE "%' . $search . '%"';
+				// agar tidak menambahkan 'OR' diakhir Looping
+				if ($i < count($columnsSearch) - 1) {
+					$whereTemp .= ' OR ';
+				}
+			}
+			if ($where != '') $where .= " AND (" . $whereTemp . ")";
+			else $where .= $whereTemp;
+		}
+		if ($where != '') $sql .= ' where (' . $where . ')';
+		//SORT Kolom
+		$sortColumn = isset($post['order'][0]['column']) ? $post['order'][0]['column'] : 1;
+		$sortDir    = isset($post['order'][0]['dir']) ? $post['order'][0]['dir'] : 'asc';
+		$sortColumn = $columns[$sortColumn - 1];
+		$count = $this->db->query($sql);
+		// hitung semua data
+		$totaldata = $count->num_rows();
+		// memberi Limit
+		$start  = isset($post['start']) ? $post['start'] : 0;
+		$length = isset($post['length']) ? $post['length'] : 10;
+		$sql .= " LIMIT {$start}, {$length}";
+		// var_dump($sql);die();
+		$data  = $this->db->query($sql);
+		return array(
+			'totalData' => $totaldata,
+			'data' => $data,
+		);
+	}
 
 	public function tambah_Calon($in,$type="bem")
 	{

@@ -52,9 +52,9 @@ $bu = base_url();
 							<th>No</th>
 							<th>Nama</th>
 							<th>NIM</th>
-							<th>Prodi</th>
 							<th>Visi</th>
 							<th>Misi</th>
+							<th>Prodi</th>
 							<th>Foto</th>
 							<th>Aksi</th>
 						</tr>

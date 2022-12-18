@@ -180,12 +180,10 @@ public function master_list_siswa()
     $writer->save('php://output');
 	}	
 	public function master_DPM($id=0)
-	{
-		
+	{		
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $lisUser = $this->CalonModel->ListUserCalonDPM($id);
-
     $spreadsheet->setActiveSheetIndex(0)
         ->setCellValue('A1', 'ID Calon')
         ->setCellValue('B1', 'NIM')
