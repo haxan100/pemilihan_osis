@@ -144,7 +144,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/Profile" class="nav-link ">
+									<a href="<?= base_url() ?>User/Profile" class="nav-link <?php if($uri=='Profile') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Profile</p>
 									</a>
@@ -153,25 +153,25 @@
 
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/pilih_bem" class="nav-link">
+									<a href="<?= base_url() ?>User/pilih_bem" class="nav-link <?php if($uri=='pilih_bem') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Pilih BEM</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/pilih_dpm" class="nav-link">
+									<a href="<?= base_url() ?>User/pilih_dpm" class="nav-link <?php if($uri=='pilih_dpm') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Pilih DPM</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/cart_bem" class="nav-link">
+									<a href="<?= base_url() ?>User/cart_bem" class="nav-link <?php if($uri=='cart_bem') echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Quick Count BEM</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/cart_dpm" class="nav-link">
+									<a href="<?= base_url() ?>User/cart_dpm" class="nav-link <?php if($uri=='Cart_dpm' || $uri=='cart_dpm' ) echo 'active' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Quick Count DPM</p>
 									</a>

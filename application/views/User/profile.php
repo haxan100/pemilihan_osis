@@ -62,7 +62,7 @@ $bu = base_url();
 				<h5><i class="icon fas fa-check"></i> Terimakasih!</h5>
 				Terima Kasih Sudah Memilih <br>
 				Anda Memilih : <?= $calon->nama_calon ?> <br>
-				Waktu Memilih : <?= $calon->waktu_milih ?> WIB <br>
+				Waktu Memilih : <?= $calon->waktu_pilih_bem ?> WIB <br>
 			</div>
 		<?php } else {
 		?>

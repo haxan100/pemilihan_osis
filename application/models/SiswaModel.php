@@ -190,9 +190,9 @@ public function getAllSiswa()
 	}
 	public function getIsUserHasChoseAndCalon($id_siswa)
 	{
-		$this->db->select('sudah_milih,pilih,waktu_milih,nama_calon');
+		$this->db->select('sudah_milih_bem,pilih_bem,waktu_pilih_bem,nama_calon');
 		$this->db->where('id_siswa', $id_siswa);
-		$this->db->join('calon c', 'c.id_calon = s.pilih');
+		$this->db->join('calon_bem c', 'c.id_calon = s.pilih_bem');
 
 		$query = $this->db->get('siswa s');
 		return $query->result();

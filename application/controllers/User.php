@@ -348,14 +348,14 @@ class User extends CI_Controller
         $obs['admin'] = false;
         $obs['login'] = true;
 
-        if ($this->getIsUserHasChose($id)) {
+        if ($this->getIsUserHasChose($id,'bem')) {
             $dataCalon = $this->SiswaModel->getIsUserHasChoseAndCalon($id)[0];
             $obj['calon'] = $dataCalon;
             $obj['statcalon'] = true;
             $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
             $obs['data'] = $getUserByID;
             $obj['judul'] = "Profile";
-            $obj['graph'] = $this->CalonModel->GetPie();
+            $obj['graph'] = $this->CalonModel->GetPie('bem');
             $id = $_SESSION['id_siswa'];
             $getUser = $this->SiswaModel->getSiswaByIdSiswa($id);
             $obj['data'] = $getUser->row();
@@ -513,7 +513,7 @@ class User extends CI_Controller
         }
 
     }
-    public function cart_dpm($id_prodi=1)
+    public function cart_dpm($prodi=1)
     {
         if ($this->isLoginUser()) {
             $obs['login'] = true;
@@ -523,14 +523,16 @@ class User extends CI_Controller
             $getUserByID = $this->SiswaModel->getSiswaById($id)[0];
             $prodi =$getUserByID->prodi;
             $obs['data'] = $getUserByID;
+            $obs['prodi'] = $prodi;
 
             $obj['judul'] = "Hasil Quick Count";
-            $obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
-            $obj['graph'] = $this->CalonModel->GetPie('bem');
-            // var_dump($obj['data']);die;
+            $obj['data'] = $this->CalonModel->ListUserCalonDPM($prodi)->result_array();
+            // var_dump( $obj['data']);die;
+            $obj['graph'] = $this->CalonModel->GetPieDPM($prodi);
+            
             $this->load->view('templating/header');
             $this->load->view('templating/sidebar', $obs);
-            $this->load->view('User/cart_bem', $obj);
+            $this->load->view('User/cart_dpm', $obj);
             $this->load->view('templating/footer');
         } else {
 
@@ -538,8 +540,8 @@ class User extends CI_Controller
             $obs['login'] = false;
             $obj['judul'] = "Hasil Quick Count";
             
-            $obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
-            $obj['graph'] = $this->CalonModel->GetPie('bem');
+            $obj['data'] = $this->CalonModel->ListUserCalonDPM($prodi)->result_array();
+            $obj['graph'] = $this->CalonModel->GetPieDPM($prodi);
             // var_dump($obj['data']);die;
             $this->load->view('templating/header');
             // $this->load->view('templating/sidebar');
