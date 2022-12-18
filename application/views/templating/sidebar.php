@@ -153,15 +153,27 @@
 
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User" class="nav-link">
+									<a href="<?= base_url() ?>User/pilih_bem" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Pilih</p>
+										<p>Pilih BEM</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?= base_url() ?>User/cart" class="nav-link">
+									<a href="<?= base_url() ?>User/pilih_dpm" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Quick Count</p>
+										<p>Pilih DPM</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?= base_url() ?>User/cart_bem" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Quick Count BEM</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="<?= base_url() ?>User/cart_dpm" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Quick Count DPM</p>
 									</a>
 								</li>
 							</ul>

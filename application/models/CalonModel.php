@@ -75,6 +75,13 @@ class CalonModel extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
+	public function ListUserCalonDPM($prodi)
+	{		
+		$this->db->where('prodi', $prodi);		
+		$this->db->from("calon_dpm");
+		$query = $this->db->get();
+		return $query;
+	}
 	public function GetPie($type)
 	{
 		$data = $this->db->query("SELECT * from calon_$type");
