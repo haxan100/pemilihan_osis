@@ -42,8 +42,8 @@ $bu = base_url();
 						$('#btnExportBem').on('click', function() {
 							var url = bu + 'Export/master_dpm/<?= $prodi ?>';
 							console.log(url)
-							return (false);
 							window.location = url;
+							return (false);
 
 						});
 					$('#containerbem').highcharts({

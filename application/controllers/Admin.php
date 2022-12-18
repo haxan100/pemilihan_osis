@@ -676,7 +676,7 @@ public function index()
 		$this->res($dataProdi,'ada',201);
 	}
 
-		public function cart_dpm()
+		public function cart_dpm($prodi=1)
 	{
 		$obs['admin'] = true;
 		$obs['login'] = true;
@@ -684,11 +684,12 @@ public function index()
 		$obj['judul'] = "Data Calon";
 
 		$obj['data'] = $this->CalonModel->ListUserCalon('bem')->result_array();
+		$obs['prodi'] = $prodi;
 		
-		$dataProdi = $this->ConfigModel->getData('prodi');
-		$obs['prodi'] = $dataProdi;
-		
-		$obj['graph_dpm'] = $this->CalonModel->GetPie('dpm');
+		$obj['judul'] = "Hasil Quick Count";
+		$obj['data'] = $this->CalonModel->ListUserCalonDPM($prodi)->result_array();
+		// var_dump( $obj['data']);die;
+		$obj['graph'] = $this->CalonModel->GetPieDPM($prodi);
 
 		$id = $this->session->userdata('id_admin');
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
