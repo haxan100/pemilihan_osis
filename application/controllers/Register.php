@@ -47,7 +47,6 @@ class Register extends MY_Controller
             'password' => $this->bizEncrypt($nim),
         );
         $nama_file  = $nama ;
-        var_dump($nama_file);die;
         if ($_FILES['foto_ktm']['name'] != null) {
             $config['upload_path'] = './images/ktm';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';

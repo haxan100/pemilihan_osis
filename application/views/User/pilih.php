@@ -138,7 +138,7 @@ $bu = base_url();
 			?>
 				<div class="col-md-3 col-sm-6 col-12">
 					<div class="info-box bg-primary" style="max-width: 95%;max-height: 100%;">
-						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon_bem/<?= $key->foto ?>"> </span>
+						<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/calon_bem/<?= $key->foto ?>"> </span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">Nama : <?= $key->nama_calon ?></span>
@@ -274,7 +274,7 @@ $bu = base_url();
 								'success'
 							);
 							setTimeout(function() {
-								window.location.href = "User/Cart";
+								window.location.href = "<?= base_url() ?>/User/Cart_bem";
 							}, 2000);
 							
 						} else {
