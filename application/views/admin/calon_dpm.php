@@ -112,7 +112,7 @@ $bu = base_url();
 																	foreach ($prodi as $key => $v) {
 
 																	?>
-																		<option value="<?= $v->nama_prodi ?>"><?= $v->nama_prodi ?></option>
+																		<option value="<?= $v->id_prodi ?>"><?= $v->nama_prodi ?></option>
 																		<?php 
 																	}
 																?>
