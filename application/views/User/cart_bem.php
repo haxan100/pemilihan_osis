@@ -99,7 +99,7 @@ $bu = base_url();
 							?>
 								<div class="col-md-6 col-sm-6 col-12">
 									<div class="info-box bg-info">
-										<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/Calon_bem/<?= $value->foto ?>"> </span>
+										<span class="info-box-icon"> <img class="img-fluid" id="foto_wrapper" data-target="#modalBaru" data-toggle="modal" src="<?= base_url(); ?>/upload/images/calon_bem/<?= $value->foto ?>"> </span>
 			
 										<div class="info-box-content">
 											<span class="info-box-text">Nama : <?= $value->nama_calon ?></span>

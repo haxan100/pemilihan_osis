@@ -21,18 +21,17 @@ class Register extends MY_Controller
         $this->load->view('User/Register', $obj);
     }
     public function process()
-    {
-			
+    {			
 				// NIM, Nama, Angkatan, Prodi, Foto KTM, Foto diri🙏
         $nim = $this->input->post('nim');
         $nama = $this->input->post('nama');
         $angkatan = $this->input->post('angkatan');
         $prodi = $this->input->post('prodi');
-        // $foto_ktm= $this->input->post('foto_ktm');
-        // $foto_diri= $this->input->post('foto_diri');
-        // var_dump($_POST);die;
         $nim_cek = $this->ConfigModel->getDataWhereFromTable('siswa', '*', ['nim' => $nim]);
-
+        $nim_db_mhs = $this->ConfigModel->getDataWhereFromTable('mahasiswa', '*', ['nim' => $nim]);		
+        if (count($nim_db_mhs) <1) {
+			$this->res([], "Nim Tidak Ada Di Table Mahasiswa!", 401);die();
+        }
         if (count($nim_cek) > 0) {
             $this->res([], "Nim Sudah Pernah Ada!", 401);die();
         }
@@ -50,9 +49,9 @@ class Register extends MY_Controller
         if ($_FILES['foto_ktm']['name'] != null) {
             $config['upload_path'] = './images/ktm';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 2000;
-            $config['max_width'] = 1500;
-            $config['max_height'] = 1500;
+            $config['max_size'] = 2000 *7000;
+            $config['max_width'] = 1500 *7000;
+            $config['max_height'] = 1500 *7000;
             $foto_ext = pathinfo($_FILES["foto_ktm"]["name"], PATHINFO_EXTENSION);
             $config['file_name'] = 'cover' . $this->generateRandomString() . '.' . $foto_ext;
             $configClone['file_name'] = $config['file_name'];
@@ -76,9 +75,9 @@ class Register extends MY_Controller
         if ($_FILES['foto_diri']['name'] != null) {
             $config['upload_path'] = './images/mahasiswa';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 2000;
-            $config['max_width'] = 1500;
-            $config['max_height'] = 1500;
+            $config['max_size'] = 2000 *7000;
+            $config['max_width'] = 1500 *7000;
+            $config['max_height'] = 1500 *7000;
             $foto_ext = pathinfo($_FILES["foto_diri"]["name"], PATHINFO_EXTENSION);
             $config['file_name'] = 'cover' . $this->generateRandomString() . '.' . $foto_ext;
             $configClone['file_name'] = $config['file_name'];
