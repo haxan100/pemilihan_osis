@@ -16,11 +16,11 @@ public function getAllSiswa()
 		return $data;
 		# code...
 	}
-	public function getAllSiswaHasChose()
+	public function getAllSiswaHasChose($type)
 	{
 		$this->db->select('*');
 		$this->db->from('siswa');
-		$this->db->where('sudah_milih_bem',1);		
+		$this->db->where("sudah_milih_$type",1);		
 		$data =  $this->db->get();
 		return $data;
 		# code...
