@@ -42,9 +42,23 @@
 					<!-- small box -->
 					<div class="small-box bg-success">
 						<div class="inner">
-							<h3><?= $siswaSudahMilih ?></h3>
+							<h3><?= $siswaSudahMilihDPM ?></h3>
 
-							<p>Sudah Memilih</p>
+							<p>Sudah Memilih Bem</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-stats-bars"></i>
+						</div>
+						<a href="<?= base_url() ?>Admin/siswa" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-4">
+					<!-- small box -->
+					<div class="small-box bg-success">
+						<div class="inner">
+							<h3><?= $siswaSudahMilihBEM ?></h3>
+
+							<p>Sudah Memilih DPM</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-stats-bars"></i>

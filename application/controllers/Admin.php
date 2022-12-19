@@ -20,7 +20,8 @@ public function index()
 		$getUserByID = $this->AdminModel->getAdminById($id)[0];
 		$obs['data'] = $getUserByID;
 		$obj['siswa']= count($this->SiswaModel->getAllSiswa()->result());
-		// $obj['siswaSudahMilih'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
+		$obj['siswaSudahMilihBEM'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
+		$obj['siswaSudahMilihDPM'] = count($this->SiswaModel->getAllSiswaHasChose()->result());
 		$obj['calon_bem'] = count($this->CalonModel->ListUserCalon('bem')->result());
 		$obj['calon_dpm'] = count($this->CalonModel->ListUserCalon('dpm')->result());
 		// var_dump($siswa);die;

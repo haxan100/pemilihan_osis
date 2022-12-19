@@ -20,7 +20,7 @@ public function getAllSiswa()
 	{
 		$this->db->select('*');
 		$this->db->from('siswa');
-		$this->db->where('sudah_milih',1);		
+		$this->db->where('sudah_milih_bem',1);		
 		$data =  $this->db->get();
 		return $data;
 		# code...
